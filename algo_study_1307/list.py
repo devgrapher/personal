@@ -1,68 +1,172 @@
+import unittest
+
 class List():
 	def __init__(self, data = None, next = None):
-		self.data_ = data
-		self.next_ = next
+		self.data = data
+		self.next = next
+		self.length = 0
 
 	def __iter__(self):
-		return ListIter(self)
+		if self.data is None:
+			return ListIter(self.next)
+		else:
+			return ListIter(self)
 
-	def next(self):
-		return self.next_
-
-	def data(self):
-		return self.data_
+	def __len__(self):
+		return self.length
 
 	def insert(self, index, data):
-		# TODO: check length
-		if self.data_ is None:
-			self.data_ = data
-			return
-		elif index is 0:
-			next = List(self.data_, self.next_)
-			self.__init__(data, next)
-			return 
+		if index > len(self): 
+			raise IndexError
 
-		begin = List(None, self)
-		it = begin
+		it = self
 		for i in range(index):
-			it = it.next()
+			it = it.next
 
-		it.next_ = List(data, it.next_)
-		return
+		it.next = List(data, it.next)
+		self.length += 1
+		return iter(it.next)
+
+	def erase(self, index):
+		if index > len(self): 
+			raise IndexError
+
+		if index is 0:
+			if self.next is None:
+				self.data = None #비어있는 HEAD로 만듬.
+			else:
+				self.next = self.next.next
+		else:
+			pre_it = self.index(index - 1)
+			pre_it.pointee.next = pre_it.pointee.next.next
+
+		self.length -= 1
 
 	def find(self, data):
-		t = self
-		while t is not None:
-			if t.data() == data:
-				return t
-			t = t.next()
+		it = self
+		while it is not None:
+			if it.data == data:
+				return it
+			it = it.next
 		return None
 
+	def index(self, index):
+		if index > len(self): 
+			raise IndexError
+
+		it = iter(self)
+		for i in range(index):
+			it = it.next()
+		return it
+
+
 class ListIter():
-	def __init__(self, target):
-		self.target = target
+	def __init__(self, pointee):
+		self.pointee = pointee
+
 	def __next__(self):
-		if self.target is None:
+		if self.pointee is None:
 			raise StopIteration
 		else:
-			data = self.target.data()
-			self.target = self.target.next()
+			data = self.pointee.data
+			self.pointee = self.pointee.next
 			return data
-	def next_iter(self):
-		return self.target.next_.__iter__()
+
+	def next(self):
+		if self.pointee.next is None:
+			return None
+		else:
+			return iter(self.pointee.next)
+
+	def data(self):
+		return self.pointee.data
 
 
-begin = List()
-for i in range(10, 0, -1):
-	begin.insert(0, i)
+class TestList(unittest.TestCase):
+	def setUp(self):
+		self.list = List()
+		for i in range(10, 0, -1):
+			self.list.insert(0, i)
 
-t = begin
-while t is not None:
-	print(t.data())
-	t = t.next()
-begin.insert(3,111)
-t = begin
-for i in t:
-	print(i)
+	def test_while_roop(self):
+		it = iter(self.list)
+		while it.next() is not None:
+			print(it.data())
+			it = it.next()
+		print(it.data())
 
-print(begin.find(5).data())
+	def test_for_roop(self):
+		for i in self.list:
+			print(i)
+
+	def test_find(self):
+		for i in [1,2,3,4,5,6,7,8,9,10]:
+			found = self.list.find(i)
+			self.assertIsNotNone(found)
+			self.assertEqual(found.data, i)
+
+		for i in [0,11,-1,"wrong"]:
+			found = self.list.find(i)
+			self.assertIsNone(found)
+
+	def test_insert(self):
+		self.list.insert(0, -1)
+		self.assertTrue(equal_with_builtin(self.list, [-1,1,2,3,4,5,6,7,8,9,10]))
+
+		self.list.insert(5, -2)
+		self.assertTrue(equal_with_builtin(self.list, [-1,1,2,3,4,-2,5,6,7,8,9,10]))
+
+		self.list.insert(12, -3)
+		self.assertTrue(equal_with_builtin(self.list, [-1,1,2,3,4,-2,5,6,7,8,9,10,-3]))
+
+	def test_erase(self):
+		self.list.erase(0)
+		self.assertTrue(equal_with_builtin(self.list, [2,3,4,5,6,7,8,9,10]))
+
+		self.list.erase(0)
+		self.assertTrue(equal_with_builtin(self.list, [3,4,5,6,7,8,9,10]))
+
+		self.list.erase(1)
+		self.assertTrue(equal_with_builtin(self.list, [3,5,6,7,8,9,10]))
+
+		self.list.erase(6)
+		self.assertTrue(equal_with_builtin(self.list, [3,5,6,7,8,9]))
+
+		self.list.erase(0)
+		self.list.erase(0)
+		self.list.erase(0)
+		self.list.erase(0)
+		self.list.erase(0)
+		self.list.erase(0)
+		self.assertTrue(equal_with_builtin(self.list, []))
+		self.assertEqual(self.list.data, None)
+
+
+class TestSampleData(unittest.TestCase):
+	def test_sample1(self):
+		self.list = List()
+		sample = ["google","naver","daum","nate","zum"]
+		for i in sample:
+			self.list.insert(0, i)
+
+		sample.reverse()
+		for i in range(len(sample)):
+			self.assertEqual(self.list.index(i).data(), sample[i])
+
+		print(" ".join(sample))
+
+
+def equal_with_builtin(testee, builtin):
+	'''빌트인 리스트와 내용이 같은지 비교'''
+	if len(testee) is not len(builtin):
+		return False
+
+	for i in range(len(builtin)):
+		if testee.index(i).data() != builtin[i]:
+			return False
+
+	return True
+
+
+if __name__ == "__main__":	
+	unittest.main()
