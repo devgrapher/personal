@@ -1,0 +1,23 @@
+﻿Build started 2012-03-22 오후 9:20:40.
+     1>Project "C:\svn\trunk\TopologicalSort\TopologicalSort.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release\TopologicalSort.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Release\TopologicalSort.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\TopologicalSort.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Release\TopologicalSort.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Release\TopologicalSort.lib" /MACHINE:X86 Release\stdafx.obj
+         Release\TopologicalSort.obj
+         Generating code
+         Finished generating code
+         TopologicalSort.vcxproj -> C:\svn\trunk\Release\TopologicalSort.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\svn\trunk\Release\TopologicalSort.exe;#1" /manifest Release\TopologicalSort.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\TopologicalSort.unsuccessfulbuild".
+         Touching "Release\TopologicalSort.lastbuildstate".
+     1>Done Building Project "C:\svn\trunk\TopologicalSort\TopologicalSort.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.74

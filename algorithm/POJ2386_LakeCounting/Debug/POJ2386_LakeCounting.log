@@ -1,0 +1,32 @@
+﻿Build started 2012-03-22 오후 10:01:40.
+     1>Project "C:\svn\trunk\POJ2386_LakeCounting\POJ2386_LakeCounting.vcxproj" on node 5 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\POJ2386_LakeCounting.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\POJ2386_LakeCounting.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\POJ2386_LakeCounting.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt POJ2386_LakeCounting.cpp
+         POJ2386_LakeCounting.cpp
+     1>c:\svn\trunk\poj2386_lakecounting\poj2386_lakecounting.cpp(54): warning C4018: '<' : signed/unsigned mismatch
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\POJ2386_LakeCounting.exe.embed.manifest.res" Debug\POJ2386_LakeCounting_manifest.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Debug\POJ2386_LakeCounting.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\POJ2386_LakeCounting.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Debug\POJ2386_LakeCounting.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Debug\POJ2386_LakeCounting.lib" /MACHINE:X86 Debug\POJ2386_LakeCounting.exe.embed.manifest.res
+         Debug\POJ2386_LakeCounting.obj
+         Debug\stdafx.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\POJ2386_LakeCounting.exe.embed.manifest" /manifest Debug\POJ2386_LakeCounting.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\POJ2386_LakeCounting.exe.embed.manifest.res" Debug\POJ2386_LakeCounting_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Debug\POJ2386_LakeCounting.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\POJ2386_LakeCounting.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Debug\POJ2386_LakeCounting.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Debug\POJ2386_LakeCounting.lib" /MACHINE:X86 Debug\POJ2386_LakeCounting.exe.embed.manifest.res
+         Debug\POJ2386_LakeCounting.obj
+         Debug\stdafx.obj
+         POJ2386_LakeCounting.vcxproj -> C:\svn\trunk\Debug\POJ2386_LakeCounting.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\POJ2386_LakeCounting.unsuccessfulbuild".
+         Touching "Debug\POJ2386_LakeCounting.lastbuildstate".
+     1>Done Building Project "C:\svn\trunk\POJ2386_LakeCounting\POJ2386_LakeCounting.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.57

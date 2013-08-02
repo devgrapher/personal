@@ -1,0 +1,27 @@
+﻿Build started 2012-03-22 오후 9:20:32.
+     1>Project "C:\svn\trunk\UVA10131_Elephant\UVA10131_Elephant.vcxproj" on node 4 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\UVA10131_Elephant.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\UVA10131_Elephant.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\UVA10131_Elephant.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt UVA10131_Elephant.cpp
+         UVA10131_Elephant.cpp
+     1>UVA10131_Elephant.cpp(58): warning C4018: '<' : signed/unsigned mismatch
+     1>UVA10131_Elephant.cpp(81): warning C4018: '<' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Release\UVA10131_Elephant.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\UVA10131_Elephant.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Release\UVA10131_Elephant.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Release\UVA10131_Elephant.lib" /MACHINE:X86 Release\stdafx.obj
+         Release\UVA10131_Elephant.obj
+         Generating code
+         Finished generating code
+         UVA10131_Elephant.vcxproj -> C:\svn\trunk\Release\UVA10131_Elephant.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\svn\trunk\Release\UVA10131_Elephant.exe;#1" /manifest Release\UVA10131_Elephant.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\UVA10131_Elephant.unsuccessfulbuild".
+         Touching "Release\UVA10131_Elephant.lastbuildstate".
+     1>Done Building Project "C:\svn\trunk\UVA10131_Elephant\UVA10131_Elephant.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.05

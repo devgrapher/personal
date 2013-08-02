@@ -1,0 +1,25 @@
+﻿Build started 2012-03-22 오후 9:20:32.
+     1>Project "C:\svn\trunk\UVA562_CoinDivide\UVA562_CoinDivide.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\UVA562_CoinDivide.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\UVA562_CoinDivide.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\UVA562_CoinDivide.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt UVA562_CoinDivide.cpp
+         UVA562_CoinDivide.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Release\UVA562_CoinDivide.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\UVA562_CoinDivide.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Release\UVA562_CoinDivide.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Release\UVA562_CoinDivide.lib" /MACHINE:X86 Release\stdafx.obj
+         Release\UVA562_CoinDivide.obj
+         Generating code
+         Finished generating code
+         UVA562_CoinDivide.vcxproj -> C:\svn\trunk\Release\UVA562_CoinDivide.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\svn\trunk\Release\UVA562_CoinDivide.exe;#1" /manifest Release\UVA562_CoinDivide.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\UVA562_CoinDivide.unsuccessfulbuild".
+         Touching "Release\UVA562_CoinDivide.lastbuildstate".
+     1>Done Building Project "C:\svn\trunk\UVA562_CoinDivide\UVA562_CoinDivide.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.69

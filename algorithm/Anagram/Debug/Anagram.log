@@ -1,0 +1,21 @@
+﻿Build started 2012-04-07 오전 10:57:10.
+     1>Project "C:\svn\trunk\Anagram\Anagram.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\Anagram.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Anagram.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Anagram.cpp
+         Anagram.cpp
+     1>c:\svn\trunk\anagram\anagram.cpp(25): error C2039: 'cin' : is not a member of 'std'
+     1>c:\svn\trunk\anagram\anagram.cpp(25): error C2065: 'cin' : undeclared identifier
+     1>c:\svn\trunk\anagram\anagram.cpp(28): error C2039: 'cin' : is not a member of 'std'
+     1>c:\svn\trunk\anagram\anagram.cpp(28): error C2065: 'cin' : undeclared identifier
+     1>c:\svn\trunk\anagram\anagram.cpp(29): error C2039: 'cout' : is not a member of 'std'
+     1>c:\svn\trunk\anagram\anagram.cpp(29): error C2065: 'cout' : undeclared identifier
+     1>c:\svn\trunk\anagram\anagram.cpp(29): error C2039: 'endl' : is not a member of 'std'
+     1>c:\svn\trunk\anagram\anagram.cpp(29): error C2065: 'endl' : undeclared identifier
+     1>Done Building Project "C:\svn\trunk\Anagram\Anagram.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.23

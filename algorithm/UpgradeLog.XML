@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Algorithm">
+</Property><Property Name="Solution File" Value="C:\svn\trunk\Algorithm.sln">
+</Property><Property Name="Date" Value="2012년 3월 21일 수요일">
+</Property><Property Name="Time" Value="오후 20:23">
+</Property></Properties><Event ErrorLevel="0" Project="TopologicalSort" Source="TopologicalSort\TopologicalSort.vcproj" Description="Converting project file 'C:\svn\trunk\TopologicalSort\TopologicalSort.vcproj'.">
+</Event><Event ErrorLevel="1" Project="TopologicalSort" Source="TopologicalSort\TopologicalSort.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="TopologicalSort" Source="TopologicalSort\TopologicalSort.vcproj" Description="Done converting to new project file 'C:\svn\trunk\TopologicalSort\TopologicalSort.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="TopologicalSort" Source="TopologicalSort\TopologicalSort.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UVA104_ForeignExchange" Source="UVA104_ForeignExchange\UVA104_ForeignExchange.vcproj" Description="Converting project file 'C:\svn\trunk\UVA104_ForeignExchange\UVA104_ForeignExchange.vcproj'.">
+</Event><Event ErrorLevel="1" Project="UVA104_ForeignExchange" Source="UVA104_ForeignExchange\UVA104_ForeignExchange.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="UVA104_ForeignExchange" Source="UVA104_ForeignExchange\UVA104_ForeignExchange.vcproj" Description="Done converting to new project file 'C:\svn\trunk\UVA104_ForeignExchange\UVA104_ForeignExchange.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="UVA104_ForeignExchange" Source="UVA104_ForeignExchange\UVA104_ForeignExchange.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UVA825_SafeWay" Source="UVA825_SafeWay\UVA825_SafeWay.vcproj" Description="Converting project file 'C:\svn\trunk\UVA825_SafeWay\UVA825_SafeWay.vcproj'.">
+</Event><Event ErrorLevel="1" Project="UVA825_SafeWay" Source="UVA825_SafeWay\UVA825_SafeWay.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="UVA825_SafeWay" Source="UVA825_SafeWay\UVA825_SafeWay.vcproj" Description="Done converting to new project file 'C:\svn\trunk\UVA825_SafeWay\UVA825_SafeWay.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="UVA825_SafeWay" Source="UVA825_SafeWay\UVA825_SafeWay.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UVA357_CoinChange" Source="UVA357_CoinChange\UVA357_CoinChange.vcproj" Description="Converting project file 'C:\svn\trunk\UVA357_CoinChange\UVA357_CoinChange.vcproj'.">
+</Event><Event ErrorLevel="1" Project="UVA357_CoinChange" Source="UVA357_CoinChange\UVA357_CoinChange.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="UVA357_CoinChange" Source="UVA357_CoinChange\UVA357_CoinChange.vcproj" Description="Done converting to new project file 'C:\svn\trunk\UVA357_CoinChange\UVA357_CoinChange.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="UVA357_CoinChange" Source="UVA357_CoinChange\UVA357_CoinChange.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UVA562_CoinDivide" Source="UVA562_CoinDivide\UVA562_CoinDivide.vcproj" Description="Converting project file 'C:\svn\trunk\UVA562_CoinDivide\UVA562_CoinDivide.vcproj'.">
+</Event><Event ErrorLevel="1" Project="UVA562_CoinDivide" Source="UVA562_CoinDivide\UVA562_CoinDivide.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="UVA562_CoinDivide" Source="UVA562_CoinDivide\UVA562_CoinDivide.vcproj" Description="Done converting to new project file 'C:\svn\trunk\UVA562_CoinDivide\UVA562_CoinDivide.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="UVA562_CoinDivide" Source="UVA562_CoinDivide\UVA562_CoinDivide.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UVA10131_Elephant" Source="UVA10131_Elephant\UVA10131_Elephant.vcproj" Description="Converting project file 'C:\svn\trunk\UVA10131_Elephant\UVA10131_Elephant.vcproj'.">
+</Event><Event ErrorLevel="1" Project="UVA10131_Elephant" Source="UVA10131_Elephant\UVA10131_Elephant.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="UVA10131_Elephant" Source="UVA10131_Elephant\UVA10131_Elephant.vcproj" Description="Done converting to new project file 'C:\svn\trunk\UVA10131_Elephant\UVA10131_Elephant.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="UVA10131_Elephant" Source="UVA10131_Elephant\UVA10131_Elephant.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="NighitsTourProblem" Source="NighitsTourProblem\NighitsTourProblem.vcproj" Description="Converting project file 'C:\svn\trunk\NighitsTourProblem\NighitsTourProblem.vcproj'.">
+</Event><Event ErrorLevel="1" Project="NighitsTourProblem" Source="NighitsTourProblem\NighitsTourProblem.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="NighitsTourProblem" Source="NighitsTourProblem\NighitsTourProblem.vcproj" Description="Done converting to new project file 'C:\svn\trunk\NighitsTourProblem\NighitsTourProblem.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="NighitsTourProblem" Source="NighitsTourProblem\NighitsTourProblem.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="POJ2386_LakeCounting" Source="POJ2386_LakeCounting\POJ2386_LakeCounting.vcproj" Description="Converting project file 'C:\svn\trunk\POJ2386_LakeCounting\POJ2386_LakeCounting.vcproj'.">
+</Event><Event ErrorLevel="1" Project="POJ2386_LakeCounting" Source="POJ2386_LakeCounting\POJ2386_LakeCounting.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="POJ2386_LakeCounting" Source="POJ2386_LakeCounting\POJ2386_LakeCounting.vcproj" Description="Done converting to new project file 'C:\svn\trunk\POJ2386_LakeCounting\POJ2386_LakeCounting.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="POJ2386_LakeCounting" Source="POJ2386_LakeCounting\POJ2386_LakeCounting.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="PCC50_Maze" Source="PCC50_Maze\PCC50_Maze.vcproj" Description="Converting project file 'C:\svn\trunk\PCC50_Maze\PCC50_Maze.vcproj'.">
+</Event><Event ErrorLevel="1" Project="PCC50_Maze" Source="PCC50_Maze\PCC50_Maze.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="PCC50_Maze" Source="PCC50_Maze\PCC50_Maze.vcproj" Description="Done converting to new project file 'C:\svn\trunk\PCC50_Maze\PCC50_Maze.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="PCC50_Maze" Source="PCC50_Maze\PCC50_Maze.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Knapsack" Source="Knapsack\Knapsack.vcproj" Description="Converting project file 'C:\svn\trunk\Knapsack\Knapsack.vcproj'.">
+</Event><Event ErrorLevel="1" Project="Knapsack" Source="Knapsack\Knapsack.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="Knapsack" Source="Knapsack\Knapsack.vcproj" Description="Done converting to new project file 'C:\svn\trunk\Knapsack\Knapsack.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="Knapsack" Source="Knapsack\Knapsack.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Knapsack2" Source="Knapsack2\Knapsack2.vcproj" Description="Converting project file 'C:\svn\trunk\Knapsack2\Knapsack2.vcproj'.">
+</Event><Event ErrorLevel="1" Project="Knapsack2" Source="Knapsack2\Knapsack2.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="Knapsack2" Source="Knapsack2\Knapsack2.vcproj" Description="Done converting to new project file 'C:\svn\trunk\Knapsack2\Knapsack2.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="Knapsack2" Source="Knapsack2\Knapsack2.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="LongestIncreasingSubsequence" Source="LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcproj" Description="Converting project file 'C:\svn\trunk\LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcproj'.">
+</Event><Event ErrorLevel="1" Project="LongestIncreasingSubsequence" Source="LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="LongestIncreasingSubsequence" Source="LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcproj" Description="Done converting to new project file 'C:\svn\trunk\LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="LongestIncreasingSubsequence" Source="LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Algorithm.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Algorithm.sln" Description="Converted">
+</Event></UpgradeLog>

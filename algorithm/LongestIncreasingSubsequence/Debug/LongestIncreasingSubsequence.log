@@ -1,0 +1,31 @@
+﻿Build started 2012-03-22 오후 10:01:37.
+     1>Project "C:\svn\trunk\LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\LongestIncreasingSubsequence.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\LongestIncreasingSubsequence.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\LongestIncreasingSubsequence.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LongestIncreasingSubsequence.cpp
+         LongestIncreasingSubsequence.cpp
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\LongestIncreasingSubsequence.exe.embed.manifest.res" Debug\LongestIncreasingSubsequence_manifest.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Debug\LongestIncreasingSubsequence.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\LongestIncreasingSubsequence.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Debug\LongestIncreasingSubsequence.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Debug\LongestIncreasingSubsequence.lib" /MACHINE:X86 Debug\LongestIncreasingSubsequence.exe.embed.manifest.res
+         Debug\LongestIncreasingSubsequence.obj
+         Debug\stdafx.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\LongestIncreasingSubsequence.exe.embed.manifest" /manifest Debug\LongestIncreasingSubsequence.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\LongestIncreasingSubsequence.exe.embed.manifest.res" Debug\LongestIncreasingSubsequence_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\svn\trunk\Debug\LongestIncreasingSubsequence.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\LongestIncreasingSubsequence.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\svn\trunk\Debug\LongestIncreasingSubsequence.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\svn\trunk\Debug\LongestIncreasingSubsequence.lib" /MACHINE:X86 Debug\LongestIncreasingSubsequence.exe.embed.manifest.res
+         Debug\LongestIncreasingSubsequence.obj
+         Debug\stdafx.obj
+         LongestIncreasingSubsequence.vcxproj -> C:\svn\trunk\Debug\LongestIncreasingSubsequence.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\LongestIncreasingSubsequence.unsuccessfulbuild".
+         Touching "Debug\LongestIncreasingSubsequence.lastbuildstate".
+     1>Done Building Project "C:\svn\trunk\LongestIncreasingSubsequence\LongestIncreasingSubsequence.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.94
