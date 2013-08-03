@@ -37,8 +37,8 @@ class List():
 			else:
 				self.next = self.next.next
 		else:
-			pre_it = self.index(index - 1)
-			pre_it.pointee.next = pre_it.pointee.next.next
+			prev_it = self.index(index - 1)
+			prev_it.pointee.next = prev_it.pointee.next.next
 
 		self.length -= 1
 
@@ -132,12 +132,8 @@ class TestList(unittest.TestCase):
 		self.list.erase(6)
 		self.assertTrue(equal_with_builtin(self.list, [3,5,6,7,8,9]))
 
-		self.list.erase(0)
-		self.list.erase(0)
-		self.list.erase(0)
-		self.list.erase(0)
-		self.list.erase(0)
-		self.list.erase(0)
+		while len(self.list):
+			self.list.erase(0)
 		self.assertTrue(equal_with_builtin(self.list, []))
 		self.assertEqual(self.list.data, None)
 
