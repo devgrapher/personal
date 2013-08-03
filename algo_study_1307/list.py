@@ -67,6 +67,10 @@ class ListIter():
 			self.pointee = self.pointee.next
 			return data
 
+	def __iter__(self):
+		"pointee.data를 문자열로 출력할 수 있는 iter를 만든다. "
+		return ListStrIter(self.pointee)
+
 	def next(self):
 		if self.pointee.next is None:
 			return None
@@ -77,11 +81,26 @@ class ListIter():
 		return self.pointee.data
 
 
+class ListStrIter():
+	def __init__(self, pointee):
+		self.pointee = pointee
+
+	def __next__(self):
+		if self.pointee is None:
+			raise StopIteration
+		else:
+			data = self.pointee.data
+			self.pointee = self.pointee.next
+			return str(data)
+
+
 class TestList(unittest.TestCase):
 	def setUp(self):
 		self.testee = List()
 		for i in range(10, 0, -1):
 			self.testee.insert(0, i)
+
+		print(" ".join(self.testee))
 
 	def test_while_roop(self):
 		it = iter(self.testee)
