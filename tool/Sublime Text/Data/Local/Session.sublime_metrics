@@ -1,5 +1,11 @@
 {
 	"licensed": false,
-	"startup_sec": 3.5253269,
+	"startup_sec": 0.436363,
+	"syntax":
+	{
+		"CSS": 17,
+		"HTML": 50,
+		"Python": 22
+	},
 	"time": 1375707993
 }
