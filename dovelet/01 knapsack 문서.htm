@@ -1,0 +1,363 @@
+
+<!-- saved from url=(0084)http://211.228.163.31/30stair/01knapsack_doc/01knapsack_doc.php?pname=01knapsack_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>01 knapsack 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./01 knapsack 문서_files/main.css">
+   </head>
+   <body>
+
+   <h2> 0/1 knapsack 힌트 </h2>
+
+   <blockquote>
+   (간단 문제)
+   도둑이 가져갈 수 있는 보석이 루비,다이아몬드,사파이어가 있다고 하고, 가져갈 수 있는
+   가방의 크기가 8 이라고 하자.
+
+   <p>
+   <table border="0" cellspacing="1" cellpadding="0" bgcolor="#000000" width="400">
+
+   <tbody><tr bgcolor="#FFFFFF"> 
+   <th> 보석 종류 </th> <th> 크기 </th> <th> 가치 </th>
+   </tr>
+
+   <tr bgcolor="#FFFFFF" align="center"> 
+   <td> 루비 </td> <td> 3 </td> <td> 6 </td> 
+   </tr>
+
+
+   <tr bgcolor="#FFFFFF" align="center"> 
+   <td> 다이아몬드 </td> <td> 4 </td> <td> 3 </td> 
+   </tr>
+
+   <tr bgcolor="#FFFFFF" align="center"> 
+   <td> 사파이어  </td> <td> 5 </td> <td> 5 </td> 
+   </tr>
+   </tbody></table>
+
+   </p><p>
+   확장 방법:
+</p><div style="background-color:&#39;#abcdef&#39;;padding-top:10px;margin:20pt;font-size:11pt; width=700">
+
+<ol>
+<li>보석이 <b>루비</b>만 있는 경우 가방 크기별 이윤을 구한후 
+</li><li>보석이 <b>루비,다이아몬드</b>가 있는 경우 가방 크기별 이윤을 구한후 
+</li><li>마지막으로 보석이 <b>루비,다이아몬드,사파이어</b>인 경우 가방 크기별 이윤을
+구한다.
+</li></ol>
+</div>
+
+(해 설)
+
+<ol>
+<li>보석이 루비(크기 3, 가격 6)하나만 있는 경우 가방 크기별 이윤은 쉽게 구할 수 있다.
+
+<p><table border="0" cellspacing="0" cellpadding="3" bgcolor="#000000" width="40%">
+  <tbody><tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">가방의 크기</td>
+    <td align="center">0 </td>
+    <td align="center">1 </td>
+    <td align="center">2 </td>
+    <td align="center">3 </td>
+    <td align="center">4 </td>
+    <td align="center">5 </td>
+    <td align="center">6 </td>
+    <td align="center">7 </td>
+    <td align="center">8 </td>
+  </tr>
+</tbody></table>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#000000" width="40%">
+  <tbody><tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">루비 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+  </tr>
+</tbody></table>
+
+</p><hr>
+
+</li><li><b>보석이 루비,다이아몬드(크기 4 , 가격 3)</b>가 있는 경우 가방 크기별 최대 이윤을 구하면
+(<font color="#cc00cc&quot;">다이아몬드  확장</font>)
+<p>
+
+</p><ol type="i">
+   <li> <font color="red">가방의 크기가 6 일 때 보석이 루비 , 다이아몬드가 있는 경우 크기별 최대 이윤을
+      구하면</font> 
+
+<p><table border="0" cellspacing="0" cellpadding="3" bgcolor="#000000" width="40%">
+  <tbody><tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">가방의 크기</td>
+    <td align="center">0 </td>
+    <td align="center">1 </td>
+    <td align="center">2 </td>
+    <td align="center">3 </td>
+    <td align="center">4 </td>
+    <td align="center">5 </td>
+    <td align="center">6 </td>
+    <td align="center">7 </td>
+    <td align="center">8 </td>
+  </tr>
+</tbody></table>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#000000" width="40%">
+  <tbody><tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">루비 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+  </tr>
+
+  <tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">다이아몬드</td>
+    <td align="center"> </td>
+    <td align="center"> </td>
+    <td align="center"> </td>
+    <td align="center"> </td>
+    <td align="center"> </td>
+    <td align="center"> </td>
+    <td align="center" style="background-color:#cccccc;"> </td>
+    <td align="center"> </td>
+    <td align="center"> </td>
+  </tr>
+</tbody></table></p><p>
+
+</p><ul>
+   <li> <span style="text-decoration:underline;">다이아몬드를 가져가는 경우</span>
+
+<blockquote>
+가방의 크기가 6 이고 , 다이아몬드의 크기가 4 이므로 다이아몬드를 가져가고 남는
+가방의크기는 2 이다.<br>
+∴ 이윤 = 다이아몬드의 가격 3 + 가방의 크기 2 로 루비는
+가져갈수 없으므로 가격은 0 =  총 이윤은 3
+</blockquote>
+
+</li><li> <span style="text-decoration:underline;">다이아몬드를 가져가지 않는 경우 </span>
+
+<blockquote>
+ 가방의 크기 6 으로 루비를 가져갈 때의 이윤 6
+</blockquote>
+
+</li></ul>
+
+<p>두가지 경우 중 최대 6 이 루비,다이아몬드가 있는 경우 
+에서 가방의 크기 6 으로 가져갈수 있는 최대 이윤이다.
+
+</p></li><li> 가방의 크기가 7 일 때 보석이 루비 , 다이아몬드가 있는 경우 크기별 최대 이윤을
+구하면 
+
+<ul>
+<p></p><li> 다이아몬드를 가져가는 경우
+
+<blockquote>
+가방의 크기가 7 이고 , 다이아몬드의 크기가 4 이므로 다이아몬드를 가져가고 남는
+가방의크기는 3 이다.<br>
+∴ 이윤 = 다이아몬드의 가격 3 + 남는 가방의 크기 3 으로 이윤  6 =  총 이윤은 9
+</blockquote>
+
+<p></p></li><li> 다이아몬드를 가져가지 않는 경우 
+
+<blockquote>
+ 가방의 크기 7 로 루비를 가져갈 때의 이윤 6
+</blockquote>
+
+</li></ul>
+
+<p>두가지 경우 중 최대 9 가  루비,다이아몬드가 있는 경우 
+에서 가방의 크기 7 로서 가져갈수 있는 최대 이윤이다.
+
+</p></li><li> 가방의 크기가 8 일 때 보석이 루비 , 다이아몬드가 있는 경우 크기별 최대 이윤을
+구하면 
+
+<ul>
+<p></p><li> 다이아몬드를 가져가는 경우
+
+<blockquote>
+가방의 크기가 8 이고 , 다이아몬드의 크기가 4 이므로 다이아몬드를 가져가고 남는
+가방의크기는 4 이다.<br>
+∴ 이윤 = 다이아몬드의 가격 3 +  남는 가방의 크기 4  으로 이윤 6 =  총 이윤은 9
+</blockquote>
+
+<p></p></li><li> 다이아몬드를 가져가지 않는 경우 
+
+<blockquote>
+ 가방의 크기 8 으로 루비를 가져갈 때의 이윤 6
+</blockquote>
+
+</li></ul>
+
+<p>두가지 경우 중 최대 9 가  루비,다이아몬드가 있는 경우 
+에서 가방의 크기 8 로서 가져갈수 있는 최대 이윤이다.
+</p></li></ol>
+
+
+<table border="0" cellspacing="0" cellpadding="3" bgcolor="#000000" width="40%">
+  <tbody><tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">가방의 크기</td>
+    <td align="center">0 </td>
+    <td align="center">1 </td>
+    <td align="center">2 </td>
+    <td align="center">3 </td>
+    <td align="center">4 </td>
+    <td align="center">5 </td>
+    <td align="center">6 </td>
+    <td align="center">7 </td>
+    <td align="center">8 </td>
+  </tr>
+</tbody></table>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#000000" width="40%">
+  <tbody><tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">이윤 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td align="center" width="25%">이윤 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">0 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">6 </td>
+    <td align="center">9 </td>
+    <td align="center">9 </td>
+  </tr>
+</tbody></table>
+
+<hr>
+
+</li><li>마지막으로 보석이 루비,다이아몬드,사파이어(크기 5 , 가격 5)가 있는 경우 가방 크기별 최대 이윤을 구하면
+(<font color="#cc00cc&quot;">사파이어 확장 </font>)
+<p>
+
+</p><ol type="i">
+<li>...
+</li><li> 가방의 크기가 6 일 때 보석이 루비 , 다이아몬드,사파이어가 있는 경우 크기별 최대 이윤을
+구하면 
+
+
+<ul>
+<p></p><li> 사파이어를 가져가는 경우
+
+<blockquote>
+가방의 크기가 6 이고 , 사파이어의 크기가 5 이므로 사파이어를 가져가고 남는
+가방의크기는 1 이다.<br>
+∴ 이윤 = 사파이어 가격 5 + 가방의 크기 1 로 루비,다이아몬드에서의
+이윤은 0 =  총 이윤은 5
+</blockquote>
+
+<p></p></li><li> 사파이어를 가져가지 않는 경우 
+
+<blockquote>
+ 가방의 크기 6 으로 루비,다이아몬드에서의 이윤 6
+</blockquote>
+
+</li></ul>
+
+<p>두가지 경우 중 최대 6 이 루비,다이아몬드,사파이어가 있는 경우 
+에서 가방의 크기 6 으로 가져갈수 있는 최대 이윤이다.
+
+</p></li><li> 가방의 크기가 7 일 때 보석이 루비 , 다이아몬드,사파이어가 있는 경우 크기별 최대 이윤을
+구하면 
+
+<ul>
+<p></p><li> 사파이어를 가져가는 경우
+
+<blockquote>
+가방의 크기가 7 이고 , 사파이어의 크기가 5 이므로 사파이어를 가져가고 남는
+가방의크기는 2 이다.<br>
+∴ 이윤 = 사파이어의 가격 5 + 남는 가방의 크기 2 으로 이윤  0 =  총 이윤은 5
+</blockquote>
+
+<p></p></li><li> 사파이어를 가져가지 않는 경우 
+
+<blockquote>
+ 가방의 크기 7 로 루비.다이아몬드에서의 이윤 9
+</blockquote>
+
+</li></ul>
+
+<p>두가지 경우 중 최대 9 가  루비,다이아몬드,사파이어가 있는 경우 
+에서 가방의 크기 7 로서 가져갈수 있는 최대 이윤이다.
+
+</p></li><li> 가방의 크기가 8 일 때 보석이 루비 , 다이아몬드,사파이어가 있는 경우 크기별 최대 이윤을
+구하면 
+
+<ul>
+<p></p><li> 사파이어를 가져가는 경우
+
+<blockquote>
+가방의 크기가 8 이고 , 사파이어의 크기가 5 이므로 사파이어를 가져가고 남는
+가방의크기는 3 이다.<br>
+∴ 이윤 = 사파이어의 가격 5 +  남는 가방의 크기 3  으로 이윤 6 =  총 이윤은 11
+</blockquote>
+
+<p></p></li><li> 사파이어를 가져가지 않는 경우 
+
+<blockquote>
+ 가방의 크기 8 으로 루비,다이아몬드에서의  이윤 9
+</blockquote>
+
+</li></ul>
+
+<p>두가지 경우 중 최대 11 이  루비,다이아몬드,사파이어가 있는 경우 
+에서 가방의 크기 8 로서 가져갈수 있는 최대 이윤이다. 이것이 답이다.
+</p></li></ol>
+
+
+</li></ol>
+
+<p>문제의 핵심은 새로 추가한 보석을 가져가는 경우 혹은 아닌 경우 중 최대
+값을 구하면서 보석을 하나씩 추가하면서 확장한다.
+
+
+</p><hr>
+정리하면 ,
+
+
+<blockquote>
+<ul>
+<li> 점화식 ans[i][j]: 1 ~ i 번째 보석으로 , 가방의 크기 j 로 얻을 수 있는 최대 이윤 
+
+<p>
+ans[i][j] = max(ans[i-1][j] , profit[i] + ans[i-1][j-weight[i]] )
+
+</p><p>
+</p><ul>
+<li>i 번째 보석을 포함하지 않는 경우 : ans[i-1][j]
+</li><li>i 번째 보석을 포함하는 경우 : profit[i] + ans[i-1][j-weight[i]] 단, j-weight[i] &gt;= 0
+</li></ul>
+<p>
+</p></li><li> 답 : 보석의 개수가 m 개이고, 가방의 크기가  n 이라면 ans[m][n]
+</li></ul>
+</blockquote>
+
+   </blockquote>
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=01knapsack_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

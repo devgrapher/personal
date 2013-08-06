@@ -1,0 +1,258 @@
+
+<!-- saved from url=(0054)http://211.228.163.31/30stair/heap/heap.php?pname=heap -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>heap</title>
+      
+      <link rel="stylesheet" type="text/css" href="./heap_files/main.css">
+   </head>
+   <body>
+
+<h2>HEAP 문서</h2>
+
+<pre style="font-size:10pt">차례:
+      <a href="http://211.228.163.31/30stair/heap/heap.php?pname=heap#heap" class="A5">1.heap 이란?</a>
+      <a href="http://211.228.163.31/30stair/heap/heap.php?pname=heap#why" class="A5">2.언제 heap 을 사용하는가?</a>
+      <a href="http://211.228.163.31/30stair/heap/heap.php?pname=heap#imp" class="A5">3.heap 구현</a>
+         <a href="http://211.228.163.31/30stair/heap/heap.php?pname=heap#insert" class="A5">-insert</a>
+         <a href="http://211.228.163.31/30stair/heap/heap.php?pname=heap#delete" class="A5">-delete</a>
+      <a href="http://211.228.163.31/30stair/heap/heap.php?pname=heap#pq" class="A5">4.우선 순위 큐란?</a>
+</pre>
+
+<h3><a name="heap">1. heap 이란?</a></h3>
+
+<blockquote>
+
+최대 heap 이란 두 가지 조건을 만족하는 이진트리이다.
+
+<ol>
+<li> complete binary tree 
+</li><li> parents node &gt;= child node (최소 heap 은 parents node &lt;= child node)
+</li></ol>
+
+최대 heap 이면 전체 데이터 중 루트 노드가 가장 큰 데이터가 된다.
+
+<p>(예)
+
+<table>
+<tbody><tr>
+<td> <img src="./heap_files/heap_1.gif"> </td>
+<td>     <img src="./heap_files/heap_2.gif"> </td>
+<td>     <img src="./heap_files/heap_3.gif"> </td>
+</tr></tbody></table>
+
+</p></blockquote> 
+
+<h3><a name="why">2. heap 구조는 언제 사용하는가?</a></h3>
+   
+<blockquote> 
+수시로 데이터가 삽입되는 구조에서 삽입된 데이터 중 가장 큰 데이터(혹은 작은 데이터)를 가져오고자 하는 경우
+
+<p>예를 들어,  100 만건의 데이터가 있는 경우 이 중 가장 큰 데이터를 가져오기 위해서는 
+평균 50 만 번의 비교가 일어날 것이다.
+
+<br>heap 구조로 이를 처리한다면 100 만건의 데이터가 있을 때
+최악의 경우도 약 20 번,  평균 10 번 정도의 비교로 일을 끝낼 수 있다.
+(수시로 데이터가 삽입이 되므로 미리 소트해서 사용할 수는 없다)
+
+</p><p>이런 삽입,삭제가 무수히 발생한다면 실행속도는 비교도 할 수 만큼의 차이를 보일 것이다.
+이것이 heap 의 위력이다.
+
+</p></blockquote>
+
+<h3><a name="imp">3. heap 의 구현</a></h3>
+
+<blockquote>
+heap 구조는 complete binary tree 이므로 , 배열로 표현하는게 유리하다.
+
+<ul>
+<li>i 번째 노드의 아버지노드 : i/2
+</li><li>i 번째 노드의 왼쪽 아들: 2*i
+</li><li>i 번째 노드의 오른쪽 아들: 2*i + 1
+</li></ul>
+
+<h4><a name="insert">(1) heap insert </a></h4>
+
+<blockquote>
+추가 데이터와 추가 노드의 조상노드(아버지,할아버지,증조 할아버지....)와 차례로 비교하면서 조상노드가
+작으면 내리고 아니면 내린 노드의 위치에 데이터를 위치시키는 방법.
+
+<p>예를 들면, 
+<table cellspacing="10">
+   <tbody><tr>
+      <td> 
+         <img src="./heap_files/1heap.jpeg">
+      </td>
+      <td>
+         초기 heap 의 상태가 데이터 수 n 은 8 이고 왼쪽과 같은 경우 , 이 heap 에 데이터 item 7
+         을 추가하는 경우를 생각해보자.
+
+         <p>먼저 데이터 수 n 은 8 에서 하나 증가해 9 가되고, 이 값을 임시변수 i 가 갖는다.
+
+      </p></td>
+   </tr>
+   <tr>
+      <td> 
+         <img src="./heap_files/2heap.jpeg">
+      </td>
+      <td align="center">
+         <table border="1">
+            <tbody><tr align="center">
+               <td> 
+                  i
+               </td>
+               <td>
+                  item
+               </td>
+               <td>
+                  heap[i/2]
+               </td>
+            </tr>
+
+            <tr align="center">
+               <td>
+                  9
+               </td>
+
+               <td>
+                  7
+               </td>
+
+               <td>
+                  2 
+               </td>
+            </tr>
+         </tbody></table>
+
+         <p>item &gt; heap[i/2] 이므로 
+         </p><ul>
+            <li>heap[i/2] 는 i 위치로  
+            </li><li>i 는 parents 노드로 
+         </li></ul>
+      </td>
+      <td>
+         <img src="./heap_files/3heap.jpeg">
+      </td>
+   </tr>
+   <tr>
+      <td> 
+         <img src="./heap_files/4heap.jpeg">
+      </td>
+      <td align="center">
+         <table border="1">
+            <tbody><tr align="center">
+               <td> 
+                  i
+               </td>
+               <td>
+                  item
+               </td>
+               <td>
+                  heap[i/2]
+               </td>
+            </tr>
+
+            <tr align="center">
+               <td>
+                  4
+               </td>
+
+               <td>
+                  7
+               </td>
+
+               <td>
+                  6 
+               </td>
+            </tr>
+         </tbody></table>
+
+         <p>item &gt; heap[i/2] 이므로 
+         </p><ul>
+            <li>heap[i/2] 는 i 위치로  
+            </li><li>i 는 parents 노드로 
+         </li></ul>
+      </td>
+      <td>
+         <img src="./heap_files/5heap.jpeg">
+      </td>
+   </tr>
+   <tr>
+      <td> 
+         <img src="./heap_files/6heap.jpeg">
+      </td>
+      <td align="center">
+         <table border="1">
+            <tbody><tr align="center">
+               <td> 
+                  i
+               </td>
+               <td>
+                  item
+               </td>
+               <td>
+                  heap[i/2]
+               </td>
+            </tr>
+
+            <tr align="center">
+               <td>
+                  2
+               </td>
+
+               <td>
+                  7
+               </td>
+
+               <td>
+                  9 
+               </td>
+            </tr>
+         </tbody></table>
+
+         <p>item &lt;= heap[i/2] 이므로 
+         </p><ul>
+            <li> item 을 i 번째 위치 끝.....
+         </li></ul>
+      </td>
+      <td>
+         <img src="./heap_files/7heap.jpeg">
+      </td>
+   </tr>
+</tbody></table>
+
+</p></blockquote>
+ 
+<h4><a name="delete">(2) heap delete </a></h4>
+
+<blockquote>
+<img src="./heap_files/heap_delete.gif"><a href="http://211.228.163.31/30stair/heap/heap_delete.html" target="new" class="A5">전체과정</a><p>
+
+루트노드(그림에서는 20)를 자른 후 다음을 위하여 재차 heap 을 만들어야 한다.
+
+</p><p>complete binary tree 가 되어야 하므로 마지막 노드(그림에서 3)를 자른 후 , 
+세 값(4,18,15)을 비교후 가장 큰 데이터가 올라오는 동작이 반복되다 
+자른 데이터가 가장 크거나 같으면 위치시키는 과정이다.
+
+</p><p><a href="http://211.228.163.31/30stair/heap/src/heapsrc.html" class="A2"> heap 소스 </a></p><p>
+
+</p></blockquote>
+</blockquote>
+<h3><a name="pq">4. 우선 순위 큐란?</a></h3>
+
+<blockquote>
+queue 구조는 먼저 들어간 데이터가 먼저 나오는 구조이지만 , heap 구조는 들어간 순서에 관계없이
+최대 혹은 최소값이 먼저 나오므로 이러한 구조를 우선순위 큐(priority queue)라 한다.
+</blockquote>
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=heap">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

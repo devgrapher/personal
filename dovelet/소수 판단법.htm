@@ -1,0 +1,171 @@
+
+<!-- saved from url=(0066)http://211.228.163.31/30stair/primedoc/primedoc.php?pname=primedoc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>소수 판단법</title>
+      
+      <link rel="stylesheet" type="text/css" href="./소수 판단법_files/main.css">
+   </head>
+   <body>
+
+<pre class="io">  차례.
+  -수 하나에 대한 소수 판별법
+  -구간에서 소수 판별법
+</pre>
+
+<h3>(1) 어떤 수 n 이 소수인지 판단하는 방법</h3>
+
+<blockquote>
+      
+<ul>
+<li> <div style="background:gray;color:white;width:60;line-height:2;text-align:center">방법1</div>
+
+소수의 정의에 충실하게  2 부터 n-1 까지 나누어 가다 나누어지면 소수가
+아니고 나누어지지 않으면 소수라 판단
+
+<pre class="source">
+   for(i = 2;i &lt; n;i++){
+      if (n%i == 0) break;
+   }
+
+   if (i == n) printf("소수");
+   else printf("소수 아님");
+
+}
+</pre>
+         
+<!--
+<li> <div style="border-left-style:double" > 방법2 </div>
+2 부터 n/2 까지 나누어가다 나누어지면 소수가 아니고 나누어지지 않으면 소수
+
+<p>방법 1 보다는 빠르겠죠.
+
+<pre class=source>
+
+   for(i = 2;i <= n/2;i++){
+      if (n%i == 0) break;
+   }
+
+   if (i == n/2+1) printf("소수");
+   else printf("소수 아님");
+
+</pre>
+-->
+         
+</li><li> <div style="background:gray;color:white;width:60;line-height:2;text-align:center">방법2</div>
+ 2 부터 <img src="./소수 판단법_files/sqrt.gif">까지 나누어가다 나누어지면 소수가 아니고 나누어 지지 않으면 소수
+
+<pre class="source">
+//함수로 
+bool isprime(int n)
+{
+    int i;
+
+    for(i = 2; i*i &lt;= n; i++)
+          if(n%i == 0) return false;
+
+    return true;
+}
+
+//그냥 
+
+   for(i = 2;i*i &lt;= n;i++){
+      if (n%i == 0) break;
+   }
+
+   if ( i*i &gt; n ) printf("소수");
+   else printf("소수 아님");
+}
+</pre>
+
+이게 이해가 쉽지 않죠.
+
+<p>
+8 로 예를 들어보면 ,
+</p><ul>
+<li>1 * 8 
+</li><li>2 * 4
+</li><li>4 * 2
+</li><li>8 * 1
+</li></ul>
+
+1 * 8 과 2 * 4 를 검사했으면 4 * 2 와 8 * 1 은 다시 중복 검사할 필요가 없겠죠.
+
+그러면 왜 <img src="./소수 판단법_files/sqrt.gif"> 인가?
+
+a * b 에서 a &lt;= b 인 규칙으로 수를 선택한다면 중복없이 선택할 수 있습니다.
+
+이 경우 a 와 b 가 같아지는 경계선이 <img src="./소수 판단법_files/sqrt.gif"> 입니다.
+
+</li><li> <div style="background:gray;color:white;width:60;line-height:2;text-align:center">방법3</div>
+
+<p> 방법 2 의 방법에서 짝수 중에 소수는 2 밖에 없으니 미리 걸러 버리는 것입니다.
+
+</p><pre class="source">
+bool isprime(int n)
+{
+    int i;
+
+    if(n == 2)  return true; 
+    if(n%2 == 0) return false; // 짝수 중에 2 만 소수임
+
+    for(i=3; i*i &lt;= n; i+=2 )
+          if(n%i == 0) return false;
+
+    return true;
+}
+</pre>
+
+</li></ul>
+
+</blockquote>
+
+<h3>(2) 구간에서 소수 판별 법 </h3>
+         
+<blockquote>
+에라토스테네스의 체(sieve of eratosthenes)
+
+<p>구간 사이에 있는 소수를 모두 구하는 문제에서는 어떤 수가 소수이면 이 수의 배수는 소수가 될수 없으므로 배수를 모두 없애고
+차례대로 하나씩 구하면서 전진하는 방법이다.
+            
+</p><p>예를 들어, 15 까지의 모든 소수를 구하는 문제를 생각해보자.
+            
+</p><p><img src="./소수 판단법_files/era1.png" style="valign:top;">
+
+</p><p>2 는 소수... 2 의 배수는 모두 탈락
+
+</p><p><img src="./소수 판단법_files/era2.gif">
+
+</p><p>3 은 소수 ...  3 의 배수 모두 탈락
+
+</p><p><img src="./소수 판단법_files/era3.gif">
+
+</p><p>체크 안된 위치가 소수이다.
+            
+</p><pre class="source">// era[] 배열을 0 으로 클리어 
+
+for( i = 2 ; i*i &lt;= 15 ; i++){
+   if ( era[i] == 0 ){
+      for( j = i+i ; j &lt;= 15 ; j += i){
+         era[j] = 1;
+      }
+   }
+}
+
+//era[] 0 이면 소수
+</pre>
+
+</blockquote>
+
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=primedoc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

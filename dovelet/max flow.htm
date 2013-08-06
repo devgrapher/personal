@@ -1,0 +1,154 @@
+
+<!-- saved from url=(0075)http://211.228.163.31/30stair/maxflow_doc/maxflow_doc.php?pname=maxflow_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>max flow</title>
+      
+      <link rel="stylesheet" type="text/css" href="./max flow_files/main.css">
+	  <link href="./max flow_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./max flow_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./max flow_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./max flow_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+
+// 작업 중 입니다...
+
+<h2> Ford-Fulkerson max flow </h2>
+
+<pre style="font-size:10pt">차례.  
+   maximum flow
+   maximum matching
+   minimum cut
+</pre>
+
+<hr>
+
+<h3> 0. augmenting path </h3>
+
+<blockquote>
+먼저 augmenting path 에 대해서 알아보자.<a href="http://211.228.163.31/30stair/virtual/virtual.php?pname=virtual" class="A5">augmenting path 문제</a> 
+
+<p><a href="http://211.228.163.31/30stair/maxflow_doc/hint.html">////hint////</a>
+</p></blockquote>
+
+<h3> 1. Maximum flow </h3>
+
+<h4>(1) 문제 개요</h4>
+
+<blockquote>
+
+<p>시작 정점(source)에서 목적 정점(sink)까지  한 번에 흘릴 수 있는 최대 용량을 알아내는 문제
+
+</p><p>(예시문제) 1 번 정점에서 4 번 정점까지 흘릴 수 있는 최대 용량은? 
+<span style="background:black">최대 용량은 6</span>
+
+</p><p><img src="./max flow_files/mf1.png">
+
+</p><p><a href="http://211.228.163.31/30stair/maxflow_doc/method.html" class="A5">왜?</a>
+
+</p></blockquote>
+
+<h4>(2) 직관적인 생각</h4>
+
+<blockquote>
+<p>이 문제는 언뜻 생각하면 augument path 를 구한 후 해당 용량을 빼 준후 , 다시 augument path 를 구한 후 
+다시 용량을 빼 주는 동작을 반복하면서 더 이상 소스에서 싱크까지 패스가 존재하지 않을 때 까지 반복하면 될 듯 한데....
+그렇게 해서는 답이 나오지 않는 경우가 발생함
+
+</p><p> 아래 그래프에서 
+
+</p><p><img src="./max flow_files/m_f1.bmp">
+
+</p><p>위와 같은 방법으로 하면 최대 플로가 10 .. 하지만 최대 플로는 16 
+</p></blockquote>
+
+<h4>(3) residual network 개념 </h4>
+
+<blockquote>
+
+1 에서 2 로 5 가 흐르는 경우 residual network 몇 가지 예를 보면 
+<div><div id="highlighter_910659" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/maxflow_doc/maxflow_doc.php?pname=maxflow_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">5</code></div><div class="line number2 index1 alt1"><code class="c plain">1 -------&gt; 2</code></div></div></td></tr></tbody></table></div></div>
+
+(보기 1) 1 번에서 2 번으로 3 을 흘릴 경우의 residual network 는
+
+<blockquote>
+<p>3 을 흘린 후 남은 용량은 2 ....거꾸로 3 
+
+</p><p>residual network
+    
+</p><div><div id="highlighter_235926" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/maxflow_doc/maxflow_doc.php?pname=maxflow_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">2</code></div><div class="line number2 index1 alt1"><code class="c plain">1 -------&gt;&nbsp; 2</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;</code><code class="c plain">&lt;------</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">3</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+<p>(보기 2)
+1 번 정점에서 2 번 정점으로 5 를 흘릴 경우 
+
+</p><blockquote>
+남은 용량은 없고 거꾸로 5
+
+<p>residual network
+
+</p><div><div id="highlighter_591843" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/maxflow_doc/maxflow_doc.php?pname=maxflow_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">5</code></div><div class="line number2 index1 alt1"><code class="c plain">1 &lt;------ 2</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+</blockquote>
+
+<h4>(4) residual network 이용 maxflow 구하기 </h4>
+
+
+<blockquote>
+
+<p style="font-style:oblique">
+답을 구하는 과정은 augmenting path 를 구한 후 residual network 를 적용...이를 augmenting path 가
+0 일 때 까지 반복 . 답은 augmenting path 의 합.
+</p>
+
+<p>예시 문제에서 최대 플로를 구하는 과정을 살펴 보자.
+
+</p><dl>
+<dt> step1:
+</dt><dd>
+먼저 1 에서 4 로 한 번에 흘릴수 있는  augmenting path 는  <span style="font-size:16">3</span> ( 1 - 2 - 3 - 4)
+
+<p>이 패스에 residual network 를 적용하면 
+
+</p><p><img src="./max flow_files/mf3.gif">
+     
+</p></dd><dt> step2:
+</dt><dd>다시 augmenting path 를 구하면 1 -&gt; 3 -&gt;4 로 <span style="font-size:16">2</span>
+
+<p>이 패스에 residual network 을 적용하면 
+
+</p><p><img src="./max flow_files/mf4.gif">
+
+</p></dd><dt> step3:
+</dt><dd>다시 augmenting path 구하면 1 -&gt; 2 -&gt; 4 로 <span style="font-size:16">1</span>
+
+<p>residual network 를 적용 
+
+</p><p><img src="./max flow_files/mf5.gif">
+</p></dd></dl>
+<p>source 에서 sink 로 더 이상의 길이 없으므로(augmenting path가 0) </p><p><img src="./max flow_files/therefore.gif"> 최대 용량은 3 + 2 + 1 = 6 
+
+</p><hr>
+ 이렇게 하면 왜 max flow 가 구해지는지 직관적인 이해가 안되네요. 아시는 분 도와 주세요.!!!
+
+</blockquote>
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=maxflow_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

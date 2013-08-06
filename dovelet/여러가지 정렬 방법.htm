@@ -1,0 +1,443 @@
+
+<!-- saved from url=(0063)http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>여러가지 정렬 방법</title>
+      
+      <link rel="stylesheet" type="text/css" href="./여러가지 정렬 방법_files/main.css">
+	  <link href="./여러가지 정렬 방법_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./여러가지 정렬 방법_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./여러가지 정렬 방법_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./여러가지 정렬 방법_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+<!-- here -->
+<h2> 여러 가지 정렬 방법 </h2>
+<blockquote style="font-style:oblique">
+처음 언어(그 당시에 FORTRAN 이란 언어가 주류)를 배울 때 bubble 소트 프로그램을 보고 
+
+<p>"아! 소스를 외우지 않고 어떻게 이런 프로그램을 하나...이 분야는 내가 갈 길이 아닌가ㅜㅜ"
+
+</p><p>라고 좌절을 느낀 기억이 있다. 그런데 지금은 많이 컸다. 이 부분이 쉬우니(^^)
+이 부분에서 비슷한 기분이 드시는 분들은 반복문 연습을 확실히 하는게 좋을 것 같다.
+</p></blockquote>
+
+<pre class="src">차례:
+      <a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#count" class="A5">count sort</a> 
+      <a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#bubble" class="A5">bubble sort</a>
+      <a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#selection1" class="A5">selection sort</a>
+      <a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#selection2" class="A5">selection sort 번형</a>
+      <a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#insertion" class="A5">insertion sort</a>
+      <a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#shell" class="A5">shell sort</a>
+</pre>
+
+
+무작위로 놓인 원소들을 크기 순으로 재 배치하는 것을 정렬이라 하고 ,
+
+정렬에는 
+<ul>
+<li>작은 순에서 큰 순으로 정렬하는 오름 차순 정렬과 , 
+</li><li>큰 순에서 작은 순으로 정렬하는 내림차순 정렬이 있다. 
+</li></ul>
+
+여러가지 정렬 기법에 대해서 알아보자. <p>
+
+<a name="count"></a></p><h3><a name="count">1. count 소트 </a></h3>
+
+<blockquote>
+<a href="http://211.228.163.31/30stair/count_sort/count_sort.php?pname=count_sort" class="A5">///문제 참조///</a>
+</blockquote>
+
+<hr>
+
+<a name="bubble"><h3>2 bubble 소트 </h3></a>
+
+<blockquote>
+<h4>1) 문제의 핵심</h4>
+
+<blockquote>
+
+bubble 공기방울을 뜻한다. 물 속에서 공기 방울이 있으면 위로 올라오는 경험이 목욕탕에서 있죠 :-)
+이 물방은 위로 위로 해서 물 밖으로 나게게 됩니다.
+
+<p>데이터에서 공기방울은 가장 큰데이터가 되어서 가장 뒤로 놓이게 된다고 해서 이런 이름이 붙었는 것 같습니다.
+
+</p><p>
+버블소트에서는 <font size="+3">인접한 두 원소를 비교</font>해서 두 데이터 중 앞 데이터가 크면 뒤 데이터와 순서를
+바꾸면서, 한 판 훌터면서 가장 큰 데이터를 뒤로 보내는 소트 방법이다.
+이 과정을 반복하는 방법이 버블소트이다.
+
+</p></blockquote>
+
+<h4>2)구현 </h4>
+
+<blockquote>
+
+배열 ia[] 에 아래와 같은 데이터가 있다고 하자.
+
+
+<blockquote style="letter-spacing:10pt;">
+6     2     9      8      3      4      7
+</blockquote>
+
+  ia[j]의 뒤 원소는 ia[j+1] 이므로, 두 개의 인접한 원소를
+비교해서 앞원소가 크면 앞 과 뒤 원소를 교환하면 된다.
+
+
+<div><div id="highlighter_344161" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c keyword bold">if</code><code class="c plain">( ia[j] &gt; ia[j+1){ </code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp = ia[j];</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[i] = ia[j+1];</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j+1] = tmp; </code></div><div class="line number5 index4 alt2"><code class="c plain">} </code></div></div></td></tr></tbody></table></div></div>
+
+
+     변수 j 값의 범위를 생각해보자.
+<ul>
+<li> 첫 판에는 0 에서 5
+</li><li> 다음 판에는 0 에서 4
+</li><li> ...
+</li></ul>
+<p>
+
+끝 값이 5 , 4 , 3 , 2 , 1 , 0 로 변하므로 이를 상수로 처리하지는 못하고 , 변수로 처리할
+수 있다. 이 변수명을 i 라 하면 소스 는 다음과 같다.
+</p><p>
+  
+</p><blockquote>
+<img src="./여러가지 정렬 방법_files/bubble1.gif">
+</blockquote>
+ 
+</blockquote>
+
+    <h4> 3) 개선된 bubble sort </h4>
+
+    <blockquote>
+
+위 그림 세째 판에서 네째 판으로 넘어올 때 한 번의 자리바꿈도 일어나지 않는다.
+이는 세째 판에서 이미 소트가 끝난 상태라는 것이다.
+
+<p> 이를 구현하기 위하여 임시 변수(여기에서는  flag) 를 사용하여 해결한다.
+ 
+</p><div><div id="highlighter_415802" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c keyword bold">for</code><code class="c plain">(i = n - 2 ; i &gt;= 0 ; i--){</code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">flag = 0;</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(j = 0;j &lt;= i ; j++)</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(ia[j] &gt; ia[j+1]){</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">flag = 1;</code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp = ia[j];</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j] = ia[j+1];</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j+1] = tmp;</code></div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number10 index9 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(flag==0) </code><code class="c keyword bold">break</code><code class="c plain">;</code></div><div class="line number11 index10 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>    
+
+    </blockquote>
+
+    </blockquote>
+
+    <hr>
+<h3><a name="selection1">3. selection sort</a></h3>
+
+<blockquote>
+
+<p>(<b>작은문제1</b>) 아래와 같은 데이터가  배열 ia[] 에 있다고 할 때 , 이 수 중 가장 작은
+데이터의 위치를 찾는 프로그램은?<br>
+
+</p><blockquote>
+데이터가 아래와 같을 경우 2 번째 데이터의 위치인 4 를 출력 해야 한다.
+<p>
+
+</p><center>
+<img src="./여러가지 정렬 방법_files/selection2.gif">
+</center>
+<p>
+
+(풀이) 0 번째 데이터를 가장 작은 데이터위치로 둔 후 첫 번째부터 끝까지 
+비교하면서 작은데이터의 위치보다 더 작은 데이터가 존재하면 작은 데이터의
+위치를 변경하는 방법.
+
+</p><div><div id="highlighter_29174" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c plain">min_index=0;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c keyword bold">for</code><code class="c plain">(j=1;j&lt;=6;j++){</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( ia[min_index] &gt; ia[j]) min_index=j;</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+(<b>작은문제2</b>) 배열 중에 가장 작은 데이터를 찾아서 그 데이터와 0 번째 데이터를 
+교환하는 프로그램을 작성.
+<p>
+
+</p><blockquote>
+(풀이) 가장 작은 데이터의 위치를 찾는 루틴은 보기 1 에서 구했으므로 , 이 위치와
+0 번째 위치를 교환하는 루틴만 구하면 된다.
+<p>
+
+</p><div><div id="highlighter_87767" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c plain">min_index=0;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c keyword bold">for</code><code class="c plain">(j=1;j&lt;=6;j++){</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( ia[min_index] &gt; ia[j]) min_index=j;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="c plain">tmp=ia[0];</code></div><div class="line number7 index6 alt2"><code class="c plain">ia[0]=ia[min_index];</code></div><div class="line number8 index7 alt1"><code class="c plain">ia[min_index]=tmp;</code></div></div></td></tr></tbody></table></div></div>
+
+결과로서 가장 작은 데이터가 0 번째의 위치로 이동한다.
+<p>
+
+<img src="./여러가지 정렬 방법_files/selection5.gif">
+</p><p>
+
+</p></blockquote>
+
+(<b>작은문제3</b>) 아래와 같이 배열ia[] 에 1 , 2, ... ,6 까지의 데이터 중 가장
+작은 데이터의 위치를 찾는 프로그램은?
+
+<blockquote>
+
+<center>
+<img src="./여러가지 정렬 방법_files/selection4.gif">
+</center>
+<p>
+
+(풀이) 보기 1 에서  처음 min_index 변수에 1 을 두고 j 는 2 부터 6 까지 반복하면
+된다.
+
+</p><div><div id="highlighter_896757" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c plain">min_index=1;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c keyword bold">for</code><code class="c plain">(j=2;j&lt;=6;j++){</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( ia[min_index] &gt; ia[j]) min_index=j;</code></div></div></td></tr></tbody></table></div></div>
+
+</blockquote>
+
+이 정렬 방법에 대해서 정리하면 , 기본 개념은 가장 작은 데이터를 선택해서
+제일 앞의 데이터와 해당 데이터와 교체하는 방법이다.
+<p>
+
+</p><ul>
+<li>첫 판에는 min_index 가 0 이고 j 는 1 부터 끝 까지
+</li><li>다음 판에는 min_index 가 1 이고 j 는 2 부터 끝 까지
+</li><li>...
+</li><li>다음 판에는 min_index 가 5 이고 j 는 6
+</li></ul>
+
+<div><div id="highlighter_682599" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c keyword bold">for</code><code class="c plain">(i=0;i&lt;6;i++){</code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">min_index=i;</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(j=i+1;j&lt;=6;j++) </code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(ia[min_index] &gt; ia[j]) min_index=j;</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp=ia[i];</code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[i]=ia[min_index];</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[min_index]=tmp;</code></div><div class="line number8 index7 alt1"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+</blockquote>
+
+<h3><a name="selection2">4. selection sort 의 변형</a></h3>
+
+<blockquote>
+
+<p>이 방법은 정렬의 효율은 떨어지지만 소스가 조금 더 간단한 방법인데 ,
+위에서 본 selecition 정렬은 가장 작은 데이터를 찾아 제일 앞 데이터와 교환하는 
+방법인데 반하여 , 이 방법은 비교하면서 제일 앞의 데이터와 바로 교환하는 방법이다.
+
+</p><div><div id="highlighter_28928" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c keyword bold">for</code><code class="c plain">( i = 0 ; i &lt; 6 ; i++){</code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( j = i+1 ; j &lt;= 6 ; j++){</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( a[i] &gt; a[j] ){</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp = a[i];</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">a[i] = a[j];</code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">a[j] = tmp;</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number9 index8 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+</blockquote>
+
+<hr>
+
+<h3><a name="insertion">5. insertion sort</a></h3>
+
+<blockquote>
+
+<p>이미 정렬된 데이터에서 하나의 원소가 새로 추가되는 경우 효율적으로 소트할수 있는
+방법이다.
+
+</p><p> 예를 들어, 학생들이 운동장에서 키순으로 줄을 서 있는 경우 한 학생이 늦게 도착해서 
+제일 뒤에 섰다. 이 학생은 어떻게 하면 가장 빨리 시끄럽지 않게  자기 자리를 찾아 갈수 있을까를 생각해보자.
+
+
+</p><p> 이 방법은 어떨까? 앞의 학생과 비교해서 자기보다 크면 그 학생과 자리를 바꾸고 , 다시 앞 학생과
+비교해서 자기 보다 크면 자리를 바꾸고 , 이 과정을 반복하다 앞 학생이 자기보다
+작거나 같으면 이 학생은 자기자리를 찾은 것이다. 
+이런 동작을 형태를 보이는  정렬이 삽입 정렬이다.
+</p><p>
+
+아래와 같은 정렬된 데이터에서 7 을 추가하고자 하는 경우의 예를 들면
+
+</p><blockquote>
+2 &nbsp;&nbsp; 4 &nbsp;&nbsp; 6 &nbsp;&nbsp; 8 &nbsp;&nbsp; 10 &nbsp;&nbsp;
+</blockquote>
+
+
+<ul>
+<li> 7 과 10 을 비교. 7 이 작으므로  10 을 한 칸 뒤로 
+</li><li> 7 과 8  을 비교. 7 이 작으므로  8 을 한 칸 뒤로 
+</li><li> 7 과 6  을 비교. 7 이 크므로 7 을 삽입후  종료
+</li></ul>
+
+그림으로 나타내면 ,
+<p>
+
+<img src="./여러가지 정렬 방법_files/insertion11.gif"></p><p>
+</p><p>
+
+보기에서 입력되는 데이터가 1 이라면 예외적인 경우가 발생하는데 앞 데이터와 비교해서
+작은면 뒤로 이동한다고 했는데 이런 경우에는 모든 데이터가 뒤로 밀리고 마지막에
+1 과 비교할 데이터가 없다. 이런 경우의 해결 방법은 두가지가 있는데
+</p><p>
+
+<b>하나</b>는 , 제일 앞 위치에 보초(sentinel)를 세우는 경우인데  이런 경우의 보초는 
+데이터에서 나올수 없는 아주 작은 데이터를 두면 해결 가능하다. 
+아래 소스에서 ia[0] 번째 위치에 0 을 둔 것이 그 예가 되겠고 ,
+</p><p>
+
+</p><div><div id="highlighter_143330" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include&nbsp; &lt; stdio.h &gt;</code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">ia[]={0,2,4,6,8,9,7};</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number6 index5 alt1"><code class="c plain">{</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i,j;</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">tmp;</code></div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number10 index9 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp=ia[6];</code></div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">j=5;</code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(tmp &lt; ia[j]){</code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j+1]=ia[j];</code></div><div class="line number15 index14 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">j--;</code></div><div class="line number16 index15 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number17 index16 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number18 index17 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j+1]=tmp;</code></div><div class="line number19 index18 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number20 index19 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c comments">//출력 </code></div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c comments">//</code></div><div class="line number22 index21 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=1;i&lt;7;i++)</code></div><div class="line number23 index22 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d "</code><code class="c plain">,ia[i]);</code></div><div class="line number24 index23 alt1"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+소스를 간략하게 설명하면 , 데이터는 배열을 1 번째 위치부터 존재하고 , 0 번째 배열에는
+나올수 없는 아주 작은 값으로 보초를 세우는 방법이다.
+<p>
+
+
+<b>다른하나</b>는 ,  비교할 데이터가 남아 있는지를 검사하는 방법이다.
+
+</p><div><div id="highlighter_164067" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/sorting/sorting.php?pname=sorting#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include&nbsp; &lt; stdio.h &gt;</code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">ia[]={2,4,6,8,9,7};</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number6 index5 alt1"><code class="c plain">{</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i,j;</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">tmp;</code></div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number10 index9 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp = ia[5];</code></div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">j = 4;</code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(j != -1 &amp;&amp; tmp &lt; ia[j]){</code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j+1] = ia[j];</code></div><div class="line number15 index14 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">j--;</code></div><div class="line number16 index15 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number17 index16 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number18 index17 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">ia[j+1] = tmp;</code></div><div class="line number19 index18 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number20 index19 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c comments">//출력 </code></div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i = 0;i &lt; 6; i++)</code></div><div class="line number22 index21 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d "</code><code class="c plain">,ia[i]);</code></div><div class="line number23 index22 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+간략히 설명하면 , 이 경우에는 0 번째부터 데이터를 두고 비교시 마다 앞에 데이터가
+있는지 없는지( 위 소스에서 j 가 -1 이면 더 이상 앞 데이터가 없음)를 검사하는 방법이다.
+
+<hr>
+이미 소트된 데이터에서 하나의 데이터가 입력되는 경우 이상적인 소트 방법이라면 
+아래와 같은 무작위 데이터에선 삽입정렬을 행할 수 없는 것인가?
+
+<blockquote>
+6 &nbsp;&nbsp; 2 &nbsp;&nbsp; 9 &nbsp;&nbsp;8 &nbsp;&nbsp;3 &nbsp;&nbsp;4 &nbsp;&nbsp;7
+</blockquote>
+<p>
+
+방법은 , 
+아래 정렬된 데이터(데이터가 하나이니 당연히 정렬된 상태)에 2 가 입력될 경우에는 삽입정렬을 행할 수 있을 것이다.
+
+</p><blockquote>
+6
+</blockquote>
+
+결과는 2 6 이 될 것이고, 이 정렬된 데이터에 9 가 입력될 경우 삽입정렬을 
+행하면  2 6 9 가 될 것이고 ,
+이 정렬된 데이터에 8 이 입력될 경우 삽입정열을 행하면  2 6 8 9 가 될 것이고....
+</blockquote>
+
+<hr>
+    
+<a name="shell"><h3>6. shell 소트</h3></a>
+
+<blockquote>
+////<a href="http://211.228.163.31/30stair/sorting/shell_applet.html" style="text-decoration:underline">쉘 동작보기 </a> ////
+<br>////<a href="http://211.228.163.31/30stair/sorting/sort/insertion_shell.html" style="text-decoration:underline">삽입:쉘 비교</a>////
+
+<p>insertion sort 에서 한 번의 비교로 한 칸씩 뒤로 이동하는 것을 개선하여 , 
+거리(distance)를 두어 한 번 비교로 여러칸 이동시키는 방법으로 속도를 개선한 소트
+방법이다.</p><p>
+
+</p><p>어차피 삽입정렬을 하는데 어떻게 속도를 줄 일수 있을까?
+
+</p><p>아래 보기에서 쉘 정렬에 대해서 개념을 잡아보자. 물론 이 데이터는 삽입 정령에서 가장 최악의 시간을 
+보이는 데이터이다.
+
+</p><p>데이터가 역순으로 소트되어 있는 경우 삽입 정렬을 행할 시
+총 몇 번의 비교로 완전히 정렬을 끝낼수 있을까?
+
+<table width="300">
+<tbody><tr>
+  <td>
+     <table border="0" width="300" style="font-size:10pt;">
+     <tbody><tr align="center">
+        <td> 1 </td>
+        <td> 2 </td>
+        <td> 3 </td>
+        <td> 4 </td>
+        <td> 5 </td>
+        <td> 6 </td>
+        <td> 7 </td>
+     </tr>
+     </tbody></table>
+  </td>
+</tr>
+
+<tr>
+  <td>
+      <table border="0" width="300" bgcolor="#000000">
+      <tbody><tr align="center" bgcolor="#ffffff"> 
+         <td> 7 </td>
+         <td> 6 </td>
+         <td> 5 </td>
+         <td> 4 </td>
+         <td> 3 </td>
+         <td> 2 </td>
+         <td> 1 </td>
+      </tr>
+      </tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+</p><p>7 을 위치시키는데 1 번 ,  6 을 위치시키는데 2 번, ...
+
+</p><blockquote>
+총= 1 + 2 + 3 + 4 + 5 +6 = 21
+</blockquote>
+
+총 21 번의 비교가 일어난다.
+
+<hr>
+
+한편 , 거리 3 을 두고  삽입정렬을 한 후, 삽입정렬을 한다면 몇 번의 비교로 정렬을 끝낼수 있을 까?
+
+<ul>
+<li> 1 번째 , 4 번째 , 7 번째 데이터와 삽입정렬을 한다면 
+</li><li> 2 , 5 
+</li><li> 3 , 6 
+</li></ul>
+
+만약 거리 3 을 주고 삽입 정렬을 한다면 
+
+<p><img src="./여러가지 정렬 방법_files/shell_0.gif">
+
+</p><p><img src="./여러가지 정렬 방법_files/shell_1.gif">
+
+</p><p>비교 횟수를 계산해 보면 
+
+</p><ul>
+<li>간격을 3 을 주고 이 데이터를 만드는데 비교 회수가 5 번 이고 
+</li><li> 삽입정렬을 하는 데 8 번(1 + 2 + 1 + 1 + 2 + 1 ) 으로 
+</li></ul>
+
+총 13 번의 비교로 정렬이 끝난다.
+
+<p> 정리하면 , 
+
+insertion sort 에서 한 번의 비교로 한 칸씩 뒤로 이동하는 것을 개선하여 , 
+거리(distance)를 두어 한 번 비교로 여러칸 이동시키는 방법으로 속도를 개선한 소트
+방법이다.</p><p>
+
+물론 마지막 과정에서 거리 1 을 주어 insertion sort 가 수행된다.</p><p>
+
+<!--
+쉘 소트는 insertion sort 란 개량한 소트방법으로 비교적 간단하고 , 
+속도도 괜찮은 소트 방법이다.<p>
+
+
+<pre style="font-size:12pt;background-color:#cccccc;width:500;margin-left:100"> 
+dist=n/2; //
+while ( dist >= 1){  //dist 가 1 이면 insertion sort 
+   for(i=dist+1 ; i <= n ;i++){
+      tmp=ia[i];
+      j=i-dist;
+ 
+      while (j >= 1 && tmp < ia[j]){
+         ia[j+dist]=ia[j];
+         j-=dist;
+      }
+      ia[j+dist]=tmp;
+  }
+  dist/=2;
+</pre>
+   
+
+ <small>데이터는 ia[] 배열의 1 번째 부터 위치한다고 가정.</small>
+-->
+
+</p><p> 첫 거리를 얼마나 주면 좋은지 , 간격을 얼마나 줄이면서 마지막에 삽입 정렬로 
+가는지의 여러가지 연구가 있지만 우리는 간격을 데이터수의 반으로 줄이면서
+가는 방법으로 프로그래밍 했다.
+
+</p></blockquote>
+
+<h3>7.소트별 시간 측정 </h3>
+
+<blockquote>
+삼만건의 데이터로 bubble sort 에서는 32.10 초 , insertion sort 에서 10.93 초
+, shell sort 에서는 0.20 초  , quick sort 에서 0.16 초 가 걸렸다.(셀러론 300 기준)
+</blockquote>
+
+
+
+
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=sorting">[질/답]</a>
+
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

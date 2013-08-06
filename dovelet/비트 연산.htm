@@ -1,0 +1,201 @@
+
+<!-- saved from url=(0063)http://211.228.163.31/30stair/bit_doc/bit_doc.php?pname=bit_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>비트 연산</title>
+      
+      <link rel="stylesheet" type="text/css" href="./비트 연산_files/main.css">
+   </head>
+   <body>
+
+   // 작업 중 입니다....
+
+   <p>
+   </p><div style="font-style:oblique">
+   이 파트를  완전히 이해하기 위해서는 <a href="http://211.228.163.31/30stair/complement/complement.php?pname=complement#fixed_point" class="A3">2 의 보수 표현법</a>에 대한 공부가 필요합니다.
+   </div>
+   
+   <h2>1. bit 연산자 </h2>
+
+   동기부여) 부분 집합형 퇴각검색(backtracking)을  재귀를 이용하지 않고 비트 연산으로 구현한  소스 입니다.
+<pre class="csource">#include <stdio.h>
+
+int main () 
+{
+    int i, j, sum;
+    int B;
+                
+    int buckets[3]={6,2,9};
+
+    B = 3;
+
+    for (i = 0; i &lt; <font size="+1">1 &lt;&lt; B </font>; i++) {
+        sum = 0;
+        for (j = 0; j &lt; B; j++)
+            if (<font size="+1">i &amp; (1 &lt;&lt; j) </font>) sum += buckets[j];
+        printf("%d\n",sum);
+    
+    }
+    return 0;
+}
+</stdio.h></pre>
+<pre>/*
+10진수 2진수 합
+----------------
+  0     000  0  
+  1     001  6  
+  2     010  2  
+  3     011  8  
+  4     100  9  
+  5     101 15 
+  6     110 11 
+  7     111 17 
+*/
+</pre>
+비트 연산자를 간단히 공부 한 후 어떻게 비트 연산으로 가능한지 알아 보겠습니다.
+
+<h3>1) and 연산자 <font color="orange"> &amp; </font> </h3>
+
+<blockquote>
+모두가 1 일 때 1 인 연산자. 즉 
+
+<p><img src="./비트 연산_files/bit_and.gif">
+
+</p><pre class="csource">#include &lt;stdio.h&gt;
+
+int main()
+{
+   int a;
+
+   a=172;
+   printf("%d",a &amp; 56); // 결과 : 40
+}
+</pre>
+
+1 로 비트 연산을 가하면 원래의 상태가 그대로 유지가 되고 , 0 을 가하면 원래의 상태에 관계없이
+ 0 으로 클리어(mask off)가 됩니다.
+
+<p>
+(예제1) a 가 짝수인지 홀수인지를 판단하는 프로그램 
+
+</p><pre class="csource">#include &lt;stdio.h&gt;
+
+int main()
+{
+   int a;
+
+   scanf("%d",&amp;a);
+   if ( a &amp; 1 ) { // 2 진수로 바꿀 때 첫 비트가 1 이면 홀수 아니면 짝수 
+      printf("홀수");
+   }else {
+      printf("짝수");
+   }
+}
+</pre>
+
+<p>
+(예제2) a 의 제일 오른쪽에 나오는 1 의 값을 가져옴.
+
+</p><pre class="csource">#include &lt;stdio.h&gt;
+
+int main()
+{
+   int a;
+
+   a=172;
+   printf("%d",a&amp;-a); //결과는 4
+}
+</pre>
+
+(예제3) 2<sup>n</sup> 인지 check.
+
+<pre class="csource">#include &lt;stdio.h&gt;
+
+int main()
+{
+   int a;
+
+   scanf("%d",&amp;a);
+   if ( a &amp; (a-1) == 0 ){
+      printf("yes");
+   }else {
+      printf("no");
+   }
+}
+</pre>
+</blockquote>
+
+<h3>2) or 연산자 <font color="orange"> | </font> </h3>
+<blockquote>
+a 의 2 , 3 , 4  번 비트를 1 0 1 나머지는 현재 상태로 유지하고 싶으면 
+
+<ul>
+<li>
+먼저 2 , 3 , 4 번 비트를 and 연산자로 클리어 합니다. 나머지는 그대로 
+a = a&amp;11111....10001
+
+</li><li>
+다음 2, 3 ,4 번 비트를 1 0 1  으로 or 연산을 취합니다.
+a = a|00000000001010
+</li></ul>
+
+특정비트를 어떤 값으로 세팅할 때(selective set) 사용합니다.
+</blockquote>
+
+<h3>3) x-or연산자 <font color="orange"> ^ </font> </h3>
+
+<blockquote>
+서로 상태가 다를 때 1 입니다. 1 의 개수가 홀수 개 일 때라 생각해도 됩니다.
+
+<p>
+이 연산자는 특정 비트를 반전(selective complement) 시킬 때 많이 사용합니다. 
+
+</p><p>
+특정 비트에 1 로 x-or 을 하면 0 이면 1 이되고 , 1 이면 0 으로 됩니다. not 연산자와
+같이 움직입니다.
+
+</p></blockquote>
+
+<h3>4) not 연산자 <font color="orange"> ~ </font> </h3>
+<blockquote>
+0 을 1 로 , 1 을 0 으로 바꿉니다.
+</blockquote>
+
+<h3>5)  shift 연산자  </h3>
+<blockquote>
+오른쪽 shift 연산은 두가지가 있습니다. 
+
+<ul>
+<li> 부호를 고려하지 않는 논리 쉬프트(logical shift) ,
+</li><li> 부호를 고려한 산술 쉬프트(arithmetic shift) 
+</li></ul>
+
+logical 오른쪽 shift 는 새로 첨가되는 비트가 0 이고 
+arithmetic 오른쪽 shift 는 새로 첨가되는 비트가 1 입니다.
+
+<h4>(1) right shift<font color="orange"> &gt;&gt; </font></h4>
+<blockquote>
+</blockquote>
+
+<h4>(2) left shift<font color="orange"> &lt;&lt;  </font></h4>
+<blockquote>
+</blockquote>
+
+</blockquote>
+
+<h2>2. stl bitset </h2>
+
+
+<h2>3. 참고 자료 </h2>
+*<a href="http://graphics.stanford.edu/~seander/bithacks.html" class="A3"> graphics.stanford.edu/~seander/bithacks.html</a>
+<pre class="src">출처:dovelet
+</pre>
+
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=bit_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

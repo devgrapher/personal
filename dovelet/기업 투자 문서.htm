@@ -1,0 +1,246 @@
+
+<!-- saved from url=(0072)http://211.228.163.31/30stair/invest_doc/invest_doc.php?pname=invest_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>기업 투자 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./기업 투자 문서_files/main.css">
+   </head>
+   <body>
+
+   <h3>기업 투자 문서</h3>
+
+   <div style="background-color:#cfcfcf;">
+   이런 류의  확장 방법은 하나씩 녹여가면서 큰 덩어리를 만들어간다. 
+   이 하나를 큰 덩이에 녹이는  것이 유리한 가 아니면 버리는 것이 유리한가를 판단하면서 
+   확장 ....  최종적으로 전체를 고려한 큰 덩이를 만든다.
+
+<ol>
+   <li><b>A 기업</b>에서 답을 구하고
+   </li><li>이를 이용하여 <b>A,B 기업</b> 기업에서 답을 구하고
+   </li><li>이를 이용하여 마지막  <b>A,B,C 기업</b>으로 확장하면서  답을 구함.
+</li></ol>
+</div>
+
+핵심은 
+
+<p><img src="./기업 투자 문서_files/invest1.gif">
+
+</p><p>A+B 기업에서 투자 금액별  최대 이윤을 알고있다고 할 때 ( 그림에서 box )
+
+A+B+C 기업에서 j 원을 투자할 경우 최대 이윤은 .....
+
+</p><ul>
+<li>C 에 0  A+B 에 j
+</li><li>C 에 1  A+B 에 j-1 
+</li><li>....
+</li><li>C 에 j  A+B 에 0
+</li></ul>
+이 중 최대가 A+B+C 기업에서 J 원을 투자한 경우 최대 이윤이다.
+
+<hr>
+
+<h4>자세한 해 설</h4>
+
+<p><table border="0" bgcolor="#000000" width="30%">
+
+<tbody><tr bgcolor="#ffffff" align="center">
+<td> </td><td>A </td> <td>B</td> <td> C </td> 
+</tr>
+
+<tr bgcolor="#ffffff" align="center">
+<td>0 </td> <td> 0 </td> <td> 0 </td> <td> 0 </td>
+</tr>
+
+<tr bgcolor="#ffffff" align="center">
+<td>1 </td> <td> 2 </td> <td> 1 </td> <td> 3 </td>
+</tr>
+
+<tr bgcolor="#ffffff" align="center">
+<td> 2 </td> <td> 5 </td> <td> 4 </td> <td> 4 </td>
+</tr>
+
+<tr bgcolor="#ffffff" align="center">
+<td>3 </td> <td> 7 </td> <td> 9 </td> <td> 9 </td>
+</tr>
+
+<tr bgcolor="#ffffff" align="center">
+<td>4 </td> <td> 8 </td> <td> 11 </td> <td> 10</td>
+</tr>
+</tbody></table>
+
+</p><ol>
+
+<li>4 원을 투자할 경우 , A 기업만 있다고 할때 투자 금액별 이윤을 구하면 
+
+<p><img src="./기업 투자 문서_files/a_giup.gif">
+
+</p><hr color="red">
+<p></p></li><li>이를 이용하여 A,B 기업에서 투자 금액별 최대이윤을 구해보자.
+
+<ul>
+
+<p></p><li>0 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A 기업 0 원 투자  + B 기업 0 원 투자 = 0 + 0
+</li></ol>
+
+<p><img src="./기업 투자 문서_files/ab_giup_0.gif">
+
+</p><p></p></li><li>1 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A 기업 0 원 투자  + B 기업 1 원 투자 = 0 + 1
+</li><li>A 기업 1 원 투자  + B 기업 0 원 투자 = 2 + 0
+</li></ol>
+
+이중 최대값 2 가  A,B 기업에 1 원을 투자할 경우 최대 이윤 
+
+<p><img src="./기업 투자 문서_files/ab_giup_1.gif">
+
+</p><p></p></li><li>2 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A 기업 0 원 투자  + B 기업 2 원 투자 = 0 + 4
+</li><li>A 기업 1 원 투자  + B 기업 1 원 투자 = 2 + 1
+</li><li>A 기업 2 원 투자  + B 기업 0 원 투자 = 5 + 0
+</li></ol>
+
+
+이중 최대 5 가  A,B 기업에 2 원을 투자할 경우 최대 이윤 
+
+<p><img src="./기업 투자 문서_files/ab_giup_2.gif">
+
+</p><p></p></li><li>3 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A 기업 0 원 투자  + B 기업 3 원 투자 = 0 + 9
+</li><li>A 기업 1 원 투자  + B 기업 2 원 투자 = 2 + 4
+</li><li>A 기업 2 원 투자  + B 기업 1 원 투자 = 2 + 1
+</li><li>A 기업 3 원 투자  + B 기업 0 원 투자 = 7 + 0
+</li></ol>
+
+이중 최대 9 이  A,B 기업에 3 원을 투자할 경우 최대 이윤 
+
+<p><img src="./기업 투자 문서_files/ab_giup_3.gif">
+
+</p><p></p></li><li>4 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+
+<ol type="i">
+<li>A 기업 0 원 투자  + B 기업 4 원 투자 = 0 + 11
+</li><li>A 기업 1 원 투자  + B 기업 3 원 투자 = 2 + 9
+</li><li>A 기업 2 원 투자  + B 기업 2 원 투자 = 5 + 4
+</li><li>A 기업 3 원 투자  + B 기업 1 원 투자 = 7 + 1
+</li><li>A 기업 4 원 투자  + B 기업 0 원 투자 = 8 + 0
+</li></ol>
+
+이중 최대 11 이 A,B 기업에 4 원을 투자할 경우 최대 이윤 
+</li></ul>
+
+<p><img src="./기업 투자 문서_files/ab_giup.gif">
+
+</p><hr color="red">
+
+<p></p></li><li>마지막으로 A,B,C 기업에서 투자 금액별 최대이윤을 구하면 
+
+<ul>
+
+<p></p><li>0 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A,B 기업 0 원 투자  + C 기업 0 원 투자 = 0 + 0
+</li></ol>
+
+<p><img src="./기업 투자 문서_files/abc_giup_0.gif">
+
+</p><p></p></li><li>1 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A,B 기업 0 원 투자  + C 기업 1 원 투자 = 0 + 3
+</li><li>A,B 기업 1 원 투자  + C 기업 0 원 투자 = 2 + 0
+</li></ol>
+
+이중 최대 3 이   A,B,C 기업에 1 원을 투자할 경우 최대 이윤 
+
+<p><img src="./기업 투자 문서_files/abc_giup_1.gif">
+
+</p><p></p></li><li>2 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A,B 기업 0 원 투자  + C 기업 2 원 투자 = 0 + 4
+</li><li>A,B 기업 1 원 투자  + C 기업 1 원 투자 = 2 + 3
+</li><li>A,B 기업 2 원 투자  + C 기업 0 원 투자 = 5 + 0
+</li></ol>
+
+
+이중 최대 5 가  A,B,C 기업에 2 원을 투자할 경우 최대 이윤 
+
+<p><img src="./기업 투자 문서_files/abc_giup_2.gif">
+
+</p><p></p></li><li>3 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+<ol type="i">
+<li>A,B 기업 0 원 투자  + C 기업 3 원 투자 = 0 + 9
+</li><li>A,B 기업 1 원 투자  + C 기업 2 원 투자 = 2 + 4
+</li><li>A,B 기업 2 원 투자  + C 기업 1 원 투자 = 5 + 2
+</li><li>A,B 기업 3 원 투자  + C 기업 0 원 투자 = 9 + 0
+</li></ol>
+
+이중 최대 9 이  A,B,C 기업에 3 원을 투자할 경우 최대 이윤 
+
+<p><img src="./기업 투자 문서_files/abc_giup_3.gif">
+
+</p><p></p></li><li>4 원을 투자할 경우에 가능한 모든 경우를 생각하면 
+
+
+<ol type="i">
+<li>A,B 기업 0 원 투자  + C 기업 4 원 투자 = 0 + 10
+</li><li>A,B 기업 1 원 투자  + C 기업 3 원 투자 = 2 + 9
+</li><li>A,B 기업 2 원 투자  + C 기업 2 원 투자 = 5 + 4
+</li><li>A,B 기업 3 원 투자  + C 기업 1 원 투자 = 9 + 3
+</li><li>A,B 기업 4 원 투자  + C 기업 0 원 투자 = 11 + 0
+</li></ol>
+
+이중 최대 12 이 A,B 기업에 4 원을 투자할 경우 최대 이윤 
+</li></ul>
+
+<p><img src="./기업 투자 문서_files/abc_giup.gif">
+</p></li></ol>
+
+<p>이를 프로그램하기 위해서 식(규칙)을 세워보자. 기업수를 m , 총 투자금액을 n 이라 하자.
+
+</p><p>각 기업의 투자금액 별 이윤을 가지고 있는 배열을 data[][] 배열이라
+하면 이 배열 data[i][j] 는 i 번째 기업에 j 원을 투자할 경우의 이윤으로
+문제에서 주어진다.
+
+</p><p>첫 번째 기업 ~   i 번째 기업에서 j 원을 투자할 경우의 
+최대이윤은 answer[i][j] 는 
+
+</p><p>점화식:
+</p><blockquote>
+<ul>
+<li>answer[i][j] = max( answer[i-1][k] + data[i][j-k] ) 단 ,0&lt;= k &lt;= j 
+</li></ul>
+</blockquote>
+
+<p>답
+</p><blockquote>
+<ul>
+<li> answer[m][n]
+</li></ul>
+</blockquote>
+
+<h4>시간 복잡도</h4>
+
+O(n^3) 
+ 
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=invest_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

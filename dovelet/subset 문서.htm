@@ -1,0 +1,99 @@
+
+<!-- saved from url=(0072)http://211.228.163.31/30stair/subset_doc/subset_doc.php?pname=subset_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>subset 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./subset 문서_files/main.css">
+   </head>
+   <body>
+
+   <h2><a href="http://211.228.163.31/30stair/subset/subset.php?pname=subset" class="A5">subset</a> 문서</h2>
+
+   <blockquote>
+
+   <blockquote style="font-style:oblique">
+   이 문제는 backtracking 문제로도 유명하지만 데이터의 수가 많아지는 경우 dp 로 해결할 수 있습니다.
+   </blockquote>
+
+
+   <div style="border:1 solid gray; width:700px">
+(예시) 
+
+  A = { 1 , 2 , 3}
+<p>
+집합 A 의부분 집합 중 원소 3 을 포함하는 부분 집합은 어떻게 구할 수 있을까요?
+
+</p><blockquote>
+답)
+A = {1, 2} 의 부분 집합
+
+<p>
+</p><ul>
+<li>    {}
+</li><li>    1
+</li><li>    2
+</li><li>    1,2 
+</li></ul>
+
+<p>
+에서 각각에 3 을 더한 4 개가 됩니다.
+
+</p><p>
+</p><ul>
+<li>    {}  + 3
+   </li><li> 1  + 3
+    </li><li>2  + 3
+    </li><li>1,2  + 3
+</li></ul>
+
+이 와 같은 방법으로 확장이 이루어 집니다.
+</blockquote></div>
+</blockquote>
+
+   <a href="http://211.228.163.31/30stair/subset/subset.php?pname=subset" style="text-decoration:underline;color:blue"> 문제 보기 </a>
+   <p> ---구현
+
+   </p><ul>
+   <li> 시작 상태 
+   <p><img src="./subset 문서_files/subset1.gif">
+   </p></li><li> 원소 1 이 적용된 상태 입니다.
+   <p><img src="./subset 문서_files/subset2.gif">
+
+   </p><p></p></li><li> 원소 2 가 적용된 상태 입니다. 2 번 적용되는 것을 막기 위하여 뒤에서 앞으로 검사 합니다.
+   <p><img src="./subset 문서_files/subset3.gif">
+   </p></li><li> 원소 3 이 적용되는 과정 입니다.
+
+   <ul>
+   <li>&nbsp;
+   <p><img src="./subset 문서_files/subset4.gif">
+   </p></li><li>&nbsp;
+   <p><img src="./subset 문서_files/subset5.gif">
+   </p></li><li>&nbsp;
+   <p><img src="./subset 문서_files/subset6.gif">
+   </p></li><li>&nbsp;
+   <p><img src="./subset 문서_files/subset7.gif">
+   </p></li></ul>
+   </li></ul>
+
+   (1+2+3)/2 = 3 의 위치로 가서 2 로 나누면 원하는 답 입니다.
+   
+  
+   <h3>2.소스 </h3>
+   <blockquote>
+   </blockquote>
+
+   <h3>3.시간 복잡도 </h3>
+   <blockquote>
+   </blockquote>
+<pre class="src">관련 문제:구슬 게임, 돌다리 건너기, 연속적인 소수의 합, 줄다리기, 스파이더 맨, 가장 긴 접두어, 만들수 없는 수
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=subset_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>
