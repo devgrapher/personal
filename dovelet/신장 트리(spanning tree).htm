@@ -1,0 +1,552 @@
+
+<!-- saved from url=(0081)http://211.228.163.31/30stair/spanning_tree/spanning_tree.php?pname=spanning_tree -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>신장 트리(spanning tree)</title>
+      
+      <link rel="stylesheet" type="text/css" href="./신장 트리(spanning tree)_files/main.css">
+   </head>
+
+   <body style="font-family:verdana">
+
+<h2> 신장 트리란?(spanning tree) </h2>
+<pre style="font-size:10pt;">
+차례.
+
+-<a href="http://211.228.163.31/30stair/spanning_tree/spanning_tree.php?pname=spanning_tree#spanning">신장트리란?</a>
+-<a href="http://211.228.163.31/30stair/spanning_tree/spanning_tree.php?pname=spanning_tree#mcs">최소비용 신장트리</a>
+-<a href="http://211.228.163.31/30stair/spanning_tree/spanning_tree.php?pname=spanning_tree#imp">구현 방법(kruskal,prime)</a>
+</pre>
+
+<h3><a name="spanning">1. 신장 트리(spanning tree)란?</a></h3>
+
+<blockquote>
+      
+<div style="border: 1 solid gray;width:700px">
+그래프에서 
+
+<ol>
+<li> <b>모든 정점을  포함</b>하고 ,
+</li><li> 정점간 서로 <b>연결</b>되면서 <b>사이클이 존재하지 않는</b> 그래프 ( 이 조건은 트리 조건 입니다 )
+</li></ol>
+
+즉 모든 정점을 모두 포함하는 트리를 신장 트리라 합니다.
+</div>
+
+<p>
+</p><p>아래 그래프의 신장트리는 존재 할까요? 한다면 몇개가 있을까요? 
+
+</p><p><img src="./신장 트리(spanning tree)_files/spanning.png">
+
+</p><p>
+<span style="background-color:#000000"><a href="http://211.228.163.31/30stair/spanning_tree/img/spanning2.gif">4 가지</a>가 존재하겠죠.</span>
+
+</p><hr>
+
+<p>여기에서 간선에 값(cost)을 한 번 부여해 보겠습니다.
+
+</p><p><img src="./신장 트리(spanning tree)_files/sp1.gif">
+
+</p><p>
+이 경우에 4 개의 신장 트리 중 값의 합이 최소인 신장트리가 있겠죠. 이 신장트리가 최소 비용 신장 트리 입니다.
+
+</p><p><img src="./신장 트리(spanning tree)_files/sp2.gif">
+
+</p><p>
+최소 비용은 15 입니다.
+
+
+
+<!--
+<ol>
+<li> 주어진 그래프에 있는 모든 정점을 포함하고
+<li> 정점간 서로 연결되면서 (연결되지 않은 그래프에서는 신장트리는 존재할 수 없음)
+<li> 사이클이 존재하지 않는 그래프 
+</ol>
+신장트리는 하나이상 존재할 수 있다.
+-->
+</p></blockquote>
+
+<h3><a name="mcs">2. 최소비용 신장트리(minimal cost spanning tree) 구하는 방법</a> </h3>
+
+<blockquote>
+
+   <p>주어진  그래프에서 최소비용 신장트리를 구하면 ? 그 때의 최소비용은?
+   </p><p><img src="./신장 트리(spanning tree)_files/spanning_problem.gif">
+
+   </p><p> 이 정도만 하더라도 눈으로 구하는 것이 쉽지가 않습니다. 이 를 구하는 방법으로 널리 알려진 알고리즘으로 Kruskal , prim 방법이 있습니다.
+    눈으로 구하신 후 두 방법을 사용해서 구한 답이 맞는지 확인 해 보세요.
+</p></blockquote>
+
+<h3><a name="imp">3. 방법과 구현 </a> </h3>
+
+<blockquote>
+
+두가지 모두 그리디 메소드를 이용합니다. 직관의 힘이 필요합니다.
+
+<h4>1) Kruscal 방법</h4>
+
+<blockquote>
+
+<p> 알고리즘 
+</p><div style="border:1 solid gray;width:800px;padding-top:10px;">
+
+<ol>
+   <li> 간선중 비용이 적은 순으로 소트 
+   </li><li> 가장 적은 비용이 드는 간선부터 차례대로 추가
+   </li><li> 추가중 사이클이 존재하는 간선은 제외
+   </li><li> 모든 정점이 연결될 때 까지 2 - 3 과정을 반복
+</li></ol>
+
+</div>
+
+<blockquote>
+위에서 든 예로 모든 정점을 포함 해야 하므로 그림과 같이 준비 합니다. 목표는 이 정점들이 사이클을 발생하지 않으면서
+모두 연결되어야 합니다.
+
+<p>
+cost 가 작은 간선 부터 하나씩 연결 합니다.
+</p><p><img src="./신장 트리(spanning tree)_files/spanning_prob1.gif">
+
+</p><ul>
+   <li>2 , 3 번 정점의 간선  5 를 선택 
+<p><img src="./신장 트리(spanning tree)_files/spanning_prob2.gif">
+   </p></li><li>2 , 4 번 정점의 간선  6 을 선택 
+<p><img src="./신장 트리(spanning tree)_files/spanning_prob3.gif">
+   </p></li><li>3 , 4 번 정점의 간선 10 을 선택하면 사이클이 발생하므로 10 을 버림 
+<p><img src="./신장 트리(spanning tree)_files/spanning_prob4.gif">
+   </p></li><li>2 , 6 번 정점의 11 을 선택 
+   </li><li> ...
+</li></ul>
+이 과정을 모든 정점이 연결할 때 까지 반복 
+
+</blockquote>
+
+구현... union and find 를 이용...
+
+시간 복잡도: O(e loge)
+
+</blockquote>
+<h4>2) Prim 방법</h4>
+
+<blockquote>
+kruskal 방법과 달리 정점을 하나씩 추가. 정정의 수가 n 개이면 n-1 번의 반복이 필요.
+
+<!--
+용어:
+<ul>
+<li>트리 정점: 현재까지 만들어지는 트리의 내의 정점
+<li>인접 정점: 트리 정점의 인접 정점
+</ul>
+-->
+
+
+<blockquote>
+<!--
+그리디 메소드는 시작 부분의 이해가 중요합니다.
+
+<p>그림의 정점에서 시작한다고 했을 때 이 정점에 연결된 간선 중 최소 간선이 1 입니다.
+즉 이 1 은 답으로 선택될 수 밖에 없다는 것입니다.
+
+<p><img src="./img/prim_why.gif">
+
+<p>왜 그럴까요?
+일단 한 번 생각해 보고 갈 일은 두 가지 하나는 왜 이렇게 하면 최소 비용 신장트리가 구해지는가?
+다른 하나는 이렇게 전진해 나가면 사이클이 발생하지 않는가?
+-->
+
+알고리즘 
+
+
+<div style="border:1 solid gray;width:800px;padding-top:10px;">
+<ol>
+<li> 임의의 정점을 선택
+</li><li> 이 정점에서 다른 정점으로 갈수 있는 최소 비용의 정점을 선택<br> 이 정점은 제외
+</li><li> 이 정점에서 다른 정점으로 가는 비용과 기존의 비용과 비교후 더  작은 비용이 있으면 갱신
+</li><li>step4. 2-3 번 과정을  n(정점의수)-1 번 반복
+</li></ol>
+</div>
+
+<p>
+왼쪽 그래프에서 오른쪽의 최소비용 신장트리를 prim 방법으로 구하여 봅니다.
+
+</p><pre>
+<table>
+<tbody><tr>
+<td>
+<img src="./신장 트리(spanning tree)_files/prim1.png">
+</td>
+<td valign="middle">
+<pre>최소비용 신장트리
+------------------&gt;
+</pre>
+</td>
+<td>
+<img src="./신장 트리(spanning tree)_files/prim2.png">
+</td>
+</tr>
+</tbody></table>
+
+step 1. 임의의 정점(1,2,3,4 중 하나)에서 시작... 3 번 정점에서 시작한다고 하면 
+
+<blockquote>
+<table bgcolor="#000000" cellspacing="1">
+<tbody><tr bgcolor="#ffffff">
+<td>
+정점
+</td>
+
+<td>
+방문유무
+</td>
+
+<td>
+아버지 정점
+</td>
+
+<td>
+패스크기
+</td>
+
+</tr>
+
+<!-- 1  -->
+<tr bgcolor="#ffffff">
+
+<td>
+1
+</td>
+
+<td>
+x
+</td>
+
+<td>
+3
+</td>
+
+<td>
+8
+</td>
+
+</tr>
+
+<!-- 2  -->
+
+<tr bgcolor="#ffffff">
+
+<td>
+2
+</td>
+
+<td>
+x
+</td>
+
+<td>
+3
+</td>
+
+<td>
+9
+</td>
+
+</tr>
+
+<!-- 3  -->
+ 
+<tr bgcolor="#ffffff">
+
+<td>
+3
+</td>
+
+<td>
+o
+</td>
+
+<td>
+x
+</td>
+
+<td>
+0
+</td>
+
+</tr>
+
+
+<!-- 4  -->
+
+<tr bgcolor="#ffffff">
+
+<td>
+4
+</td>
+
+<td>
+x
+</td>
+
+<td>
+3
+</td>
+
+<td>
+2
+</td>
+
+</tr>
+
+</tbody></table>
+
+</blockquote>
+step 2. 방문되지 않는 노드중 패스가 최소인 정점을 선택... 이 간선은 최소비용 스패트 트리의 간선이 됨.(그리디)
+        이 정점에 연결된 방문되지 않은 정점 중 패스의 크기가 작은 것이 있으면 갱신
+        이 경우 2 번 정점으로 가는 기존의 패스가 9 이고 , 4 에서 2 로 가는 정점이 6 이므로 갱신.
+
+<table cellpadding="20">
+<tbody><tr>
+<td>
+
+<table border="1">
+<tbody><tr>
+<td>
+정점
+</td>
+
+<td>
+방문유무
+</td>
+
+<td>
+아버지 정점
+</td>
+
+<td>
+패스크기
+</td>
+
+</tr>
+
+<!-- 1  -->
+<tr>
+
+<td>
+1
+</td>
+
+<td>
+x
+</td>
+
+<td>
+3
+</td>
+
+<td>
+8
+</td>
+
+</tr>
+
+<!-- 2  -->
+
+<tr>
+
+<td>
+2
+</td>
+
+<td>
+x
+</td>
+
+<td>
+3
+</td>
+
+<td>
+9
+</td>
+
+</tr>
+
+<!-- 3  -->
+
+<tr>
+
+<td>
+3
+</td>
+
+<td>
+o
+</td>
+
+<td>
+x
+</td>
+
+<td>
+0
+</td>
+
+</tr>
+
+
+<!-- 4  -->
+
+<tr bgcolor="#cccccc">
+
+<td>
+4
+</td>
+
+<td>
+o
+</td>
+
+<td>
+3
+</td>
+
+<td>
+2
+</td>
+
+</tr>
+
+</tbody></table>
+
+</td>
+
+<td>
+<table border="1">
+<tbody><tr>
+<td>
+정점
+</td>
+
+<td>
+방문유무
+</td>
+
+<td>
+아버지 정점
+</td>
+
+<td>
+패스크기
+</td>
+
+</tr>
+
+<!-- 1  -->
+<tr>
+
+<td>
+1
+</td>
+
+<td>
+x
+</td>
+
+<td>
+3
+</td>
+
+<td>
+8
+</td>
+
+</tr>
+
+<!-- 2  -->
+
+<tr>
+
+<td>
+2
+</td>
+
+<td>
+x
+</td>
+
+<td>
+<b>4</b>
+</td>
+
+<td>
+<b>6</b>
+</td>
+
+</tr>
+
+<!-- 3  -->
+
+<tr>
+
+<td>
+3
+</td>
+
+<td>
+o
+</td>
+
+<td>
+x
+</td>
+
+<td>
+0
+</td>
+
+</tr>
+
+
+<!-- 4  -->
+
+<tr bgcolor="#cccccc">
+
+<td>
+4
+</td>
+
+<td>
+o
+</td>
+
+<td>
+3
+</td>
+
+<td>
+2
+</td>
+
+</tr>
+
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+step 3. 이 과정을 노드수가 4 개이므로 3 번 반복....
+</pre>
+
+</blockquote>
+
+</blockquote>
+</blockquote>
+
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=spanning_tree">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

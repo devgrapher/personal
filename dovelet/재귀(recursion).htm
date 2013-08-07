@@ -1,0 +1,252 @@
+
+<!-- saved from url=(0069)http://211.228.163.31/30stair/recursion/recursion.php?pname=recursion -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>재귀(recursion)</title>
+      
+      <link rel="stylesheet" type="text/css" href="./재귀(recursion)_files/main.css">
+   </head>
+   <body>
+
+   <h2>재귀 호출(recursive call)이란?</h2>
+
+   <blockquote>
+<p>재귀 호출이라 함은  함수를 호출 할  때 <b>자기 함수를 자기가 호출 </b>호출을 말함.
+
+</p><pre class="src">void recursion()
+{
+   recursion(); // 재귀 호출 
+}
+
+int main()
+{
+   recursion();
+}
+</pre>
+
+물론 위 프로그램은 무한 루핑에 빠지는 재귀이다.
+
+<hr>
+<pre class="src">void recursion(int n)
+{
+   printf("%d\n",n);
+   recursion(n+1); // 재귀 호출 
+}
+
+int main()
+{
+   recursion(1);
+}
+</pre>
+
+<p>프로그램 언어에서 재귀 호출이 가능한 이유는 함수가 불리워 질때 마다 
+c 언어에서는 auto 변수, pascal 언어에서는 지역변수는 새로운 공간(스택)에 자리를 확보하기
+때문이고 ,
+
+</p><p> 재귀 호출에서 무한 반복이 빠지지 않기 위해서는  반드시 끝나는 종료 조건이 존재해야 한다. 이를 base 혹은 terminal 조건 이라 한다
+
+</p><hr>
+<p>(보기) 다음 프로그램을 실행하면 결과는?
+
+<table cellspacing="5" border="0" bgcolor="#edf5f4">
+<tbody><tr>
+<td>
+<pre><font size="3">
+void <b>print</b>(int n){
+   if (n != 1) <b> print </b>(n-1);
+   printf("%d\n",n);
+}
+
+int main()
+{
+   print(3);
+}
+</font>
+</pre>
+</td>
+</tr>
+</tbody></table>
+
+(풀이)
+
+함수내의 if 문의 형식은
+</p><pre>if ( 조건식 ) A
+B
+</pre>
+<ul>
+<li>조건식이 참이면 A 실행후 , B 를 실행한다.
+</li><li>조건식이 거짓이면 B 를 실행한다.
+</li></ul>
+
+n 이 3 과 2 인 경우,
+
+<blockquote>
+if 의 조건식이 참이므로 두 문장이 수행된다.<p>
+</p><pre>print(n-1);
+printf("%d\n",n);
+</pre>
+
+print() 함수의 수행이 종료되어야 printf() 함수가 실행될 것이다.
+</blockquote>
+
+n 이 1 인 경우 
+
+<blockquote>
+if 의 조건식이 거짓이므로 아래 한 문장이 수행된다.
+
+<p></p><pre>printf("%d\n",n);
+</pre>
+</blockquote>
+
+그림으로 나타내면 , 
+
+<p><img src="./재귀(recursion)_files/recur22.gif">
+
+</p><p>(유제) 위 보기를 참고하여  10 진수를 받아 , 해당 2 진수로 변환하는 프로그램을 작성하라.
+
+</p><hr>
+<p>(보기2) 다음 프로그램의 실행결과는?
+
+<table border="0" cellspacing="5" bgcolor="#EDF5F4">
+<tbody><tr>
+<td>
+<pre><font size="3">
+int <b>fibo</b>(int n){
+   if (n==0) return 0;
+      else if (n==1) return 1;
+         else return return <b>fibo</b>(n-1)+<b>fibo</b>(n-2);
+}
+
+main(){
+   printf("%d",fibo(4));
+}
+</font>
+</pre>
+</td>
+</tr>
+</tbody></table>
+
+위 재귀호출에서 주목해야 할 것은 제어의 흐름이다. 
+
+fibo(4) 가 호출된 경우 
+
+</p><blockquote>
+fibo(3) + fibo(2)
+</blockquote>
+
+이 호출되는데 , 수행 순서는 fibo(3) 의 수행을 끝내고 fibo(2) 의 수행을 시작한다는 
+데 있다.
+
+
+<p>위의 재귀호출에서 알아야 할 사항은 제어의 흐름을 알아야 한다. 아래 그림의
+반원위의 숫자는 이 재귀호출이 호출되고 리턴되는 순서이다.</p><p>
+
+<img src="./재귀(recursion)_files/fibo_order.gif"></p><p>
+
+이 보기는 유명한 피보나치 수열이다.
+
+</p><blockquote>
+<ul>
+<li>f(0)=0
+</li><li>f(1)=1
+</li><li>f(n)=f(n-1) + f(n-2)
+</li></ul>
+0 , 1 , 1 , 2 , 3 , 5 , 8 , 13,
+</blockquote>
+
+
+<table border="0" cellspacing="5" bgcolor="#edf5f4">
+<tbody><tr>
+<td>
+<pre><font size="3">
+int fibo(int a,int b , int n){
+
+   if (n&lt;=1) return b;
+     else return fibo(b,a+b,n-1);
+}
+
+main(){
+   printf("%d\n",fibo(0,1,8));
+}
+</font>
+</pre>
+</td>
+</tr>
+</tbody></table>
+            
+
+
+
+(유제1) n! 구하는 프로그램 <br>
+
+(hint) 
+
+<script language="JavaScript">
+
+function factorial(n){
+if (n <= 1) return 1;
+  else return n*factorial(n-1);
+}
+
+function egF1(){
+  var n=new Number(document.egF.elements[1].value);
+
+  if (n < 0) document.egF.elements[2].value="음수는 안됨";
+    else if (n > 20) document.egF.elements[2].value="20 이하정수"
+      else document.egF.elements[2].value=factorial(n);
+}
+</script>
+
+<blockquote>
+<ul>
+<li>f(n) = n * f(n-1)
+</li><li>f(0) = 1 
+</li></ul></blockquote>
+
+
+<form name="egF">
+<input type="button" value="go" onclick="egF1();">
+n= <input type="text" size="3" value="4">] ,
+n!=[<input type="text" size="30">]
+</form>
+
+
+
+
+<hr width="4" noshade="">
+(유제 2) x 의 y 승을 구하는 재귀 프로그램(x<sup>y</sup>)<br>
+
+<blockquote>
+(hint) 
+<ul>
+<li>3<sup>5</sup>=3 *  3<sup>4</sup>
+</li><li>3<sup>0</sup>=1
+</li></ul>
+</blockquote>
+
+(유제 3) gcd 구하는 프로그램<br>
+
+<blockquote>
+(hint) 12,8 의최대 공약수를 구하는 뉴클리드 알고리즘<p>
+<img src="./재귀(recursion)_files/gcd.gif"><br>
+
+즉 n 값을 m 으로 , m%n(m 을 n 으로 나눈 나머지) 값을 n 값으로 두는 과정을 반복하면서
+n 값이 0 이 될때의 m 값이 두 수의 최대 공약수가 됨.
+
+</p><ul>
+<li> gcd(m,n) 는 gcd(n,m%n)
+</li><li> n 이 0 일 때  m 이 최대 공약수
+</li></ul>
+
+</blockquote>
+</blockquote>
+
+   
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=recursion">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

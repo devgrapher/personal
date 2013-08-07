@@ -1,0 +1,115 @@
+
+<!-- saved from url=(0078)http://211.228.163.31/30stair/floating_rep/floating_rep.php?pname=floating_rep -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>실수 표현 법</title>
+      
+      <link rel="stylesheet" type="text/css" href="./실수 표현 법_files/main.css">
+      
+      <link rel="stylesheet" type="text/css" href="./실수 표현 법_files/main.css">
+	  <link href="./실수 표현 법_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./실수 표현 법_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./실수 표현 법_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./실수 표현 법_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+
+   <blockquote style="font-style:oblique">
+   정수에는 자리수의 유한 함으로 수의 넘침 현상이 일어나고 , 실수에는 정확한 수를 표현할 수가 없는 경우가
+   있습니다. 이 부분에 초점을 두겠습니다.
+   </blockquote>
+
+   <h3><a name="float">1.IEEE 754 단정도 부동소수(float) 표현 법</a></h3>
+<blockquote>
+
+   float 형 변수는 다음과 같은 틀의 형태로 저장된다.
+
+<p><img src="./실수 표현 법_files/f1.gif">
+
+</p><p>예를 들어 10 진수는  12.5 는 
+
+</p><ul>
+<li> 먼저 이를 2 진수로 바꾸면 1100.1 
+</li><li> 이를 1.xxx 형태로 바꾼다. 1.1001 * 2^3  ( 이를 정규화..normalization...이라 함)
+</li><li> 1001 부분을 소수부에 , 3 즉 11 을 소수부에 기억한다.
+</li></ul>
+
+*지수부에는 bias 라는 것을 적용해서 지수값에 127 을 더한 후 지수부에 기억한다.
+
+<p><img src="./실수 표현 법_files/f2.gif">
+
+</p><p>----확인
+
+</p><div><div id="highlighter_938903" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/floating_rep/floating_rep.php?pname=floating_rep#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number4 index3 alt1"><code class="c plain">{</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">float</code> <code class="c plain">a; </code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">a = 12.5;</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%x"</code><code class="c plain">,a);</code></div><div class="line number8 index7 alt1"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+그런데 %x 는 실수형에서는 작동이 되지 않는가 제대로 된 결과를 볼수가 없어 다음과 같은 코드로 다시 시도.
+
+<div><div id="highlighter_896718" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/floating_rep/floating_rep.php?pname=floating_rep#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number4 index3 alt1"><code class="c plain">{</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">float</code> <code class="c plain">*a;</code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">a = </code><code class="c keyword bold">new</code> <code class="c color1 bold">float</code><code class="c plain">;</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">*a = 12.5;</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%x"</code><code class="c plain">,*(</code><code class="c color1 bold">int</code><code class="c plain">*)a);</code></div><div class="line number10 index9 alt1"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+위에서 설명한 대로 출력되는 것을 확인 함.(vc 와 <a href="http://211.228.163.31/30stair/floating_rep/gcc.html" style="text-decoration:underline">gcc</a> 동일)
+<div><div id="highlighter_177233" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/floating_rep/floating_rep.php?pname=floating_rep#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c plain">41480000</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+   <h3><a name="round_off">2. 실수에서 round off 오류가 발생하는 이유</a></h3>
+
+   <blockquote>
+   만약 소수부의 자리수를  4 비트로 사용한다면 소수부가 나타낼 수 있는 것은 
+
+<ul>
+<li> 0000 ... 10 진수 0.0
+</li><li> 0001 ... 10 진수 0.0625
+</li><li> 0010 ... 10 진수 0.25
+</li><li> ...
+</li><li> 1111 ...
+</li></ul>
+
+0.0 과 0.0625 사이에 있는 수는 이 둘 중 하나로 표현될 수 밖에 없습니다. 이  0.0625 를 Epsilon 오차라 합니다.
+
+<p>그래서 가능하면 소수부가 크면 클수록 더 정확하게 표현할 수가 있으니 정확한 연산을 위해서는 소수부를 3 바이트 쓰는
+float 보다는 소수부를 3 + 4 = 7  바이트 사용하는 double 형을 사용하는게 안전합니다. 물론 double 형도 Epsilon 오차가
+발생하지만 float 보다는 더 작습니다.
+</p></blockquote>
+
+<h3><a name="float_cmp">3. 실수 비교 방법</a></h3>
+
+<blockquote>
+일단 , 두 실수를 비교할 때는 컴퓨터내에서 실수를 표현하는데 유한한 자리와  
+수체계로 인하여 어느정도의 오차 범위내에서 수를 비교하는게 안전할 듯 합니다.  
+
+<p>
+두 실수 a,b 가 있다면  
+<br>
+if ( a  == b ) ..   
+<br>
+보다는   
+
+</p><p>
+if ( fabs( a - b) &lt; DBL_EPSILON ) ....  
+
+</p><p>
+fabs 두 실수의 절대값 구하는 함수이고 두 수의 차가 double 형의 오차의 한계  
+DBL_EPSION 보다 작으면으로 가는게 안전한 코딩이 될 것 같습니다.  
+여기에서 fabs 는 math.h 에 DBL_EPSION 은 float.h 에 정의가 되어 있습니다.  
+
+</p><p>
+</p><div><div id="highlighter_579965" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/floating_rep/floating_rep.php?pname=floating_rep#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;math.h&gt;</code></div><div class="line number2 index1 alt1"><code class="c preprocessor">#include &lt;float.h&gt;</code></div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">main()&nbsp; </code></div><div class="line number4 index3 alt1"><code class="c plain">{&nbsp; </code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">double</code> <code class="c plain">a,b;</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">...</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code><code class="c plain">( </code><code class="c functions bold">fabs</code><code class="c plain">( a - b)&nbsp; &lt; DBL_EPSILON ){ </code><code class="c comments">//&nbsp; a 와 b 가 같으면 </code></div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">....</code></div><div class="line number10 index9 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}&nbsp; </code></div><div class="line number11 index10 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=floating_rep">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+<div id="ToolTipDic" style="display: none !important; visibility: hidden !important; position: absolute !important; height: auto !important; z-index: 1410065406 !important; vertical-align: middle !important; padding-top: 1px !important; padding-right: 1px !important; padding-bottom: 1px !important; padding-left: 1px !important; margin-top: 0px !important; margin-right: 0px !important; margin-bottom: 0px !important; margin-left: 0px !important; font-size: 9pt !important; line-height: normal !important; font-family: &#39;留묒&#65533; 怨좊뵓&#39;; font-weight: bold; color: rgb(0, 0, 0); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(112, 112, 112); border-right-color: rgb(112, 112, 112); border-bottom-color: rgb(112, 112, 112); border-left-color: rgb(112, 112, 112); border-image: initial; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(240, 240, 240)), to(rgb(220, 220, 220))); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; border-top-left-radius: 0.2em; border-top-right-radius: 0.2em; border-bottom-right-radius: 0.2em; border-bottom-left-radius: 0.2em; -webkit-box-shadow: rgba(0, 0, 0, 0.398438) 2px 2px 5px; left: 637px !important; top: 1185px !important; width: auto !important; background-position: initial initial; background-repeat: initial initial; " class="tooltip_dic"></div></body></html>

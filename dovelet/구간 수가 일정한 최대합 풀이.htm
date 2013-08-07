@@ -1,0 +1,137 @@
+
+<!-- saved from url=(0081)http://211.228.163.31/30stair/ninterval_doc/ninterval_doc.php?pname=ninterval_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>구간 수가 일정한 최대합 풀이</title>
+      
+      <link rel="stylesheet" type="text/css" href="./구간 수가 일정한 최대합 풀이_files/main.css">
+	  <link href="./구간 수가 일정한 최대합 풀이_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./구간 수가 일정한 최대합 풀이_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./구간 수가 일정한 최대합 풀이_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./구간 수가 일정한 최대합 풀이_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+   <blockquote style="font-style:oblique">
+   dp에서 자주 이용되는 확장 방법 입니다.
+   </blockquote>
+
+   <h3>1. <a href="http://211.228.163.31/500stair/ninterval/ninterval.php?pname=ninterval" class="A5">구간수가 일정한 최대 합</a> 풀이 </h3>
+
+   <p>입력 데이터가 다음과 같고 3 구간으로 나눌 때의 최대값을 알아보겠습니다.
+
+   </p><p><table width="300" cellspacing="1" bgcolor="gray">
+   <tbody><tr bgcolor="white" align="center" style="color:gray">
+   <td> 1 </td>
+   <td> 2 </td>
+   <td> 3 </td>
+   <td> 4 </td>
+   <td> 5 </td>
+   <td> 6 </td>
+   <td> 7 </td>
+   <td> 8 </td>
+   <td> 9 </td>
+   </tr>
+   <tr bgcolor="white" align="center">
+   <td> 6 </td>
+   <td> 2 </td>
+   <td> 9 </td>
+   <td> 8 </td>
+   <td> 3 </td>
+   <td> 4 </td>
+   <td> 7 </td>
+   <td> 5 </td>
+   <td> 1 </td>
+   </tr>
+   </tbody></table>
+   
+
+   </p><p>점화식을 정의 합니다.
+
+   </p><ul>
+   <li>dy[i][j] ...<span style="font-size:13pt;color:blue"> i 개의 구간으로 나눌 때</span> <span style="font-style:13pt;color:red">1
+   .. j 까지의 구간의 최대 합</span>으로 정의 합니다.
+   </li><li>답은 max( dy[3][6], dy[3][7],dy[3][8] ,dy[3][9])
+   </li></ul>
+
+   <p><img src="./구간 수가 일정한 최대합 풀이_files/nint.gif">
+
+   </p><p>처음 테이블의 구조 입니다.
+   </p><p><img src="./구간 수가 일정한 최대합 풀이_files/nint1.gif">
+
+   </p><ul>
+   <li> 1 행 즉 한 구간일 때 눈으로 채워 봅니다.
+   <p><img src="./구간 수가 일정한 최대합 풀이_files/nint2.gif">
+
+   </p></li><li> 다음 2 행에서1,2,3 열은 의미가 없습니다. (<img src="./구간 수가 일정한 최대합 풀이_files/because.gif"> 2 묶음으로 하기위해서는 4 개 이상의 수가 필요)
+   <p> 2 행 4 열이 5 인 이유는 data[3],data[4] 를 한 묶음으로 하고 첫 행(한 묶음일 때의 구간) 에서 dy[1][2] 를 더한
+   값 입니다.
+   </p><p><img src="./구간 수가 일정한 최대합 풀이_files/nint3.gif">
+
+   </p><p></p></li><li> 다음 2 행 5 열에서 
+    <ul>
+      <li> data[4],data[5] 를 한 묶음으로  5  +  dy[1][3] 7 = 12
+      <p><img src="./구간 수가 일정한 최대합 풀이_files/nint4.gif">
+
+      </p></li><li> data[3],data[4],data[5] 를 한 묶음으로 6 + dy[1][2] 4 = 10
+      <p><img src="./구간 수가 일정한 최대합 풀이_files/nint5.gif">
+
+    </p></li></ul>
+    두 가지중 최대 12 가 저장됩니다.
+      <p><img src="./구간 수가 일정한 최대합 풀이_files/nint6.gif">
+
+      </p><p></p></li><li>dy[2][6] 은 어떻게 채워 질까요?( data[a] ~ data[b] 는 a 에서 b 까지의 최대-최소값으로 약속하겠습니다.)
+
+      <p></p><ul>
+      <li>  dy[1][4] + (data[5]~data[6]) 
+      </li><li>  dy[1][3] + (data[4]~data[6]) 
+      </li><li>  dy[1][2] + (data[3]~data[6]) 
+      </li></ul>
+      <p>이 중 최대값이 채워 집니다.
+
+      </p><p></p></li><li> ...
+      <p></p></li><li> 마지막 dy[3][9] 를 채워 보빈다.
+
+      <ul>
+      <li> dy[2][4] + data[5]~data[9]
+      </li><li> dy[2][5] + data[6]~data[9]
+      </li><li> dy[2][6] + data[7]~data[9]
+      </li><li> dy[2][7] + data[8]~data[9]
+      </li></ul>
+      중 최대 입니다.
+   </li></ul>
+
+   이제 일반화된 점화식 dy[i][j] 를 구해 봅니다.
+
+   <ul>
+   <li> max( dy[i-1][k] + data[k+1]~data[j] ), 단 k = 2*(i-1) ... j-2
+   </li></ul>
+
+   <h3>2. 소스 </h3>
+
+   <div><div id="highlighter_845219" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/ninterval_doc/ninterval_doc.php?pname=ninterval_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div><div class="line number48 index47 alt1">48</div><div class="line number49 index48 alt2">49</div><div class="line number50 index49 alt1">50</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="c color1 bold">int</code> <code class="c plain">data[101];</code></div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">dy[51][101];</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="c color1 bold">int</code> <code class="c plain">diff(</code><code class="c color1 bold">int</code> <code class="c plain">m,</code><code class="c color1 bold">int</code> <code class="c plain">n)</code></div><div class="line number6 index5 alt1"><code class="c plain">{</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i,max,min;</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">max = min = data[m];</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( i = m +1 ; i &lt;= n ; i++){</code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( max &lt; data[i] ) max = data[i];</code></div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( min &gt; data[i] ) min = data[i];</code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">return</code> <code class="c plain">max - min;</code></div><div class="line number17 index16 alt2"><code class="c plain">}</code></div><div class="line number18 index17 alt1">&nbsp;</div><div class="line number19 index18 alt2"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number20 index19 alt1"><code class="c plain">{</code></div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i,j,k;</code></div><div class="line number22 index21 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">n,ng,max,tmp;</code></div><div class="line number23 index22 alt2">&nbsp;</div><div class="line number24 index23 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">scanf</code><code class="c plain">(</code><code class="c string">"%d %d"</code><code class="c plain">,&amp;n,&amp;ng);</code></div><div class="line number25 index24 alt2">&nbsp;</div><div class="line number26 index25 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( i = 1 ; i &lt;= n ; i++){</code></div><div class="line number27 index26 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">scanf</code><code class="c plain">(</code><code class="c string">"%d"</code><code class="c plain">,&amp;data[i]);</code></div><div class="line number28 index27 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number29 index28 alt2">&nbsp;</div><div class="line number30 index29 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( i = 1 ; i &lt;= ng ; i++){</code></div><div class="line number31 index30 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( j = i*2 ; j &lt;= n ; j++){</code></div><div class="line number32 index31 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">max = -1;</code></div><div class="line number33 index32 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( k = 2*(i-1) ; k &lt;= j-2 ; k++){</code></div><div class="line number34 index33 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp = diff(k+1,j);</code></div><div class="line number35 index34 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( dy[i-1][k] + tmp&gt; max ) {</code></div><div class="line number36 index35 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">max = dy[i-1][k] + tmp;</code></div><div class="line number37 index36 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number38 index37 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number39 index38 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">dy[i][j] = max;</code></div><div class="line number40 index39 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number41 index40 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number42 index41 alt1">&nbsp;</div><div class="line number43 index42 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">ans=-1;</code></div><div class="line number44 index43 alt1">&nbsp;</div><div class="line number45 index44 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">( i = ng*2 ; i &lt;= n ; i++){</code></div><div class="line number46 index45 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( dy[ng][i] &gt; ans ) ans = dy[ng][i];</code></div><div class="line number47 index46 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number48 index47 alt1">&nbsp;</div><div class="line number49 index48 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d\n"</code><code class="c plain">,ans);</code></div><div class="line number50 index49 alt1"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+   <h3>3. 시간 복잡도 </h3>
+
+   <blockquote>
+   O(n^3)
+   </blockquote>
+
+
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=ninterval_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

@@ -1,0 +1,194 @@
+
+<!-- saved from url=(0078)http://211.228.163.31/30stair/huffman_code/huffman_code.php?pname=huffman_code -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>트리의 패스</title>
+      
+      <link rel="stylesheet" type="text/css" href="./트리의 패스_files/main.css">
+   </head>
+   <body>
+   //작업 중.........
+
+<h2>트리의 패스 크기 와 허프만 압축 </h2>
+
+<h3> 1.내부 패스(internal path) </h3>
+
+<blockquote>
+
+<blockquote>
+<dl>
+<dt>트리에서 어떤노드의 패스 크기란?
+</dt><dd>루트에서 해당 노드까지 오는데 까지의 브랜치 수를 말한다.
+</dd></dl>
+
+예를 들어 , 아래의 그림에서<p>
+ 
+<img src="./트리의 패스_files/tree_path1.gif"></p><p>
+
+</p><ul>
+<li>A 노드의 패스 크기는 0
+</li><li>B 노드의 패스 크기는 1
+</li><li>C 노드의 패스 크기는 1
+</li><li>D 노드의 패스 크기는 2
+</li><li>E 노드의 패스 크기는 2
+</li></ul>
+
+
+내부패스 크기(I)=0+1+1+2+2=6<p>
+
+</p></blockquote>
+
+</blockquote>
+
+<h3> 2.외부 패스(external path) </h3>
+
+<blockquote>
+
+<h4> (1) 외부 패스란? </h4>
+
+<blockquote>
+널 링크에 가상의 노드(실패 노드)가 있다고 가정할 때, 이 실패노드까지 오는 경로를
+외부 패스라한다.
+
+<p>아래 이진 트리의 외부 패스는 
+
+</p><p><img src="./트리의 패스_files/tree_path2_1.gif">
+
+</p><p>널 링크에 실패노드(사각형 박스)를 붙인 후 , 각 사각형까지의 브랜치수를 합한 것이
+외부 패스의 크기가 된다.
+
+</p><p><img src="./트리의 패스_files/tree_path2_2.gif">
+
+</p><p>∴ 외부 패스의 크기(E)=3+3+2+2+3+3=16
+
+</p><p>이진 트리에서 내부 패스의 크기(I)와 외부 패스의 크기(E)는 항상 다음과 같은 성질을 만족한다.
+
+</p><blockquote>
+E = I + 2*n 
+</blockquote>
+
+</blockquote>
+
+<h4>(2) 가중치를 가지는 외부 패스의 크기</h4>
+
+<blockquote>
+아래 그림과 같이 실패노드에 가중치가 있을 때의 패스의 외부 크기를 알아보자.<p>
+
+<img src="./트리의 패스_files/tree_path3.gif"></p><p>
+
+E = 4*3 + 3*3 + 2*2 + 1*2 + 1*2 =12 + 9 + 4 + 2 + 2=29</p><p>
+</p></blockquote>
+
+</blockquote>
+<h3>3. huffman code</h3>
+
+<blockquote>
+huffman code 란 외부패스의 크기를 최소로 하는 방법으로 , 
+가장 작은 데이터 두 개를 선택해서 하나로 합치면서 진행하는 방법(greedy method)
+(이렇게 하면 최소 외부 패스가 나오는다는 것은 조금 고민해 봐야 할 듯)
+
+<p>(보기) 외부 패스의 크기가 아래와 같을 때 가장 작은 크기의 외부 패스
+크기를 구하는 문제이다.
+
+</p><blockquote>
+1  &nbsp;&nbsp; 1 &nbsp;&nbsp; 2 &nbsp;&nbsp; 3 &nbsp;&nbsp;4 
+</blockquote>
+
+<p>(풀이)
+</p><ol type="i">
+
+<li>1,1,2,3,4 중 작은 데이터 두 개를 하나로 합친다.
+
+<p><img src="./트리의 패스_files/tree_path4_2.gif">
+
+</p></li><li>2 , 3 ,4 중 작은 데이터 두 개를 하나로 합친다.
+
+<p><img src="./트리의 패스_files/tree_path4_3.gif">
+
+</p></li><li>4 , 5 중 작은 데이터 두 개를 하나로 합친다.
+
+<p><img src="./트리의 패스_files/tree_path4_4.gif">
+</p></li></ol>
+
+
+<p>(유제) 다음과 같은 가중치를 가질 때의 최소의 외부 패스 크기는?
+</p><blockquote>
+1 &nbsp;&nbsp; 2 &nbsp;&nbsp; 3 &nbsp;&nbsp; 4 &nbsp;&nbsp;5
+</blockquote>
+(답) 33 
+
+</blockquote>
+
+<h3>4. 허프만 압축(huffman encoding) </h3>
+<blockquote>
+
+<pre>acaabc
+
+문자열을 압축하려고 한다. 
+
+방법은 각 문자에 이진수를 할당해서 문자열을 압축하려고 한다.
+
+빈도수가 가장 많은 문자에 비트 수를 가능한 짧게 하는게 압축된 사이즈가 줄일 수 있다.
+
+문자 a 가 의 빈도수가 3 
+문자 b 의 빈도수가 1
+문자 c 의 빈도수가 2
+
+이니 a 에 0 을  b 에 01 을 c 에 1 을 할당 했다고 하자.
+
+그런 후 이 문자열을 압축하면
+
+0100011
+
+자 그리면 
+
+a 가 0
+b 가 01
+c 가 1
+
+과 압축된 
+
+0100011
+
+로 원래 문자열을 acaabc 를 결정적으로 해독할 수 있는가?
+
+</pre>
+
+<img src="./트리의 패스_files/htree1.bmp">
+
+<!--
+진폐증의 뜻을 가진 이 단어를 압축을 한 번 시켜보자.
+
+pneumonoultramicroscopicsilicovolcanoconiosis
+
+
+
+
+다음 문장을 ABCABAD 을 압축시키는 방법을 알아보자.
+
+먼저 압축되는 크기가 작은 것이 유리하므로 이 문장속에 있는 문자열의 빈도수가 많은 것은 작은 크기로 하면 할수록
+유리하다.
+
+예를 든 문자에 A 가 4 번 B 가 3 번 C 가 2 번 D 가 2 번 E 가 한번   발생해 있으므로
+
+<ul>
+<li>A,B,C 가 외부 노드가 되고 각 가중치를 3 , 2 , 1 로 둔다.
+<li> 외부 노드의 패스가 최소가 되게 이를 이진 트리로 만든다.
+<li>
+<li>
+</ul>
+-->
+
+</blockquote>
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=huffman_code">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+<div id="ToolTipDic" style="display: none !important; visibility: hidden !important; position: absolute !important; height: auto !important; z-index: 1410065406 !important; vertical-align: middle !important; padding-top: 1px !important; padding-right: 1px !important; padding-bottom: 1px !important; padding-left: 1px !important; margin-top: 0px !important; margin-right: 0px !important; margin-bottom: 0px !important; margin-left: 0px !important; font-size: 9pt !important; line-height: normal !important; font-family: &#39;留묒&#65533; 怨좊뵓&#39;; font-weight: bold; color: rgb(0, 0, 0); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(112, 112, 112); border-right-color: rgb(112, 112, 112); border-bottom-color: rgb(112, 112, 112); border-left-color: rgb(112, 112, 112); border-image: initial; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(240, 240, 240)), to(rgb(220, 220, 220))); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; border-top-left-radius: 0.2em; border-top-right-radius: 0.2em; border-bottom-right-radius: 0.2em; border-bottom-left-radius: 0.2em; -webkit-box-shadow: rgba(0, 0, 0, 0.398438) 2px 2px 5px; left: 726px !important; top: 3041px !important; width: auto !important; background-position: initial initial; background-repeat: initial initial; " class="tooltip_dic"></div></body></html>
