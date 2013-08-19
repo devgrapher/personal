@@ -1,5 +1,5 @@
 [core]
-	editor = \"c:\\program files\\Sublime Text 2\\sublime_text.exe\"
+	editor = \"C:\\Users\\Jihun\\Documents\\GitHub\\personal\\tool\\Sublime Text\\sublime_text.exe\" -w
 [user]
 	email = devgrapher@gmail.com
 	name = devgrapher
