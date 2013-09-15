@@ -16,3 +16,5 @@
 **/Sublime Text/Data/Index/
 **/Sublime Text/Data/Local/
 **/Sublime Text/Data/Packages/
+
+__pycache__
