@@ -5,7 +5,7 @@ class Tree:
 	def __init__(self):
 		self.nodes = [None] * 1000
 
-	def add(self, value):
+	def insert(self, value):
 		exist, idx = self.findIndex(value)
 		if exist:
 			return False
@@ -55,28 +55,28 @@ class TestTree(unittest.TestCase):
 	def testMakeTree(self):
 		tree = Tree()
 
-	def testAdd(self):
+	def testInsert(self):
 		tree = Tree()
-		self.assertTrue(tree.add(1))
-		self.assertTrue(tree.add(2))
-		self.assertTrue(tree.add(11))
-		self.assertFalse(tree.add(2))
+		self.assertTrue(tree.insert(1))
+		self.assertTrue(tree.insert(2))
+		self.assertTrue(tree.insert(11))
+		self.assertFalse(tree.insert(2))
 
 	def testFind(self):
 		tree = Tree()
-		tree.add(1)
-		tree.add(2)
+		tree.insert(1)
+		tree.insert(2)
 		self.assertTrue(tree.find(1))
 		self.assertTrue(tree.find(2))
-		tree.add(15)
+		tree.insert(15)
 		self.assertTrue(tree.find(15))
 		self.assertFalse(tree.find(20))
 
 	def testErase(self):
 		tree = Tree()
-		tree.add(100)
-		tree.add(1)
-		tree.add(10)
+		tree.insert(100)
+		tree.insert(1)
+		tree.insert(10)
 		self.assertTrue(tree.find(10))
 		self.assertTrue(tree.erase(10))
 		self.assertFalse(tree.find(10))
@@ -86,7 +86,7 @@ class TestTree(unittest.TestCase):
 		tree = Tree()
 		sample = [10,20,1,2,3,5,8,22,99,98,6,97,1000]
 		for n in sample:
-			tree.add(n)
+			tree.insert(n)
 		sample.sort()
 		self.assertEqual(sample, tree.values())
 
