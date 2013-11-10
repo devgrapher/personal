@@ -1,0 +1,425 @@
+
+<!-- saved from url=(0078)http://211.228.163.31/30stair/bindexedtree/bindexedtree.php?pname=bindexedtree -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>이진 인덱스 트리( binary indexed tree)</title>
+      
+      <link rel="stylesheet" type="text/css" href="./이진 인덱스 트리( binary indexed tree)_files/main.css">
+	  <link href="./이진 인덱스 트리( binary indexed tree)_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./이진 인덱스 트리( binary indexed tree)_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./이진 인덱스 트리( binary indexed tree)_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./이진 인덱스 트리( binary indexed tree)_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+
+<!-- here -->
+<ul class="io">
+<li><a href="http://211.228.163.31/30stair/bindexedtree/bindexedtree.php?pname=bindexedtree#doc1" class="A5">문서 I</a>
+</li><li><a href="http://211.228.163.31/30stair/bindexedtree/bindexedtree.php?pname=bindexedtree#doc2" class="A5">문서 II</a>
+</li></ul>
+
+<hr>
+<h2><a name="doc1">문서 I<!--/a--></a></h2><a name="doc1">
+참고 자료 </a><a href="http://211.228.163.31/30stair/bindexedtree/indextree.ppt" class="A3">프리젠테이션 문서</a>
+<h3> Indexed Tree </h3>
+
+인덱스트리는 이진트리로 구성한 부모노드가 자식노드의 대표가 되게 하는 자료구조이다. 쉽게 말해서, 조건에 맞추어 쭉쭉 올려주는 트리라고 생각하면 된다.
+
+<p> 예를 들어보자. 
+
+</p><pre style="margin-left:30px">&lt;문제&gt;
+당신은 새로운 계산기 M_Int를 만들려고 한다. 당신은 M_Int에 다음과 같은 기능을 갖게 하려고 한다.
+1. 처음에 n과 n개의 수 a[0]~a[n-1]가 입력된다. (n&lt;=100000, n개의 수는 int범위)
+2. 명령 개수 T가 입력된다. (T&lt;=100000)
+3. 0 x y가 들어오면 a[x]~a[y]의 최솟값을 출력한다.
+4. 1 x y가 들어오면 a[x]를 y로 고친다.
+M_Int를 구현해보아라. 단, M_Int는 제한 범위 내에 있는 어떤 데이터라도 1초 안에 계산되어야한다.
+
+입력
+
+4
+2 4 6 8
+4
+0 0 2
+0 1 2
+1 3 1
+0 0 3
+
+출력
+
+2
+4
+1
+</pre>
+
+※생각해보기
+
+<h4> 1. 나는 인덱스트리를 몰라요 ㅋ</h4>
+
+<blockquote>
+<p>
+이러한 경우는 단순히 생각할 것이다. 1 x y가 들어오면 간단히 상수시간 내로 연산이 가능하겠지만, 0 x y에서 많은 시간을 소요하게 될 것이다. 다음과 같은 예제를 보면 단순히 생각하던 이들이 깨달음을 얻으며 “시간이 매우 오래 걸리는구나!”라고 소리친 후, 어떻게 해야 할지 깊은 고민에 빠질 것이다.
+
+</p><pre>100000
+1 (10만개)
+100000
+0 0 99999 (10만개)
+</pre>
+
+<p>
+왜 시간이 오래 걸리는지는 간단히 생각해볼 수 있다. 우선 명령 수는 10만개이다. 간단히 Sequential Search(쭉 다 찾아보는 방법)을 이용한다면 한 개의 명령 계산만 해도 10만 번이 걸린다. 근데 명령 수는 10만개이다. 따라서 10만*10만&gt;1억이므로
+<span style="text-decoration:underline"> 1초안에 계산이 될 리가 전혀 없다!</span>
+
+</p><p>우리는 여기서 개선점이 필요함을 느꼈다. 어떻게 해야 할까? 바로 인덱스트리를 사용하는 것이다.(binary indexed tree는 합밖에 구하지 못한다.)  
+
+</p></blockquote>
+
+<h4> 2. Indexed Tree </h4>
+
+<blockquote>
+여기서부터는 프리젠테이션 파일을 참고하도록 하자.
+
+<h5> 2-1. 인덱스트리 개요 </h5>
+
+인덱스 트리가 완전히 구성된 1번 슬라이드를 참고하자. 제일 아래에 있는 2가 4와 비교하여 부모로 올라갔다. 이 연산엔 무슨 의미가 있을까? 부모노드는 모든 자식노드들의 값보다 같거나 작을 것이다. 따라서 일정 구간의 최솟값은 그 구간의 부모노드에 있을 것이다.
+
+<p>
+이해가 잘 안 갈수도 있으니 예제로 설명하겠다. “0 0 1”이라는 명령어를 받았다고 해보자. a[0]~a[1]의 최솟값을 찾으라는 연산이다. 다 찾을 수도 있지만, 그들의 공통 부모노드를 하나 찾으면 그걸로 끝이다. 따라서 2가 나올 것이다. 또 다른 명령어 “0 0 3”을 넣었다고 해보자. a[0]~a[3]이 포함된 공통 부모노드를 찾으면 역시 또 2가 나올 것이다.
+
+</p><p>
+
+</p><h5> 2-2. 삽입 (insert(x,y) : x는 x번째에 y가 들어가야 한다는 것을 의미) </h5>
+
+삽입은 제일 밑바닥(즉, leap node)에서부터 시작한다. x번째 leap node의 인덱스를 갖고 시작한다. 노드에 값을 갱신할 때에는 아래의 세 규칙을 따른다.
+I) 노드에 아무런 값도 없을 경우 : 값을 넣고 부모노드로 가고, 부모노드에 대해 재실시.
+II) 노드에 값이 있을 때 값이 작은 경우 : 값을 넣고 부모노드로 가고, 부모노드 재실시.
+III) II에 위배되는 노드이거나 값을 넣은 후 부모가 없을 경우 : 루프를 종료.
+
+<h5> 2-3. 대푯값 찾기 (find(sp,ep) : sp~ep를 대표하는 값을 찾는다.) </h5>
+
+구간은 대표가 어떤 값이어야 하는가에 따라 융통성 있게 해주면 된다. 프리젠테이션을 참고하자.
+
+<h5> 2-4. 값 고치기 (insert(x,y), 삽입과 같이 그대로 써준다.) </h5>
+
+삽입과 같다. 프리젠테이션을 참고하자.
+
+<p>
+이게 인덱스트리의 전부이다. 직접 구현을 해보도록 하자.
+
+</p><p>
+해보기)
+
+</p><ul>
+<li>
+Q1. 최솟값이 아닌 구간 합을 구하려면 어떻게 구현할까? 최댓값은 또 어떻게 구현할까?
+직접 구현해보자.
+</li><li>
+Q2. 배열로 구현하려고 한다. 최대 N개의 데이터가 들어온다고 한다면, 배열을 가장 작게 잡았을 때 배열의 크기를 얼마로 잡아야겠는가? 계산해보도록 하자.
+
+<p>
+hint : 트리의 depth가 d일 때, 그 깊이에는 최대 2^d의 데이터가 들어갈 수 있다.
+(제일 위의 depth를 0으로 가정했을 때이다.) 부등식을 응용해보자.
+(로그나 지수 등을 배우지 않은 학생에게는 어려울 수 있다. 그러나 알고 가도록 하자.)
+
+</p><p>
+Q2 답 : 2^{d-1} &lt; N &lt;= 2^d인 d를 찾으면 2^{d+1}-1 정도 잡으면 된다.
+</p></li></ul>
+
+</blockquote>
+<h4> 3. Binary Indexed Tree </h4>
+
+<blockquote>
+tree[i]
+
+<p> <img src="./이진 인덱스 트리( binary indexed tree)_files/bit1.gif">
+
+</p><p>
+구성 훑어보기
+
+</p><p> <img src="./이진 인덱스 트리( binary indexed tree)_files/bit2.gif">
+
+</p><p>a[i]
+
+</p><p> <img src="./이진 인덱스 트리( binary indexed tree)_files/bit3.gif">
+
+</p><p>
+구간 최솟값을 구하는 BIT를 만들어보았다. 구성 훑어보기의 테이블을 보자. 더블릿의 한 유저는 저 테이블을 이해하지 못하여 “삼진트리가 되는데요?”라고 하였다. 그러나 다음 색칠한 것을 보게 되면 이진트리임을 알 수 있을 것이다.
+
+</p><p> <img src="./이진 인덱스 트리( binary indexed tree)_files/bi4.gif">
+
+</p><p>
+이 표를 보고도 이해가 안 간다고 생각된다면, <a href="http://211.228.163.31/30stair/bindexedtree/indextree.ppt" class="A3">프리젠테이션</a>을 참고하자. 
+
+</p><p>Indexed Tree로 고쳐놓은 개형이 보인다. 그래도 이해가 안 간다고 생각되면, 손으로 위의 5*16 테이블을 그리고, Indexed Tree에서 어떻게 연결했는지 그대로 선을 그어보자. 그럼 “아하!” 소리치며 이해를 할 수 있을 것이다.
+
+</p><p>
+tree[i]
+
+</p><p> <img src="./이진 인덱스 트리( binary indexed tree)_files/bit5.gif">
+
+</p><h5> 3-2. GET_LAST_BIT </h5>
+
+BIT에서 올라가는데 있어 중요한 역할을 하는 함수이다. 자신의 위치의 인덱스 번호를 이진수로 바꾸었을 때, 마지막 비트를 얻어주는 역할을 해준다. 다음 함수를 기억하고, 구현할 때 사용하도록 하자.
+
+<pre class="csource">int GET_LAST_BIT(int x) {
+   return x&amp;-x;
+}
+</pre>
+
+<h5> 3-3. read(x) </h5>
+
+1~x까지의 대푯값을 찾는다. tree[x]부터 답을 계속 저장해둔다. 다음번 후보로 올라갈 때에는 x에 GET_LAST_BIT(x)를 빼주며 올라가면 된다. 그리고 x가 0이 되면 탐색을 종료한다.
+
+<pre>ex) read(13)
+tree[13]-&gt;tree[12]-&gt;tree[8]-&gt;tree[0]=종료
+
+ex2) read(15)
+tree[15]-&gt;tree[14]-&gt;tree[12]-&gt;tree[8]-&gt;tree[0]=종료
+</pre>
+
+탐색하면서 답이 될수 있는지 항상 체크를 해두어야 한다.
+
+<p>
+Q) read(x)는 1부터 답을 찾는다. 그렇다면 구간 합을 구하는 BIT에서 생각해보자. (x~y)를 BIT로 구현해보고자 한다. 어떻게 해야할까?
+
+</p><h5> 3-4. update(x,y) </h5>
+
+x에 y를 넣는다. read와 반대로, GET_LAST_BIT(x)를 더해주면서 갱신해준다. 트리의 기준에 맞추어 융통성 있게 수행해주면 된다. 종료 조건은 범위를 넘을 때 종료한다.
+
+<pre>ex) update(1,10)
+tree[1]-&gt;tree[2]-&gt;tree[4]-&gt;tree[8]-&gt;tree[16]-&gt;tree[32](범위 초과=종료)
+ex2) update(3,0)
+tree[3]-&gt;tree[4]-&gt;tree[8]-&gt;tree[16]-&gt;tree[32](범위초과=종료)
+ex3) update(13,1)
+tree[13]-&gt;tree[14]-&gt;tree[16]-&gt;tree[32](범위초과=종료)
+</pre>
+
+<h5> 3-5. 2D BIT</h5>
+
+2차원으로 BIT를 구현한다.
+
+<a href="http://211.228.163.31/30stair/mobile/mobile.php?pname=mobile" class="A3">mobile문제</a> 를
+
+보도록 하자.
+2D-BIT를 이용하면 되는 문제이다. 2D-BIT는 2차원적인 BIT로, tree[x][y]=(1~x),(1~y)를 대표할 수 있는 값을 찾을 수 있는 구조이다.
+
+<p>
+구성 방법은 간단하다. 우선 가로로 BIT를 만들어주고, 그것을 이용해 세로로도 BIT를 만들어주면 그게 2차원 BIT가 된다. update나 read 등의 함수도 1차원 BIT와 유사하게 하면 된다. 단, 가로 세로 모두 업데이트가 필요하니 주의하도록 하자.
+
+</p></blockquote>
+<div align="right">
+written by <a href="http://211.228.163.31/usts.php?uid=victor5432" class="A5">victor5432</a>
+</div>
+
+<hr style="both:clear">
+
+<h2><a name="doc2">문서 II</a> </h2>
+
+우리는 종종 우리의 알고리즘을 더욱 빠르게 할 수 있는 자료구조가 필요하다.
+이 문서에서 우리는 binary indexed tree 구조에 대해서 논의 해보자.
+
+<p>Peter M. Fenwick 에 따르면 이 구조는 처음 자료의 압축에 사용되어 졌다. 지금은 
+빈도수를 저장하고 저장된 빈도수 테이블에서 구간의 합을 구하는데 종종 사용되어
+진다.
+
+</p><h3>1. 문제 정의</h3>
+
+<blockquote>
+여러개의 돌이 들어있는 n 개의 박스를 가지고 있다.  
+
+<p>두가지 동작을 하는 경우 
+
+</p><ol>
+<li>  돌을 i 번째 박스에  더한다. --- update
+</li><li>  k 번째 박스에서 l 번째 박스까지의 돌의 합을 구한다. --- read
+</li></ol>
+
+<p>일반적인 해법은 질의 1 에서는 O(1) 에 , 질의 2 는 O(n) 에 가능하다.
+m  개의 질의가 주어진다면  최악의 시간복잡도는( 모두 2 번 질의 일 경우)는 O(n*m) 이 된다.
+
+</p><p>다른 접근 방법으로는 binary indexed tree 가 있다.  이 방법의  두가지 질의 모두  시간복잡도는 O(mlogn) 이다.
+또한 코딩이 쉽다.
+
+</p></blockquote>
+
+<h3>2. 개념 잡기 </h3>
+
+<blockquote>
+가정.
+----
+
+<p>16 개의 원소를 가진 f[] 배열이 아래와 같다고 하자.  ( 실제적으로 f 배열은 사용하지 않음... 설명을 위해서) 
+
+</p><p><table border="0" width="500">
+<tbody><tr style="color:gray">
+<td> </td> <td> 1 </td> <td> 2 </td> <td> 3 </td> <td> 4 </td> <td> 5 </td> <td> 6 </td> <td> 7 </td> <td> 8 </td> <td> 9
+</td> <td> 10 </td> <td> 11 </td> <td> 12 </td> <td> 13 </td> <td> 14 </td> <td> 15 </td> <td> 16 </td>
+</tr>
+
+<tr>
+<td> f[] </td> <td> 1 </td> <td> 0 </td> <td> 2 </td> <td> 1 </td> <td> 1 </td> <td> 3 </td> <td> 0 </td> <td> 4 </td>
+<td> 2 </td> <td> 5 </td> <td> 2 </td> <td> 2 </td> <td> 3 </td> <td> 1 </td> <td> 0 </td> <td> 2 </td>
+</tr>
+
+</tbody></table>
+
+</p><p>read,update 동작을 위해 실제적으로 tree[] 배열을 사용하고 , 각 트리 배열은 f[] 배열의 원소의 일부의 합을
+저장하고 있다.
+
+</p><ul>
+<li>tree[1] = f[1]
+</li><li>tree[2] = f[1] + f[2]
+</li><li>tree[3] = f[3]
+</li><li>tree[4] = f[1] + f[2] + f[3] + f[4]
+</li><li>tree[5] = f[5]
+</li><li>tree[6] = f[5] + f[6]
+</li><li>tree[7] = f[7]
+</li><li>tree[8] = f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8]
+</li><li>tree[9] = f[9]
+</li><li>tree[10] = f[9] + f[10]
+</li><li>tree[11] = f[11]
+</li><li>tree[12] = f[9] + f[10] + f[11] + f[12]
+</li><li>tree[13] = f[13]
+</li><li>tree[14] = f[13] + f[14]
+</li><li>tree[15] = f[15]
+</li><li>tree[16] = f[1] + f[2] + f[3] + f[4] + f[5] + f[6] + f[7] + f[8] + f[9]+....+f[16]
+</li></ul>
+
+<p><img src="./이진 인덱스 트리( binary indexed tree)_files/bit.png">
+
+</p></blockquote>
+
+<h4>(1)read 동작</h4>
+
+<blockquote>
+
+<p>1 에서 13 번째 까지의 누적 합을 구하기 위해 tree[] 배열의 세 원소만 더하면 된다.
+
+</p><ul>
+<li>tree[13]  + tree[12] +  tree[8]
+</li></ul>
+
+왜냐하면 
+<ul>
+<li>tree[13] 은 f[13] 
+</li><li>tree[12] 은 f[9] + ... + f[12]
+</li><li> tree[8] 은 f[1] + ... + f[8]
+</li></ul>
+을 가지고 있다.
+
+
+<h4>- read 동작의 구현</h4>
+
+1 부터 n 번째 원소까지의 누적합을 구하는 경우에 대해서 알아보자.
+
+<p>예를 들어 ,
+13 까지의 합을 구하는 경우 13 을 이진수로 표현하면 
+
+</p><ul>
+<li>1101 .. 13 .. 오른쪽에서 왼쪽으로 스캔하다 최초로 만나는 1 을 뺌
+</li><li>1100 .. 12 .. 마찬가지로 
+</li><li>1000 ..  8 .. 마찬가지로
+</li><li>0000 .. 0 ..  끝 
+</li></ul>
+
+<!--
+<pre>
+이진표현 
+      13           12            8 
+tree[1101] + tree[1100] + tree[1000]
+</pre>
+-->
+
+<p style="text-decoration:underline">오른쪽에서 왼쪽으로 가다 최초로 0 이 아닌 자리를 알아내는 방법</p>
+
+<blockquote>
+a &amp; -a 
+</blockquote>
+
+자세한 사항은  <a href="http://211.228.163.31/30stair/rms/rms.php?pname=rms" style="text-decoration:underline">rms 문서를 참조</a>
+
+<p>13 &amp; -13 은 1 , 12 &amp; -12 는 4 , 8 &amp; -8 은 4 이다.
+
+</p><div><div id="highlighter_382982" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/bindexedtree/bindexedtree.php?pname=bindexedtree#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c color1 bold">int</code> <code class="c plain">read(</code><code class="c color1 bold">int</code> <code class="c plain">idx)</code></div><div class="line number2 index1 alt1"><code class="c plain">{</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">sum = 0;</code></div><div class="line number4 index3 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(idx &gt; 0){</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">sum += tree[idx];</code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">idx -= (idx &amp; -idx);</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">return</code> <code class="c plain">sum;</code></div><div class="line number9 index8 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+<h4>(2)update함수 </h4>
+
+<blockquote>
+n 번째 원수에 값을 더하거나 빼는 경우에 대해서 알아보자.
+
+<p>예로, 5 번째 원소의 값을 더하거나 빼는 경우 변경해야 할 원소는 5 , 6 , 8 , 16 이다.
+
+</p><p><img src="./이진 인덱스 트리( binary indexed tree)_files/bit3.png">
+
+</p><p>read 함수는 빼가면 , update 함수는 더해가면 된다.
+
+</p><ul>
+<li>tree[5] 변경 , 5 &amp; -5 -&gt; 1 ... 5 + 1 = 6
+</li><li>tree[6] 변경 , 6 &amp; -6 -&gt; 2 ... 6 + 2 = 8
+</li><li>tree[8] 변경 , 8 &amp; -8 -&gt; 8 ... 8 + 8 = 16
+</li><li>tree[16] 변경, 16 &amp; -16 -&gt; 16 ... 16 + 16 = 32 범위 초과 끝.
+</li></ul>
+
+<div><div id="highlighter_659243" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/bindexedtree/bindexedtree.php?pname=bindexedtree#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c color1 bold">int</code> <code class="c plain">tree[20];</code></div><div class="line number2 index1 alt1"><code class="c preprocessor">#define MaxVal 16</code></div><div class="line number3 index2 alt2"><code class="c keyword bold">void</code> <code class="c plain">update(</code><code class="c color1 bold">int</code> <code class="c plain">idx ,</code><code class="c color1 bold">int</code> <code class="c plain">val)</code></div><div class="line number4 index3 alt1"><code class="c plain">{</code></div><div class="line number5 index4 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(idx &lt;= MaxVal){</code></div><div class="line number6 index5 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tree[idx] += val;</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">idx += (idx &amp; -idx);</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number9 index8 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+</blockquote>
+
+<h3>3. 확장  </h3>
+
+<h4>(1) 2 차원 binary indexed tree </h4>
+<blockquote>
+2 차원으로 확장하면 행 , 열의 원소가 일차원 binary indexed tree 처럼 움직인다.
+
+<ul>
+<li> tree[1][1] = f[1][1]
+</li><li> tree[1][2] = f[1][1] + f[1][2]
+</li><li> tree[1][3] = f[1][3]
+</li><li> tree[1][4] = f[1][1] + f[1][2] + f[1][3] + f[1][4]
+
+</li><li> tree[2][1] = f[1][1] + f[2][1]
+</li><li> tree[2][2] = f[1][1] + f[1][2] + f[2][1] + f[2][2]
+</li><li> tree[2][3] = f[1][3] + f[2][3]
+</li><li> tree[2][4] = f[1][1] + f[1][2] + f[1][3] + f[1][4] + f[2][1] + f[2][2] + f[2][3] + f[2][4]
+
+</li><li> tree[3][1] = f[3][1]
+</li><li> tree[3][2] = f[3][1] + f[3][2]
+</li><li> tree[3][3] = f[3][3]
+</li><li> tree[3][4] = f[3][1] + f[3][2] + f[3][3] + f[3][4]
+
+</li><li> tree[4][1] = f[1][1] + f[2][1] + f[3][1] + f[4][1]
+</li><li> tree[4][2] = f[1][1] + f[1][2] + f[2][1] + f[2][2] + f[3][1] + f[3][2] + f[4][1] + f[4][2]
+</li><li> tree[4][3] = f[1][3] + f[2][3] + f[3][3] + f[4][3]
+</li><li> tree[4][4] = f[1][1] + f[1][2] + f[1][3] + f[1][4] + f[2][1] + f[2][2] + .... + f[4][1] + f[4][2] + f[4][3] + f[4][4]
+
+</li><li> ....
+</li></ul>
+
+<p>소스---------
+</p><div><div id="highlighter_563979" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/bindexedtree/bindexedtree.php?pname=bindexedtree#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#define max_x 8</code></div><div class="line number2 index1 alt1"><code class="c preprocessor">#define max_y 8</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="c color1 bold">int</code> <code class="c plain">tree[10][10];</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="c color1 bold">int</code> <code class="c plain">read(</code><code class="c color1 bold">int</code> <code class="c plain">x,</code><code class="c color1 bold">int</code> <code class="c plain">y)</code></div><div class="line number7 index6 alt2"><code class="c plain">{</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">sum;</code></div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">y1;</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">sum = 0;</code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(x &gt; 0 ){</code></div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">y1 = y;</code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(y1 &gt; 0 ){</code></div><div class="line number15 index14 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">sum += tree[x][y1];</code></div><div class="line number16 index15 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">y1 -= (y1 &amp; -y1); </code></div><div class="line number17 index16 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number18 index17 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">x -= (x &amp; -x); </code></div><div class="line number19 index18 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number20 index19 alt1">&nbsp;</div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">return</code> <code class="c plain">sum;</code></div><div class="line number22 index21 alt1"><code class="c plain">}</code></div><div class="line number23 index22 alt2">&nbsp;</div><div class="line number24 index23 alt1"><code class="c keyword bold">void</code> <code class="c plain">update(</code><code class="c color1 bold">int</code> <code class="c plain">x , </code><code class="c color1 bold">int</code> <code class="c plain">y , </code><code class="c color1 bold">int</code> <code class="c plain">val)</code></div><div class="line number25 index24 alt2"><code class="c plain">{</code></div><div class="line number26 index25 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">y1;</code></div><div class="line number27 index26 alt2">&nbsp;</div><div class="line number28 index27 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(x &lt;= max_x){</code></div><div class="line number29 index28 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">y1 = y;</code></div><div class="line number30 index29 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">(y1 &lt;= max_y){</code></div><div class="line number31 index30 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tree[x][y1] += val;</code></div><div class="line number32 index31 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">y1 += (y1 &amp; -y1); </code></div><div class="line number33 index32 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number34 index33 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">x += (x &amp; -x); </code></div><div class="line number35 index34 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number36 index35 alt1"><code class="c plain">}</code></div><div class="line number37 index36 alt2">&nbsp;</div><div class="line number38 index37 alt1"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number39 index38 alt2"><code class="c plain">{</code></div><div class="line number40 index39 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">update(1,1,10);</code></div><div class="line number41 index40 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">update(1,2,5);</code></div><div class="line number42 index41 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">update(2,1,4);</code></div><div class="line number43 index42 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">update(2,2,3);</code></div><div class="line number44 index43 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">update(1,1,10);</code></div><div class="line number45 index44 alt2">&nbsp;</div><div class="line number46 index45 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d\n"</code><code class="c plain">,read(2,2));</code></div><div class="line number47 index46 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+
+1,1 이 시작구간이 아니고,2 행 3 열 에서 4 행 5 열 사이의 합을 구하는 경우는 
+<blockquote>
+read(4,5) - read(1,5) - read(5,2) + read(1,2)
+</blockquote>
+와 같이 구하면 된다. 일차원도 마찬가지이다.
+</blockquote>
+
+<pre class="src">원문 : http://www.topcoder.com/tc?module=Static&amp;d1=tutorials&amp;d2=binaryIndexedTrees
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=bindexedtree">[질/답]</a>
+
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

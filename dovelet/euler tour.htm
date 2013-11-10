@@ -1,0 +1,139 @@
+
+<!-- saved from url=(0072)http://211.228.163.31/30stair/euler_tour/euler_tour.php?pname=euler_tour -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>euler tour</title>
+      
+      <link rel="stylesheet" type="text/css" href="./euler tour_files/main.css">
+   </head>
+   <body>
+
+<h3>한 붓 그리기 </h3>
+      
+<blockquote>
+<p>한 붓 그리기가 가능하기 위해서는 
+정점(vertex)의 차수(degree)가 모두  짝수이거나 , 혹은 홀수 인 것이 두 개이면 가능.
+
+</p><p> 정점의 차수가 모두 짝수이면 모든 간선을 한 번 방문하고 시작 위치로 돌아올 수 있고, 홀수 인것이
+두 개 있으면 현 위치로 돌아올 수는 없지만 모든 간선을 한 번 방문할 수 있음. 이 경우는 홀수 인 정점에서
+시작 해야 함.
+
+</p><h4> 구현 </h4>
+
+ 간선(edge)을 기준으로 dfs 하면 됨. 단 , 들어가면서 갈 수 있는 간선의 길을 없앤 후 이상 갈수 없는 경우 출력
+
+
+<pre>예.
+
+<img src="./euler tour_files/eu.gif">
+
+모든 정점의 차수가 짝수이므로 오일러 투어가 가능하고 , 시작 정점은 정점 중 아무 것이나
+가능.  
+
+-시작 정점을 1 번 정점으로 한다면 ,  
+
+
+스택의 상태: 1
+
+-2 번 정점으로 가는 간선이 유효한 간선이므로 2 번 정점으로 
+
+<img src="./euler tour_files/euler2.gif">
+
+스택의 상태: 1 2
+
+-3 번 정점으로 가는 간선이 유효한 간선이므로 3 번 정점으로 
+
+<img src="./euler tour_files/euler3.gif">
+
+스택의 상태: 1 2 3 
+
+-4 번 정점으로 가는 간선이 유효한 간선이므로 4 번 정점으로 
+
+<img src="./euler tour_files/euler4.gif">
+
+스택의 상태: 1 2 3 4
+
+-1 번 정점으로 가는 간선이 유효한 간선이므로 1 번 정점으로 
+
+<img src="./euler tour_files/euler5.gif">
+
+스택의 상태: 1 2 3 4 1
+
+
+- 1 번 정점에서 갈수 있는 간선이 없으므로 1 번 pop ----------------------<span style="border-style:solid;border-size:1;"> 1 </span>
+
+- 4 번 정점에서 갈수 있는 간선이 없으므로 4 번 pop-----------------------<span style="border-style:solid;"> 4 </span>
+
+- 3 번 정점에서 5 번 정점으로 갈수 있으므로 5 번 정점으로 
+
+<img src="./euler tour_files/euler6.gif">
+
+스택의 상태: 1 2 3 5
+
+-  6 번 정점으로 갈수 있으므로 6 번 정점으로 
+
+<img src="./euler tour_files/euler7.gif">
+
+스택의 상태: 1 2 3 5 6
+
+-  7 번 정점으로 갈수 있으므로 7 번 정점으로 
+
+<img src="./euler tour_files/euler8.gif">
+
+스택의 상태: 1 2 3 5 6 7
+
+-  3 번 정점으로 갈수 있으므로 3 번 정점으로 
+
+<img src="./euler tour_files/euler9.gif">
+
+스택의 상태: 1 2 3 5 6 7 3
+
+- 3 번 정점에서 갈수 있는 간선이 없으므로 3 번 pop ------------------------<span style="border-style:solid;"> 3 </span> 
+
+- 7 번 정점에서 갈수 있는 간선이 없으므로 7 번 pop ------------------------<span style="border-style:solid;"> 7 </span>
+
+- 6 번 정점에서 갈수 있는 간선이 없으므로 6 번 pop ------------------------<span style="border-style:solid;"> 6 </span>
+
+- 5 번 정점에서 갈수 있는 간선이 없으므로 5 번 pop ------------------------<span style="border-style:solid;"> 5 </span> 
+
+- 3 번 정점에서 갈수 있는 간선이 없으므로 3 번 pop ------------------------<span style="border-style:solid;"> 3 </span> 
+
+- 2 번 정점에서 갈수 있는 간선이 없으므로 2 번 pop ------------------------<span style="border-style:solid;"> 2 </span> 
+
+- 1 번 정점에서 갈수 있는 간선이 없으므로 1 번 pop ------------------------<span style="border-style:solid;"> 1 </span>
+</pre>
+
+euler tour: 1 4 3 7 6 5 3 2 1
+
+</blockquote>
+
+<!--
+- Fleury’s Algorithm
+
+13
+v￢v0; F￢E
+C￢trivial path at v0
+while (G has unmarked edges)
+If v has an unmarked edge that is not a bridge of (V,F)
+then e￢unmarked edge of v that is not a bridge of (V,F)
+else e￢any unmarked edge of v
+mark e
+Append e to C
+F￢F-e
+v￢other endpoint of e
+endwhile
+(aka don’t burn your bridges)
+How do you tell if an edge of (V,F) is a bridge?
+-->
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=euler_tour">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

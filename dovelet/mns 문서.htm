@@ -1,0 +1,112 @@
+
+<!-- saved from url=(0063)http://211.228.163.31/30stair/mns_doc/mns_doc.php?pname=mns_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>mns 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./mns 문서_files/main.css">
+	  <link href="./mns 문서_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./mns 문서_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./mns 문서_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./mns 문서_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+
+   <h3>1.<a href="http://211.228.163.31/500stair/mns/mns.php?pname=mns" class="A5">mns</a> 풀이</h3>
+
+   <blockquote style="font-style:oblique">
+   이 문제는 up-sequence 로 풀이도 가능하나 ,  소개하는 방법으로의 풀이는
+   dp에서 자주 사용(특히 스트링 관련 문제)하는 확장 방법. 이해가 쉽지 않음^^
+</blockquote>
+
+
+   <blockquote>
+      <dl>
+      <dt><h4>확장 방법</h4>
+         </dt><dd> <img src="./mns 문서_files/mns_method1.gif">
+      </dd><dt><h4>식</h4>
+         </dt><dd> <p>mns[i,j] 위점 i 에서 아래점 j 까지의 교차하지 않는 다리의 최대수 </p>
+             <img src="./mns 문서_files/mns_method.gif">
+      </dd><dt> <h4>답</h4>
+         </dt><dd> 점의 수가 n 개 이면 mns[n,n]
+      </dd></dl>
+   </blockquote>
+   <hr noshade="" size="1">
+   <h3> 문제의 핵심</h3>
+   <blockquote>
+      <blockquote>
+         <img src="./mns 문서_files/mns11.gif">
+      </blockquote>
+      <p>위 점 5 에서 아래 점 4 로 가는 다리가 있을 경우 확장하는 방법에 대해서
+알아보면<br>
+5,1 5,2 5,3 의 접근 방법은 같다. 그 중 5,3 에 대해서 알아보면</p> 
+      <blockquote> 
+         <img src="./mns 문서_files/mns1.gif">
+      </blockquote>
+      <p>m[5,3] 은 m[4,3] 과 동일하다.(아직 위점 5 번다리에서 연결된 다리를 고려할
+  필요가 없음)</p>
+      <blockquote> 
+         <img src="./mns 문서_files/mns2.gif">
+      </blockquote>
+      <p>5,4 5,5 5,6 5,7 의 접근 방법은 같다. 그 중 5,6 에 대해서 알아보면 </p>
+      <ul>
+         <li>mns 에 포함되는 경우: m[4][3]+1 <br>
+          <blockquote>
+            <img src="./mns 문서_files/mns3.gif">
+         </blockquote>
+         </li><li>mns 에 포함되지 않는 경우: m[4,6]<br> 
+          <blockquote>
+             <img src="./mns 문서_files/mns4.gif">
+         </blockquote>
+      </li></ul>
+   </blockquote>
+
+<!--
+
+<hr>
+<img src="./img/mns_sol2.gif"><p>
+
+<hr>
+<h3>차례대로 보이기</h3>
+<img src="./img/mns_sol1.gif"><p>
+-->
+
+   <h3>식 세우기와 핵심 소스</h3>
+
+   <blockquote>
+   
+<pre>c[i] : 위 점 i 에서  아래 점으로 연결된 아래 점의 번호를 c[i] 라 하자.
+---초기화 
+식: m[1,j]=0  , j &lt; c[1]
+           1  , j &gt;= c[1]
+
+   
+----처리
+식:
+
+m[i,j]= m[i-1,j]                        , j &lt; c[i]
+        max(m[i-1,j] , m[i-1,c[i]-1]+1) , j &gt;= c[i]
+</pre>
+   </blockquote>
+
+   
+<div><div id="highlighter_870006" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/mns_doc/mns_doc.php?pname=mns_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">c[]={0,3,4,1,2,5};</code></div><div class="line number4 index3 alt1"><code class="c color1 bold">int</code> <code class="c plain">m[6][6];</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number7 index6 alt2"><code class="c plain">{</code></div><div class="line number8 index7 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i,j;</code></div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">max;</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c comments">//initialize</code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=1;i &lt; c[1];i++)</code></div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">m[1][i]=0;</code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=c[1];i &lt;= 5;i++)</code></div><div class="line number15 index14 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">m[1][i]=1;</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="c spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number18 index17 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=2;i &lt;= 5;i++)</code></div><div class="line number19 index18 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(j=1;j &lt;= 5;j++)</code></div><div class="line number20 index19 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(j &lt; c[i] ) m[i][j]=m[i-1][j];</code></div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">else</code></div><div class="line number22 index21 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code><code class="c plain">( m[i-1][j] &gt; m[i-1][c[i]-1]+1)</code></div><div class="line number23 index22 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">m[i][j]=m[i-1][j];</code></div><div class="line number24 index23 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">else</code></div><div class="line number25 index24 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">m[i][j]=m[i-1][c[i]-1]+1;</code></div><div class="line number26 index25 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c comments">//output</code></div><div class="line number27 index26 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=1;i &lt;= 5;i++){</code></div><div class="line number28 index27 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(j=1;j &lt;= 5;j++){</code></div><div class="line number29 index28 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%3d"</code><code class="c plain">,m[i][j]);</code></div><div class="line number30 index29 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number31 index30 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"\n"</code><code class="c plain">);</code></div><div class="line number32 index31 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number33 index32 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+   
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=mns_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

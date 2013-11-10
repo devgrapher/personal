@@ -1,0 +1,935 @@
+
+<!-- saved from url=(0072)http://211.228.163.31/30stair/usingqueue/usingqueue.php?pname=usingqueue -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>BFS(큐 이용)로 최단거리 구하기</title>
+   <title></title><link rel="stylesheet" type="text/css" href="./BFS(큐 이용)로 최단거리 구하기_files/main.css"></head>
+      
+      
+      
+   
+   <body>
+
+<h2>BFS(큐 이용)로 최단거리 구하기</h2>
+
+   <blockquote style="font-style:oblique">
+   각 정점간 이동하는데 비용이 일정한 경우 queue 를 이용해서 최단 거리를 구할 수 있다.
+   </blockquote>
+   
+
+<pre class="src">차례:
+    <a href="http://211.228.163.31/30stair/usingqueue/usingqueue.php?pname=usingqueue#con" class="A5">개념</a>
+    <a href="http://211.228.163.31/30stair/usingqueue/usingqueue.php?pname=usingqueue#imp" class="A5">구현 </a>
+    <a href="http://211.228.163.31/30stair/usingqueue/usingqueue.php?pname=usingqueue#com" class="A5">시간 복잡도</a>
+</pre>
+
+
+<h3><a name="con">1. 개념</a></h3>
+
+<blockquote>
+각 간선을 이동하는데 비용이 일정한 경우 만약 1 이 든다고 생각 하면 
+정점 A 를 시작 정점으로 모든 정점으로 가는 데 필요한 최소 비용를 생각해보자.
+      
+      <p><img src="./BFS(큐 이용)로 최단거리 구하기_files/bfs.jpeg">
+      
+      </p><ul>
+         <li> B 까지 가는데는 1
+         </li><li> C 까지 가는데는 2
+         </li><li> D 까지 가는데는 2  혹  A B C D 로 가는 사람은  없겠죠 ... 당연 A B D
+         </li><li> E 는 3 ... A B C E
+      </li></ul>
+
+      <p> 여러 갈래 돌아가는 길이 있더라도 <font size="+2">출발지에서 먹물을 퍼뜨리면 가장 짧은 길로 연결된 지점에 먼저
+      도착</font>하겠죠.
+
+      </p><p>어떻게 queue 를 이용해서 이 부분을 구하는 가가   핵심인데 이 는 BFS(너비 우선 탐색)를 이용합니다. 이 부분을
+      모르는 분 들은 queue 파트가 선행되어야 함.
+      
+</p></blockquote>
+
+<h3><a name="imp">2. 구현</a></h3>
+
+<blockquote>
+<pre style="border:1 solid gray;width:400;padding:5px">step1.정점에서 갈수 있는  노드 중 이미 방문된 노드를 제외하고 큐에 삽입.
+
+step2.큐에서 데이터를 하나 꺼낸후 goto step1
+      이 과정을 큐가 빌때 까지 반복
+</pre>
+      
+      큐에 삽입되는 노드의 거리는 이 노드에 연결된 이유로 삽입되는 노드이 거리보다 1 많음.  패스를 저장하기 위해서는 전노드의 번호를 저장하면서 구현 
+      
+      <hr align="left" width="30%">
+
+      <p>(예시 문제) 정점 간의 이동 비용이 1 이라 할 때 1 번 도시에서 모든 도시로의 최단거리 구하는 문제를 생각해
+      보자.
+
+      </p><p><img src="./BFS(큐 이용)로 최단거리 구하기_files/ss.png">
+
+</p><ul>
+   <li>1 번 정점을 큐에 삽입 , 거리는 0
+   
+   <p> queue
+</p><pre>--------------------   
+ 1 
+--------------------
+</pre>
+
+<table>
+   <tbody><tr>
+      <td>
+         <img src="./BFS(큐 이용)로 최단거리 구하기_files/ss1.png">
+      </td>
+
+      <td>
+        
+         <table border="1">
+            <tbody><tr>
+               <td>
+                  정점 
+               </td>
+
+               <td>
+                  방문유무
+               </td>
+
+               <td>
+                  1 번도시에서의 최단 거리
+               </td>
+
+               <td>
+                  아버지 정점
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+                  1 
+               </td>
+
+               <td>
+                 방문  
+               </td>
+
+               <td>
+                  0
+               </td>
+
+               <td>
+                 nil 
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  2 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  3 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  4 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  5 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  6 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  7 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+      </tbody></table>
+ 
+      </td>
+</tr>
+</tbody></table>
+
+<p> </p></li><li>
+
+<pre>queue 삭제
+삭제된 정점(1)에 연결된 정점이 2 3 4 번 정점 차례로 queue insert
+2 3 5 정점의 거리는 아버지 정점의 거리에서 1 을 더함
+</pre>
+
+queue
+<pre>--------------------   
+ 2 3 5 
+--------------------
+</pre>
+<table>
+   <tbody><tr>
+      <td> 
+         <img src="./BFS(큐 이용)로 최단거리 구하기_files/ss2.png">
+      </td>
+
+      <td>
+         <table border="1">
+            <tbody><tr>
+               <td>
+                  정점 
+               </td>
+
+               <td>
+                  방문유무
+               </td>
+
+               <td>
+                  1 에서의 거리
+               </td>
+
+               <td>
+                  아버지 정점
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  1 
+               </td>
+
+               <td>
+                 방문  
+               </td>
+
+               <td>
+                  0
+               </td>
+
+               <td>
+                 nil 
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+                  2 
+               </td>
+
+               <td>
+                  방문
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+                  3 
+               </td>
+
+               <td>
+                방문  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  4 
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+                  5 
+               </td>
+
+               <td>
+방문                  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  6 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  7 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+      </tbody></table>
+      </td>
+      
+   </tr>
+</tbody></table>
+
+
+</li><li>
+<pre>큐 삭제(2 번 정점). 
+2 번 정점에 연결된 정점이 1 4 번 정점. 1 번 정점은 이미 방문되었으므로
+4 번 정점 큐 삽입. 4 번 정점의 거리는 2 번 정점의 거리에 1 을 더함(거리는 2)<p>
+</p></pre>
+
+queue
+<pre>--------------------   
+3 5 4 
+--------------------
+</pre>
+
+<table>
+   <tbody><tr> 
+      <td>
+         <img src="./BFS(큐 이용)로 최단거리 구하기_files/ss3.png">
+      </td>
+
+      <td>
+                <table border="1">
+            <tbody><tr>
+               <td>
+                  정점 
+               </td>
+
+               <td>
+                  방문유무
+               </td>
+
+               <td>
+                  1 에서의 거리
+               </td>
+
+               <td>
+                  아버지 정점
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  1 
+               </td>
+
+               <td>
+                 방문  
+               </td>
+
+               <td>
+                  0
+               </td>
+
+               <td>
+                 nil 
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  2 
+               </td>
+
+               <td>
+                  방문
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  3 
+               </td>
+
+               <td>
+                방문  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+             4     
+               </td>
+
+               <td>
+방문
+               </td>
+
+               <td>
+2
+               </td>
+
+               <td>
+2
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  5 
+               </td>
+
+               <td>
+방문                  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  6 
+               </td>
+
+               <td>
+                
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  7 
+               </td>
+
+               <td>
+                  
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+      </tbody></table>
+   </td>
+</tr>
+</tbody></table>
+
+</li><li>
+<pre>3 번에 연결된 정점은 모두 방문되었으므로
+5 번 정점에 연결된 정점 중 7 번 정점
+7 번 정점의 거리는 5 번 정점의 거리 + 1
+</pre>
+
+queue
+
+<pre>--------------------   
+4 7
+--------------------
+</pre>
+
+
+<table>
+   <tbody><tr>
+      <td>
+         <img src="./BFS(큐 이용)로 최단거리 구하기_files/ss4.png">
+      </td>
+
+      <td>
+        <table border="1">
+            <tbody><tr>
+               <td>
+                  정점 
+               </td>
+
+               <td>
+                  방문유무
+               </td>
+
+               <td>
+                  1 에서의 거리
+               </td>
+
+               <td>
+                  아버지 정점
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  1 
+               </td>
+
+               <td>
+                 방문  
+               </td>
+
+               <td>
+                  0
+               </td>
+
+               <td>
+                 nil 
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  2 
+               </td>
+
+               <td>
+                  방문
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  3 
+               </td>
+
+               <td>
+                방문  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+             4     
+               </td>
+
+               <td>
+방문
+               </td>
+
+               <td>
+2
+               </td>
+
+               <td>
+2
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  5 
+               </td>
+
+               <td>
+방문                  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  6 
+               </td>
+
+               <td>
+                
+               </td>
+
+               <td>
+
+               </td>
+
+               <td>
+
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+                  7 
+               </td>
+
+               <td>
+                  
+방문
+               </td>
+
+               <td>
+2
+               </td>
+
+               <td>
+5
+               </td>
+            </tr>
+
+      </tbody></table>
+
+      </td>
+   </tr>
+</tbody></table>
+
+
+</li><li>
+<pre>4 번 정점에서 모두 방문
+7 번 정점에서는 6 번 정점
+</pre>
+
+queue
+
+<pre>--------------------   
+6
+--------------------
+</pre>
+
+<table>
+   <tbody><tr>
+      <td> 
+         <img src="./BFS(큐 이용)로 최단거리 구하기_files/ss5.png">
+      </td>
+
+      <td>
+         <table border="1">
+            <tbody><tr>
+               <td>
+                  정점 
+               </td>
+
+               <td>
+                  방문유무
+               </td>
+
+               <td>
+                  1 에서의 거리
+               </td>
+
+               <td>
+                  아버지 정점
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  1 
+               </td>
+
+               <td>
+                 방문  
+               </td>
+
+               <td>
+                  0
+               </td>
+
+               <td>
+                 nil 
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  2 
+               </td>
+
+               <td>
+                  방문
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  3 
+               </td>
+
+               <td>
+                방문  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1                  
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+             4     
+               </td>
+
+               <td>
+방문
+               </td>
+
+               <td>
+2
+               </td>
+
+               <td>
+2
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  5 
+               </td>
+
+               <td>
+방문                  
+               </td>
+
+               <td>
+1
+               </td>
+
+               <td>
+1
+               </td>
+            </tr>
+
+            <tr bgcolor="#e0e0e0">
+               <td>
+                  6 
+               </td>
+
+               <td>
+               방문  
+               </td>
+
+               <td>
+3
+               </td>
+
+               <td>
+7
+               </td>
+            </tr>
+
+            <tr>
+               <td>
+                  7 
+               </td>
+
+               <td>
+방문
+               </td>
+
+               <td>
+2
+               </td>
+
+               <td>
+5
+               </td>
+            </tr>
+
+      </tbody></table>
+
+      </td>
+   </tr>
+</tbody></table>
+</li></ul>
+</blockquote>
+
+<h3><a name="com">3. 시간 복잡도 </a></h3><a name="com">
+
+<blockquote>
+정점(vertex)의 수를 v 라 하면 O(v)
+</blockquote>
+      
+<hr>
+</a><a href="http://211.228.163.31/judgeonline/showmessage.php?pname=usingqueue">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

@@ -1,0 +1,178 @@
+
+<!-- saved from url=(0063)http://211.228.163.31/30stair/totient/totient.php?pname=totient -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>오일러 파이함수(totient 함수)</title>
+      
+      <link rel="stylesheet" type="text/css" href="./오일러 파이함수(totient 함수)_files/main.css">
+   </head>
+   <body>
+
+
+<h3>(1)포함과 배제의 원리( 포배의 원리)</h3>
+
+<h4>1)직관적으로 이해하기</h4>
+A 이거나 B 의 개수는 
+
+<p><img src="./오일러 파이함수(totient 함수)_files/aorb.gif">
+
+</p><pre><img src="./오일러 파이함수(totient 함수)_files/van1.gif">
+
+<p>그림에서 세 구역으로 이루어져 있다. 
+
+</p><ul>
+<li> A 구역에만 들어 있는 A
+</li><li> B
+</li><li> A ^B 
+</li></ul>
+
+
+A B A^B
+1   1
+  1 1
+------
+1 1 2
+
+<img src="./오일러 파이함수(totient 함수)_files/aorb3.gif">
+
+A B C A^B A^C B^C A^B^C
+1      1   1       1
+  1    1       1   1
+    1      1   1   1
+-----------------------
+1 1 1  2   2   2   3
+
+A  B  C  D A^B A^C A^D B^C B^D C^D 
+
+4 개 인 경우
+
+<ul>
+<li>한 개자리 더해 A , B , C , D
+</li><li>두개 빼 주고 
+</li><li>세개 더해주고 
+</li><li>네개 빼주고 
+<ul>
+
+</ul></li></ul></pre>
+
+
+<ul>
+<li>- 1 에서 100 사이 4 의 배수 이거나  6 의 배수인 수의 개수
+</li><li>- 1 에서 100 사이 4 의 배수이거나 6 의 배수이거나 8 의 배수인 수의 개수
+</li><li>- 1 에서 100 사이 4 의 배수이거나 6 의 배수이거나 8 의 배수이거나 10 의 배수의 개수
+</li></ul>
+
+<h4>2)수학 적으로 증명하기 </h4>
+
+
+<h3>(2)오일러 파이 ( 오일러 totient ) 함수</h3>
+
+n 보다 작은 수 중 n 과 서로 소인 수의 개수 <img src="./오일러 파이함수(totient 함수)_files/phi.gif">라 하자.
+
+<ul>
+<li> n 을 소인수 분해 하면 
+<p><img src="./오일러 파이함수(totient 함수)_files/fermat2.gif">
+</p></li></ul>
+
+<p>1 - n 사이의 n 과 서로 소인 개수는 
+
+</p><p><img src="./오일러 파이함수(totient 함수)_files/fermat5.gif">
+
+</p><ul>
+<li>20 의 오일러 파이 함수는 
+<p><img src="./오일러 파이함수(totient 함수)_files/tot1.gif">
+</p></li></ul>
+
+<h3>(3)페르마 소 정리(Fermat little theorem)</h3>
+
+페르마의 소정리란?
+
+<div style="border:1 solid; width:500;margin:1em 1em 1em 1em">
+<p>a , p 가 서로 소이고 , p 가 소수이면
+
+</p><p><img src="./오일러 파이함수(totient 함수)_files/fermat1.gif">
+는 p 의 배수이다.  즉 <img src="./오일러 파이함수(totient 함수)_files/fermat6.gif">
+
+</p></div>
+
+예를 들면 ,
+
+<ul>
+<li> a = 4 , p = 3 ... 4^(3-1)-1 = 15 는 3 의 배수이다.
+</li><li> a = 6 , p = 5 ... 6^(5-1) -1 = 1295 는 5 의 배수이다.
+</li><li> a , p 를 각각 4, 5 
+
+<p><img src="./오일러 파이함수(totient 함수)_files/tot2.gif">
+
+은 5 의 배수이다.
+</p></li><li>...
+</li></ul>
+
+문제1)
+
+<div style="border:1 solid; width:500;margin:1em 1em 1em 1em">
+소수 p 가 있다.
+
+<p>1 , 2 , 3 , .... , p-1 에 p 와 서로 소인 수 a 를 곱하면 
+
+</p><p>1*a , 2*a , 3*a , ... ,(p-1)*a 를 p 로 나누면 나머지가 1 , 2 , ... , p-1 이 된다.
+</p></div>
+
+예를 들면 ,
+<ul>
+<li> 소수 7 있고 , 
+<br> 1 , 2 , 3 , 4 , 5 , 6 에서 7 가 서로 소인 수인 수 중 임의의 수 6 을 곱하면
+
+<pre>               1 , 2 , 3 , 4 , 5 , 6
+               1*6 , 2*6 , 3 *6 , 4 *6 , 5*6 , 6*6
+7로 나눈나머지: 6  , 5   , 4    , 3    , 2   , 1
+</pre>
+
+<br> 1 , 2 , 3 , 4 , 5 , 6 에서 7 가 서로 소인 수인 수 중 임의의 수 8 을 곱하면
+
+<pre>               1 , 2 , 3 , 4 , 5 , 6
+               1*8 , 2*8 , 3 *8 , 4 *8 , 5*8 , 6*8
+7로 나눈나머지: 1  , 2  ,   3    , 4    , 5   , 6
+</pre>
+7 로 나눈 나머지 1 에서 6 까지가 나온다.
+</li></ul>
+
+<p>proof)
+
+</p><pre>만약 p 미만의 수 n, m이 있을 때, (n &lt; m) n*a 와 m*a 를 p로 나눈 나머지가 같다고 하자.
+
+즉 두 수의 차인 (m-n)*a는 p의 배수이다.
+
+서로소인 두 수 a, p의 최소공배수는 ap이므로 m-n은 p의 배수이어야 한다.
+
+이 때 m은 최소 n+p인데, n+p &gt;= p일 수밖에 없으므로 모순.
+
+즉 a부터 (p-1)*a 중 mod p가 서로 같은 쌍은 존재하지 않는다.
+즉 1부터 p-1까지의 모든 나머지가 나와야 한다. (0이 나올리는 없겠죠 
+</pre>
+
+이제 페르마 정리를 정리하면 ,
+
+<div style="border:1 solid; width:500;margin:1em 1em 1em 1em">
+<img src="./오일러 파이함수(totient 함수)_files/fermat7.gif">
+<img src="./오일러 파이함수(totient 함수)_files/fermat8.gif">
+
+<p>(p-1)! 은 p 와 서로 소이므로 (p-1)! 로 양변을 나누면 a^(p-1) = 1 (mod p)
+
+</p></div>
+
+
+<h3>(4)오일러 정리</h3>
+
+
+<pre class="src">출처:
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=totient">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

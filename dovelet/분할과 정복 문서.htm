@@ -1,0 +1,288 @@
+
+<!-- saved from url=(0093)http://211.228.163.31/30stair/divideconquer_doc/divideconquer_doc.php?pname=divideconquer_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>분할과 정복 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./분할과 정복 문서_files/main.css">
+	  <link href="./분할과 정복 문서_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./분할과 정복 문서_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+
+	  <script src="./분할과 정복 문서_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./분할과 정복 문서_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+   // 작업 중.............
+
+<pre class="src">차례:
+-<a href="http://211.228.163.31/30stair/divideconquer_doc/divideconquer_doc.php?pname=divideconquer_doc#max" class="A3">최대값 찾기</a>
+-<a href="http://211.228.163.31/30stair/divideconquer_doc/divideconquer_doc.php?pname=divideconquer_doc#merge" class="A3">merge sort</a>
+-<a href="http://211.228.163.31/30stair/divideconquer_doc/divideconquer_doc.php?pname=divideconquer_doc#quick" class="A3">quick sort</a>
+</pre>
+
+<p>작게 해서 정복하고 이 영역을 확장하는 방법.
+
+</p><ol>
+<li> 분할
+</li><li> 정복 
+</li><li> 통합
+</li></ol>
+
+소트 방법 중 merge sort 가 전형적인 분할정복의 멋진 예 이다.
+
+<h2><a name="max">1. 최대값 찾기</a></h2>
+
+<h3> 구현 </h3>
+<div><div id="highlighter_249338" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/divideconquer_doc/divideconquer_doc.php?pname=divideconquer_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;stdio.h&gt; </code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">a[8] = { 6 , 2 , 9 , 8 , 1 , 4 ,17 , 5 }; </code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="c color1 bold">int</code>&nbsp; <code class="c plain">dc( </code><code class="c color1 bold">int</code> <code class="c plain">low ,</code><code class="c color1 bold">int</code> <code class="c plain">high )&nbsp; </code></div><div class="line number6 index5 alt1"><code class="c plain">{ </code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">m,tmp1,tmp2; </code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">m = (low + high )/2; </code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( low == high ) </code><code class="c keyword bold">return</code> <code class="c plain">a[low]; </code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp1 = dc(low,m); </code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">tmp2 = dc(m+1,high); </code></div><div class="line number15 index14 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( tmp1 &gt; tmp2 ) </code><code class="c keyword bold">return</code> <code class="c plain">tmp1; </code></div><div class="line number16 index15 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">else</code> <code class="c keyword bold">return</code> <code class="c plain">tmp2; </code></div><div class="line number17 index16 alt2"><code class="c plain">} </code></div><div class="line number18 index17 alt1">&nbsp;</div><div class="line number19 index18 alt2"><code class="c color1 bold">int</code> <code class="c plain">main() </code></div><div class="line number20 index19 alt1"><code class="c plain">{ </code></div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">low ,high; </code></div><div class="line number22 index21 alt1">&nbsp;</div><div class="line number23 index22 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">low = 0; </code></div><div class="line number24 index23 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">high = 7; </code></div><div class="line number25 index24 alt2">&nbsp;</div><div class="line number26 index25 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d\n"</code><code class="c plain">,dc(low,high)); </code></div><div class="line number27 index26 alt2"><code class="c plain">}</code></div><div class="line number28 index27 alt1"><code class="c plain">&lt;/stdio.h&gt;</code></div></div></td></tr></tbody></table></div></div>
+
+어떻게 동작하는가?
+
+<pre>dc(0,7) ---&gt; tmp1 = dc(0 , 3) ---&gt;   tmp1 = dc(0 , 1)  ---&gt; tmp1 = dc(0 , 0) <font color="#ff6633"> &lt;=== return a[0] </font>
+                               
+                                                      ---&gt; tmp2 = dc(1 , 1) <font color="#ff6633">&lt;=== return a[1] </font>
+                                          <font color="#ff6633"> &lt;============== tmp1 과 tmp2 중 큰 값이 return</font>
+                            
+                              ---&gt;   tmp2 = dc(2 , 3)  ---&gt; tmp1 = dc(2 , 2) <font color="#ff6633">&lt;=== return a[2] </font>
+
+                                                       ---&gt; tmp2 = dc(3 , 3) <font color="#ff6633">&lt;=== return a[3] </font>
+                                          <font color="#ff6633"> &lt;==============  tmp1 과 tmp2 중 큰 값이 return </font>
+                    <font color="#ff6633">&lt;=============== tmp1 과 tmp2 중 큰 값이 return  </font>
+
+        ---&gt; tmp2 = dc(4 , 7) ---&gt;   tmp1 = dc(4 , 5)  ---&gt; tmp1 = dc(4 , 4) <font color="#ff6633">&lt;=== return a[4] </font>
+                               
+                                                      ---&gt; tmp2 = dc(5 , 5)<font color="#ff6633"> &lt;=== return a[5] </font>
+                                          <font color="#ff6633"> &lt;============== tmp1 과 tmp2 중 큰 값이 return </font>
+                            
+                              ---&gt;   tmp2 = dc(6 , 7)  ---&gt; tmp1 = dc(6 , 6) <font color="#ff6633">&lt;=== return a[6] </font>
+
+                                                       ---&gt; tmp2 = dc(7 , 7) <font color="#ff6633">&lt;=== return a[7] </font>
+                                          <font color="#ff6633"> &lt;==============  tmp1 과 tmp2 중 큰 값이 return </font>
+                    <font color="#ff6633">&lt;=============== tmp1 과 tmp2 중 큰 값이 return  </font>
+    <font color="#ff6633">&lt;=======최종적으로  tmp1 과 tmp2 중 큰 값이 return </font>
+</pre>
+
+<h2><a name="merge">2. merge sort</a></h2>
+<h3>(1) 이미 소트된 배열을 하나로 합치는 방법 </h3>
+
+
+<blockquote>
+(문제) 두개의 정렬 배열 ia,ib 가 주어 질 때 , 이 배열을 합친 배열 ic 를 만드는 것이 
+문제이다. 물론 ic 배열도 정렬되어 있어야 한다.
+
+<p> <img src="./분할과 정복 문서_files/merge1.gif"> 
+
+</p><h4>구현 </h4>
+
+변수 세개를 이용한다. 
+
+<p> <img src="./분할과 정복 문서_files/merge2.gif"> 
+
+</p><ul>
+<li>i , j 가 가르키는 배열 중 작은 내용을 ic 에 쓴 후 i , j 값중 쓴 쪽의 변수 와 k 값을
+증가 
+</li><li> 이 과정을 ia[] , ib[] 중 하나라도 끝에 도달할 때 까지 반복 
+</li></ul>
+
+<ul>
+<li>i 가 가르키는 데이터가 1이고 
+</li><li>j 가 가르키는 데이터가 2 이므로 
+</li><li>둘 중  작은 값 즉 i 가 가르키는 데이터를 ic 에 쓰고 i 증가 , k 증가 <p>
+</p></li></ul>
+
+<hr>
+
+<blockquote>
+<img src="./분할과 정복 문서_files/merge2.gif"><p>
+</p></blockquote>
+
+(단계 2)
+<ul>
+<li>i 가 가르키는 데이터가 3 이고 
+</li><li>j 가 가르키는 데이터가 2 이므로 
+</li><li>둘 중  작은 값 즉 j 가 가르키는 데이터를 ic 에 쓰고 j 증가 , k 증가 <p>
+</p></li></ul>
+<blockquote>
+<img src="./분할과 정복 문서_files/merge3.gif">
+</blockquote>
+
+
+(단계 3)
+<ul>
+<li>i 가 가르키는 데이터가 3 이고 
+</li><li>j 가 가르키는 데이터가 4 이므로 
+</li><li>둘 중  작은 값 즉 i 가 가르키는 데이터를 ic 에 쓰고 i 증가 , k 증가 <p>
+</p></li></ul>
+<blockquote>
+<img src="./분할과 정복 문서_files/merge4.gif">
+</blockquote>
+
+<pre>...
+...
+</pre>
+
+(단계 4)
+<ul>
+<li>i 가 가르키는 데이터가 7 이고 
+</li><li>j 가 가르키는 데이터가 8 이므로 
+</li><li>둘 중  작은 값 즉 i 가 가르키는 데이터를 ic 에 쓰고 i 증가 , k 증가 <p>
+</p></li></ul>
+<blockquote>
+<img src="./분할과 정복 문서_files/merge5.gif">
+</blockquote>
+
+(단계 5)
+<ul>
+<li> 배열 ia[] 에 남은 데이터가 없음.
+</li><li> 배열 ib[] 는 이미 소트된 상태이므로 , 남은 ib[] 내용을  ic[] 배열로
+복사 
+</li></ul>
+
+<blockquote>
+<img src="./분할과 정복 문서_files/merge6.gif">
+</blockquote>
+(단계 6)
+<blockquote>
+<img src="./분할과 정복 문서_files/merge7.gif">
+</blockquote><p>
+
+</p></blockquote>
+
+<h3> (2) mergesort ( 분할과 정복 ) </h3>
+
+<blockquote>
+
+예를 들어, 8 개의 데이터가 소트되는 과정을 요철로 표현하면 
+<pre>1 에서 8 분할 
+  1  4  분할 ,  5 8 분할 
+     1  2 분할 , 3 4 분할 
+         1 끝 
+         2 끝
+     1  2 머지 소트
+         3 끝
+         4 끝
+     3  4 머지 소트
+  1  4 머지 소트 
+     5 6 분할 7 8 분할
+         5 끝
+         6 끝
+     5 6 머지소트
+         7 끝
+         8 끝
+     7 8 머지 소트
+  5  8 머지 소트
+1  8 머지 소트 
+</pre>
+
+<!--
+<blockquote>
+하나의 배열도 나누면 두 개의 부분 배열로 나눌 수 있으므로 위에서 보인 과정과 같은 동작으로
+하나의 배열도 정렬할 수 있다.<p>
+
+
+예를 들면 8 개 아이템을 가진 배열을 정렬하기 위해
+각각 크기가 4 인 2 개의 부분 배열로 분할하고 , 그 두 부분배열을 각각 정렬하고 , 그들을
+합병하여 정렬된 배열을 만들 수 있다. 같은 방법으로 크기가 4 인 부분배열을 각각 크기가 2 인
+2 개의 부분배열로 분할하고, 부분배열을 정렬하고 합병할 수 있다. 궁극적으로는 부분배열의
+크기는 1 이 될 것이고 , 크기가 1 인 배열은  정렬 된 상태이다. <p>
+
+n 개의 아이텀을 가진 배열이 주어지면합병 정렬은 다음과 같은 절차로 진행된다.
+
+</pre>
+
+<ol>
+<li> 분할 : 배열을 n/2 개의 아이텀을 가진 2 개의 부분배열로 분할 한다.
+<li> 정복: 정렬함으로서 각 부분배열을 정복한다(푼다). 배열이 충분히 작지 않으면 재귀호출을
+한다.
+<li> 통합: 부분 배열에 대한 답들을 합병하여 하나의 정렬된 배열로 만든다.
+</ol>
+
+그림으로 나타내보면<p>
+-->
+
+<img src="./분할과 정복 문서_files/merge8.gif"><p>
+
+</p><div><div id="highlighter_585688" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/divideconquer_doc/divideconquer_doc.php?pname=divideconquer_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div><div class="line number48 index47 alt1">48</div><div class="line number49 index48 alt2">49</div><div class="line number50 index49 alt1">50</div><div class="line number51 index50 alt2">51</div><div class="line number52 index51 alt1">52</div><div class="line number53 index52 alt2">53</div><div class="line number54 index53 alt1">54</div><div class="line number55 index54 alt2">55</div><div class="line number56 index55 alt1">56</div><div class="line number57 index56 alt2">57</div><div class="line number58 index57 alt1">58</div><div class="line number59 index58 alt2">59</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c preprocessor">#include &lt;stdio.h&gt;</code></div><div class="line number2 index1 alt1"><code class="c color1 bold">int</code> <code class="c plain">s[] = {0,6,2,9,8,3,4,7,5};</code></div><div class="line number3 index2 alt2"><code class="c color1 bold">int</code> <code class="c plain">u[9]; </code><code class="c comments">// 위에서 설명한 임시 배열 ic[]&nbsp; </code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="c keyword bold">void</code> <code class="c plain">merge(</code><code class="c color1 bold">int</code> <code class="c plain">low,</code><code class="c color1 bold">int</code> <code class="c plain">mid,</code><code class="c color1 bold">int</code> <code class="c plain">high)</code></div><div class="line number6 index5 alt1"><code class="c plain">{</code></div><div class="line number7 index6 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i,j,k;</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">i=low;</code></div><div class="line number10 index9 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">j=mid+1;</code></div><div class="line number11 index10 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">k=low;</code></div><div class="line number12 index11 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">while</code> <code class="c plain">( i &lt;= mid &amp;&amp;&nbsp; j &lt;= high){</code></div><div class="line number13 index12 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(s[i] &lt; s[j]){</code></div><div class="line number14 index13 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">u[k]=s[i];</code></div><div class="line number15 index14 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">i++;</code></div><div class="line number16 index15 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code><code class="c keyword bold">else</code><code class="c plain">{</code></div><div class="line number17 index16 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">u[k]=s[j];</code></div><div class="line number18 index17 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">j++;</code></div><div class="line number19 index18 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number20 index19 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">k++;</code></div><div class="line number21 index20 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number22 index21 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(i &gt; mid)</code></div><div class="line number23 index22 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=j;i&lt;=high;i++,k++)</code></div><div class="line number24 index23 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">u[k]=s[i];</code></div><div class="line number25 index24 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">else</code></div><div class="line number26 index25 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(j=i;j &lt;= mid;j++,k++)</code></div><div class="line number27 index26 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">u[k]=s[j];</code></div><div class="line number28 index27 alt1">&nbsp;</div><div class="line number29 index28 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i=low;i &lt;= high;i++)</code></div><div class="line number30 index29 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">s[i]=u[i];</code></div><div class="line number31 index30 alt2"><code class="c plain">}</code></div><div class="line number32 index31 alt1">&nbsp;</div><div class="line number33 index32 alt2"><code class="c keyword bold">void</code> <code class="c plain">mergesort(</code><code class="c color1 bold">int</code> <code class="c plain">low,</code><code class="c color1 bold">int</code> <code class="c plain">high)</code></div><div class="line number34 index33 alt1"><code class="c plain">{</code></div><div class="line number35 index34 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">mid;</code></div><div class="line number36 index35 alt1">&nbsp;</div><div class="line number37 index36 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">(low &lt; high){</code></div><div class="line number38 index37 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">mid=(low+high)/2;</code></div><div class="line number39 index38 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">mergesort(low,mid);</code></div><div class="line number40 index39 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">mergesort(mid+1,high);</code></div><div class="line number41 index40 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c plain">merge(low,mid,high);</code></div><div class="line number42 index41 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">}</code></div><div class="line number43 index42 alt2"><code class="c plain">}</code></div><div class="line number44 index43 alt1">&nbsp;</div><div class="line number45 index44 alt2"><code class="c keyword bold">void</code> <code class="c plain">output()</code></div><div class="line number46 index45 alt1"><code class="c plain">{</code></div><div class="line number47 index46 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c color1 bold">int</code> <code class="c plain">i;</code></div><div class="line number48 index47 alt1">&nbsp;</div><div class="line number49 index48 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">for</code><code class="c plain">(i = 1;i &lt;= 8;i++)</code></div><div class="line number50 index49 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d "</code><code class="c plain">,s[i]);</code></div><div class="line number51 index50 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"\n"</code><code class="c plain">);</code></div><div class="line number52 index51 alt1"><code class="c plain">}</code></div><div class="line number53 index52 alt2">&nbsp;</div><div class="line number54 index53 alt1"><code class="c color1 bold">int</code> <code class="c plain">main()</code></div><div class="line number55 index54 alt2"><code class="c plain">{</code></div><div class="line number56 index55 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">mergesort(1,8);</code></div><div class="line number57 index56 alt2"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c plain">output();</code></div><div class="line number58 index57 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">return</code> <code class="c plain">0;</code></div><div class="line number59 index58 alt2"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+</blockquote>
+
+
+
+<h2><a name="quick">3. quick sort</a></h2>
+
+quick 정렬도 분할 정복의 멋진 예이다. merge sort 와 다른 점은
+분할 과 정복으로 알고리즘이 이루어진다. 통합과정은 필요가 없다.
+
+<h3> (1) 왜 quick 인가? </h3>
+
+
+<blockquote>
+선택 정렬 과 quick 정렬로 왜 이 정렬이 빠른 정렬인지를 알아보자.
+
+<p>두 정렬 방법 모두 한 패스만에 하나의 원소의 자리를 찾는 것은 같다.
+하지만 선택정렬은 한 패스에 현재 있는 원소중 가장 작은 데이터 혹은 큰 데이터의
+자리를 찾아 옮긴다. 이 것이 왜 빠른가?
+
+</p><p>
+다음 7 개의 데이터에서 소트를 하는 과정을 보면서 이해해 보도록 하자.
+</p><blockquote>
+6 4 9 8 1 2 7
+</blockquote>
+
+아래 데이터로 선택정렬과 quick 정열을 비교해서 알아보자.<p>
+
+</p><pre>선택 정렬의 한 패스:
+1 4 9 8 6 2 7 ... 제일 작은 데이터 1 찾아 6 과 바꾸기 위해서 6 번 비교
+
+quick 정렬의 한 패스:  첫 번째 데이터 6 의 자리를 찾기 위해서 6 번 비교. 
+
+2 1 4              6  8 7 9
+-----                 ------
+6보다작은데이터       6 보다 큰 데이터  
+
+여기까지는 비교 횟수가 같다. 하지만 다음 패스로 넘어가면 
+
+선택 정렬의 두 번째 패스:
+
+
+
+
+<img src="./분할과 정복 문서_files/sel_quick.gif"><p>
+
+selection sort 의 한 패스 
+
+</p><blockquote>
+6 번의 비교 만에 제일 작은 데이터를 제일 처음으로 <p>
+<img src="./분할과 정복 문서_files/sel1.gif">
+
+</p></blockquote><p>
+
+quick sort 의 한 패스 
+</p><blockquote>
+6 번의 비교 만에 제일 처음 데이터를 정렬<p>
+<img src="./분할과 정복 문서_files/quick1.gif">
+</p></blockquote><p>
+
+첫 단계에서는 비교회수는 두 방법다 6 번의 비교가 일어난다. 하지만 
+선택정렬의 다음 단계에서는 5 번의 비교로 다음 작은 데이터를 2 번째 위치로 옮기지만
+quick 정렬은 4 를 소트할 때 4 위의 데이터는 더 이상 비교할 필요가 없므로 2 번의 비교만에
+제자리에 놓을 수 있다. </p><p>
+
+</p></pre></blockquote>
+
+
+<pre class="src">출처:
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=divideconquer_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

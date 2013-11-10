@@ -1,0 +1,103 @@
+
+<!-- saved from url=(0072)http://211.228.163.31/30stair/factor_doc/factor_doc.php?pname=factor_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>약수 구하기</title>
+      
+      <link rel="stylesheet" type="text/css" href="./약수 구하기_files/main.css">
+	  <link href="./약수 구하기_files/shCore.css" rel="stylesheet" type="text/css"> 
+	  <link href="./약수 구하기_files/shThemeDefault.css" rel="stylesheet" type="text/css"> 
+	  <script src="./약수 구하기_files/shCore.js" type="text/javascript"></script> 
+	  <script src="./약수 구하기_files/shBrushCpp.js" type="text/javascript"></script>
+
+	  <script language="javascript"> 
+	    SyntaxHighlighter.config.bloggerMode = true;
+	    SyntaxHighlighter.config.clipboardSwf = '/scripts/clipboard.swf';
+	    SyntaxHighlighter.all();
+	  </script> 
+   </head>
+   <body>
+
+   
+   <div style="font-style:oblique">
+   수학적인 내용이지만 약수에 관한 내용이 많이 나와서 이 부분에 문서를 두었습니다.
+   </div>
+
+<h3>1.약수 구하기</h3>
+
+<blockquote>
+
+   n 의 약수를 구하여 보자.
+
+   <h4>방법 1. 무작정 하기</h4>
+
+
+   <blockquote>
+   n 을 1 부터 n 까지 나누어가면서 나누어지면 약수 .
+
+   <div><div id="highlighter_724833" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/factor_doc/factor_doc.php?pname=factor_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c plain">cnt&nbsp; = 0;</code></div><div class="line number2 index1 alt1"><code class="c keyword bold">for</code><code class="c plain">( i = 1 ; i &lt;= n ;i++){</code></div><div class="line number3 index2 alt2"><code class="c spaces">&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( n % i == 0 ) </code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d "</code><code class="c plain">,i);</code></div><div class="line number4 index3 alt1"><code class="c plain">}</code></div></div></td></tr></tbody></table></div></div>
+   </blockquote>
+
+   <h4>방법 2. 중복 피하기</h4>
+
+   <blockquote>
+      n 이 20 인 경우인 경우 약수 
+      <pre>      1  20
+      2  10
+      4   5
+      5   4 --- 이 부분부터 중복 
+      10 2
+      20 1
+      </pre>
+      중복을 피할 수 있는 경계선이 √n 이다.
+
+      <div><div id="highlighter_335763" class="syntaxhighlighter  c"><div class="toolbar"><span><a href="http://211.228.163.31/30stair/factor_doc/factor_doc.php?pname=factor_doc#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="c keyword bold">for</code><code class="c plain">( i = 1 ; i*i &lt; n ; i++){</code></div><div class="line number2 index1 alt1"><code class="c spaces">&nbsp;&nbsp;&nbsp;</code><code class="c keyword bold">if</code> <code class="c plain">( n % i == 0 ) </code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">"%d %d"</code><code class="c plain">,i,n/i); </code><code class="c comments">//약수는 쌍으로 존재</code></div><div class="line number3 index2 alt2"><code class="c plain">}</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="c keyword bold">if</code> <code class="c plain">( i*i == n ) </code><code class="c functions bold">printf</code><code class="c plain">(</code><code class="c string">" %d"</code><code class="c plain">,i); </code><code class="c comments">//n 이 제곱수인 경우</code></div></div></td></tr></tbody></table></div></div>
+
+      * 약수의 개수를 구하는 경우에도 이를 이용하면 빠르게 구할 수 있다.
+      <p>위 소스에서 한 번쯤 생각하고 넘어가야 할 것은 
+      </p><ul>
+         <li> 제곱수를 제외하고는 약수는 쌍으로 존재하고
+         </li><li> 즉 제곱수를 제외한 모든 수의 약수의 개수는 짝수개
+      </li></ul>
+   </blockquote>
+
+</blockquote>
+
+<h3> 2.소인수 구하기 </h3>
+
+<h3> 3.약수의 개수 구하기(소인수 분해 이용)</h3>
+
+<h3> 4.약수의 합 구하기(소인수 분해 이용) </h3>
+
+<!--
+
+<h4>방법 3. 소인수 분해 이용</h4>
+
+<blockquote>
+
+<pre>
+20 = 2^2 * 5
+
+소인수의 지수에 1 을 더한 수를 곱하면 약수 . 3 * 2 = 6
+
+
+for( i = 2 ; i*i <= n ; i++){
+   if ( n % i == 0 ){
+      cnt = 0; 
+      while ( n % i == 0 ){
+         cnt++;
+</pre>
+</blockquote>
+-->
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=factor_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

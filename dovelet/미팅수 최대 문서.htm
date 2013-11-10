@@ -1,0 +1,93 @@
+
+<!-- saved from url=(0075)http://211.228.163.31/30stair/meeting_doc/meeting_doc.php?pname=meeting_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>미팅수 최대 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./미팅수 최대 문서_files/main.css">
+   </head>
+   <body>
+
+<h3>미팅수 최대 문서</h3>
+
+<blockquote style="font-style:oblique">
+이 문제는 greedy method 로 널리 알려져 있는 문제이지만 다이나믹 프로그래밍으로도 좋은 예인 것 같습니다.
+다이나믹 프로그램으로 접근하는 경우 어떤 미팅에서 최대가 되는지는 조금 생각해 보아야 할 듯 합니다.
+</blockquote>
+
+<h4>1. 설명 </h4>
+
+<blockquote>
+
+선제 조건: 종료 시간을 기준으로 정렬되어 있다.
+<ul>
+<li>종류: 0/1 knapsack 류
+</li><li>점화 식:dy[i] : i 시간 까지의 meeting 의 최대 수이고 ,
+</li><li> 가장 늦은 종료시간이 n 이라면 답은 dy[n].
+</li></ul>
+
+
+<p>예를 들어 , 시작과 종료시간이 s , e 라면 
+
+</p><p><img src="./미팅수 최대 문서_files/meeting_answer1.gif">
+
+</p><p>추가되는 회의를 포함하는 경우 아닌 경우 중 최대
+</p><ol>
+<li> dy[e - 1] : 회의를 포함시키지 않는 경우
+</li><li> dy[s] + 1 : 회의를 포함 시킬 경우 
+</li></ol>
+
+<p>두가지 경우 중 최대가  dy[e]
+
+</p><p><img src="./미팅수 최대 문서_files/meeting_answer2.gif">
+
+</p><hr>
+
+<p>차례대로 과정을 보자.( 그림을 잘못 그려서 m 배열이 dy 배열 )
+풀이를 간단히 하기 위해 미팅 시간은 0 부터 9 까지 입력된다고 가정하자.
+
+</p><ol>
+<li> 첫번 째 회의 확장 
+<p><img src="./미팅수 최대 문서_files/meeting1.gif">
+
+</p><ul>
+<li> 작업의 끝이 3 이므로  0 에서 2 까지는 0 으로 채움 
+</li><li> dy[3] = max( dy[3-1] , dy[1] + 1) 
+</li></ul>
+
+<p></p></li><li> 두번 째 회의 확장 
+<p><img src="./미팅수 최대 문서_files/meeting2.gif">
+
+</p></li><li> 세번 째 회의 확장
+<p><img src="./미팅수 최대 문서_files/meeting3.gif">
+
+</p></li><li> 네번 째 회의 확장 
+<p><img src="./미팅수 최대 문서_files/meeting4.gif">
+
+</p></li><li> 다섯번 째 회의 확장 
+<p><img src="./미팅수 최대 문서_files/meeting5.gif">
+</p></li></ol>
+
+</blockquote>
+
+<h4>2. 시간 복잡도 </h4>
+
+<blockquote>
+O(n)
+</blockquote>
+<!--
+<a href="./meeting_using_dp.c">소스 </a>
+-->
+
+
+<pre class="src">출처:dovelet
+</pre>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=meeting_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

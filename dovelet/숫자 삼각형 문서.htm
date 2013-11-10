@@ -1,0 +1,141 @@
+
+<!-- saved from url=(0072)http://211.228.163.31/30stair/numtri_doc/numtri_doc.php?pname=numtri_doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-949">
+      <title>숫자 삼각형 문서</title>
+      
+      <link rel="stylesheet" type="text/css" href="./숫자 삼각형 문서_files/main.css">
+   </head>
+   <body>
+
+   <h2>숫자 삼각형 문서</h2>
+
+   <blockquote style="font-style:oblique">
+   이 문제는 top-down ,  bottom-up 으로 가능합니다. 이 문서의 목적은 bottom-up 으로의
+   확장 방식에 대한 이해에 있습니다.
+   </blockquote>
+
+   <h3> 0. 그리디로 접근 </h3>
+
+   <blockquote>
+      예를 들어 숫자 삼각형이 아래와 같다면 
+         
+         <p> </p><blockquote>
+      <img src="./숫자 삼각형 문서_files/digit_tri1.gif"><p>
+      </p></blockquote>
+
+      현재 갈수 있는 곳에서 최선을 택하면(greedy method) 2  - 5 - 3(2+5+3=10) 해서 10
+
+      <p> </p><blockquote>
+      <img src="./숫자 삼각형 문서_files/digit_tri2.gif"><p>
+      </p></blockquote>
+
+      하지만 이 방법은 정답이 아니고 2 - 4 - 5(2+4+5=11) 가 정답입니다.
+   </blockquote>
+
+   <h3>1. top-down 풀이 </h3>
+
+   <blockquote>
+   top-down 방식은 확장 방식을 위에서 아래로 확장해 나가는 방식 입니다.
+
+   <p><img src="./숫자 삼각형 문서_files/top1.gif">
+
+   </p><p>확장 방식은 
+   </p><ul>
+   <li> step1. 제일 위층만 있는 경우  그냥 2 입니다.
+
+   </li><li> step2. 밑에 층을 포함하는 경우 5 는 2 에서 , 4 도 2 에서 올수 있는 방법 밖에 없으므로 7 , 7 입니다. 
+
+   </li><li> step3. 밑에 층을 포함하는 경우
+   </li></ul>
+   답은 제일 아래층에서의 최대 값 입니다.
+
+   </blockquote>
+
+   <h3>2. bottom up 풀이 </h3>
+   
+   <blockquote>
+
+
+<p> </p><blockquote>
+<img src="./숫자 삼각형 문서_files/digit_tri3.gif"><p>
+</p></blockquote><p>
+
+</p><p>위층에서 아래 층으로 내려올 때는 
+2 에서 5 를 선택해야 할지 , 4 를 선택해야할지를 결정할 수 없습니다.
+
+</p><p> </p><blockquote>
+<img src="./숫자 삼각형 문서_files/digit_tri4.gif"><p>
+</p></blockquote>
+
+<p>하지만 밑에서 위로 접근하면 결정적으로  선택할 수 있습니다.
+
+</p><p> </p><blockquote>
+<img src="./숫자 삼각형 문서_files/digit_tri5.gif"><p>
+</p></blockquote>
+
+<hr width="30%" align="left">
+
+과정을 보면 ,
+
+<p><table cellpadding="5" cellspacing="10" width="600">
+  <tbody><tr>
+    <td><img src="./숫자 삼각형 문서_files/bottom_up1.gif"></td><td><img src="./숫자 삼각형 문서_files/bottom_up2.gif"></td>
+  </tr>
+  <tr>
+    <td><img src="./숫자 삼각형 문서_files/bottom_up3.gif"></td><td><img src="./숫자 삼각형 문서_files/bottom_up4.gif"></td>
+  </tr>
+</tbody></table></p><p>
+
+정리하면 , </p><p>
+
+</p><dl>
+  <dt>식 
+  </dt><dd> n 층까지 있다면 answ[i][j]는 i 행 j 렬에서 n 행까지 내려가는데 합의 최대 
+  </dd><dt>답 
+  </dt><dd>ans[1][1]
+</dd></dl>
+
+입력데이터가 다음과 형식으로 입력된다면,<br>
+<img src="./숫자 삼각형 문서_files/bottom_up5.gif"> <p>
+
+</p><blockquote>
+ans[i][j]=data[i][j]+ max( ans[i-1][j] , ans[i-1][j+1]) 
+</blockquote>
+
+--핵심 소스
+<table border="0" cellspacing="5" bgcolor="#edf5f4">
+<tbody><tr>
+<td>
+<pre><font size="3">
+  for(i=n;i&gt;=1;i--)
+     for(j=1;j&gt;=i;j++)
+        if (ans[i-1][j] &gt; ans[i-1][j+1])
+           ans[i][j]=data[i][j]+ ans[i-1][j];
+        else
+           ans[i][j]=data[i][j]+ ans[i-1][j+1];
+</font>
+</pre>
+</td>
+</tr>
+</tbody></table>
+
+<!--
+<img src="bottom_up.gif">
+
+<hr>
+<h3>소스</h3>
+<a href="./src/digit_tri.c">소스</a>
+-->
+
+
+   </blockquote>
+      
+<hr>
+<a href="http://211.228.163.31/judgeonline/showmessage.php?pname=numtri_doc">[질/답]</a>
+<div align="right">
+<a href="http://211.228.163.31/index.php">[홈으로]</a>&nbsp;&nbsp;<a href="javascript:history.go(-1)">[뒤 로]</a>
+</div>
+
+   
+
+</body></html>

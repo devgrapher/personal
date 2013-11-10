@@ -1,0 +1,254 @@
+.cur
+{
+   color:black;
+}
+
+.over
+{
+   #color:#08AEE7;
+   color:blue;
+   background:#FFFFFF;
+   text-decoration:underline;
+   cursor:pointer;
+}
+
+.out
+{
+   color:black;
+}
+
+.subtit
+{
+   font-size: 10pt;
+}
+
+#notice {
+   font-size:9pt;
+   border:solid 1px gray;
+   width:550px;
+   padding:5px;
+}
+
+#dovelet{
+   float:left;
+}
+
+#wraper {
+   width:950px;
+   float:left;
+}
+
+.subtitlebak
+{
+   width:632px;
+   font-size: 8pt;
+   font-family : arial,"times new roman" , fixedsys;
+   font-weight:bold;
+float: right;
+}
+.subtitle
+{
+   position:absolute;
+   left:300px;
+   top:17px;
+   width:632px;
+   font-size: 8pt;
+   font-family : arial,"times new roman" , fixedsys;
+   text-align: right;
+   font-weight:bold;
+}
+
+A:link {color:#000000 ; text-decoration:underline; }
+A:visited {color:#000000  ; text-decoration: underline;}
+A:active {color: #000000 ; text-decoration: none;}
+A:hover {color:blue; text-decoration:underline; }
+
+A.A1:link {color:#000000 ; text-decoration:underline; }
+A.A1:visited {color:#000000 ; text-decoration: underline;}
+A.A1:active {color: #000000 ; text-decoration: none;}
+A.A1:hover {color:blue; text-decoration:underline; }
+
+A.A2:link {color: #000000; text-decoration: underline;}
+A.A2:visited {color: #000000; text-decoration: underline;}
+A.A2:active {color: #000000; text-decoration: underline;}
+A.A2:hover {color: #000000; text-decoration: underline;}
+
+
+A.A3:link {color:blue;text-decoration:underline;}
+A.A3:visited {color:red;text-decoration:underline;}
+A.A3:active {color:blue;text-decoration:underline;}
+A.A3:hover {color:gray;text-decoration:underline}
+
+A.A4:link {text-decoration:none;}
+A.A4:visited {text-decoration:none;}
+A.A4:active {text-decoration:none;}
+A.A4:hover {color:blue;text-decoration:underline}
+
+A.A5:link {color:#383838;text-decoration:none;}
+A.A5:visited {text-decoration:none;}
+A.A5:active {text-decoration:underline;}
+A.A5:hover {color:blue;text-decoration:underline}
+
+.csource
+{
+   background:#EDEAF0;
+   font-size:9pt;
+   width:50%;
+}
+
+body
+{
+   font-size:11pt;
+}
+
+ol
+{
+   line-height:1.5;
+}
+
+ul
+{
+   line-height:1.5;
+}
+
+.idc
+{
+   font: bolder 12pt verdana;
+}
+.comment
+{
+   color:#F97C02;
+   font-size:12pt;
+}
+
+.title
+{
+   font-size:17pt;
+   font-family :"arial black", impact, Symbol, serif; 
+   float:left;
+}
+
+
+
+.io
+{
+   font-size:10pt;
+}
+
+.csrc
+{
+   font-size:10pt;
+   border:1px dotted orange;
+   border-width: 3px 3px 3px 3px;
+   width:500;
+   text-indent:10;
+}
+
+.esrc
+{
+   background:#cccccc;
+   font-size:10pt;
+   width:50%;
+   margin-top:2em;
+   margin-bottom:2em;
+   color:black;
+}
+
+.src
+{
+   font-size:9pt;
+}
+
+.box 
+{
+   word-break:break-all;
+   border:1px solid #CCCCCC;
+   font-size:10pt;
+   padding:4px;
+   margin-top:5px;
+   margin-bottom:5px;
+}
+
+.box1 
+{
+   border:1px solid #CCCCCC;
+   font-size:10pt;
+   padding:4px;
+   margin-top:5px;
+   margin-bottom:5px;
+}
+.source
+{
+   background:#edf5f4;
+   font-size:9pt;
+   width:50%;
+   margin-top:2em;
+   margin-bottom:2em;
+   padding-top:1em;
+   padding-left:2em;
+}
+
+.tlimit
+{
+   font-size:9pt;
+   text-decoration:underline;
+   text-align:right;
+}
+
+.pname
+{
+   font-weight:bolder;
+   font-size:13pt;
+}
+
+.under_title 
+{
+    font-family: Verdana, Arial, ±¼¸²;
+    color: #222;
+    font-size: 12.5pt;
+    font-variant: small-caps;
+    font-weight: bold;
+    border-bottom: 1px dotted black;
+    padding: 4px 0px 4px 15px;
+    text-align: left;
+    color: red;
+}
+
+.button 
+{
+	height: 23px;
+	border: solid 1px #333333;
+	color: #ffffff;
+	background: #bb0000;
+	font: bold 0.8em verdana;
+	padding: 2px;
+	vertical-align: middle;
+}
+
+.small
+{ 
+   font-size: 9pt;
+   font-family :  fixedsys,"times new roman" ;
+   letter-spacing: 0.1;
+}
+
+#wrapper{ 
+         margin-left:10px;
+         margin-top:50px;
+         width:900px;
+         float:left;
+}
+
+#left{
+         width:270px;
+         float:left;
+}
+#right{
+         width:630px;
+         float:right;
+         margin-top:20px;
+}
+#warning{
+   color:#f00;
+   font-size:12pt;
+}
