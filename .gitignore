@@ -11,3 +11,10 @@
 *.lai
 *.la
 *.a
+
+**/Sublime Text/Data/Cache/
+**/Sublime Text/Data/Index/
+**/Sublime Text/Data/Local/
+**/Sublime Text/Data/Packages/
+
+__pycache__
