@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<values>
+    <gm_path>C:\Swing\trunk\salt\src\tools\grit\gm.py</gm_path>
+    <python_path>C:\Swing\trunk\salt\depot_tools\python_bin\pythonw26.exe</python_path>
+</values>

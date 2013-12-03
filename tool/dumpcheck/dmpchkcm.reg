@@ -1,0 +1,14 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\CLSID\{6E4CC5D8-BA0F-4be1-B59C-4264C6494AE4}] 
+@= "Citrix DumpCheck Context Menu Handler"
+[HKEY_CLASSES_ROOT\CLSID\{6E4CC5D8-BA0F-4be1-B59C-4264C6494AE4}\InProcServer32] 
+@= "dmpchkcm.dll"
+"ThreadingModel" = "Apartment"
+
+[HKEY_CLASSES_ROOT\*] 
+@= "*"
+[HKEY_CLASSES_ROOT\*] 
+@= "*"
+[HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\{6E4CC5D8-BA0F-4be1-B59C-4264C6494AE4}] 
+@= ""
