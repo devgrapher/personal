@@ -61,6 +61,7 @@ def unload_plugin(modulename):
     if was_loaded:
         m = sys.modules[modulename]
         unload_module(m)
+        del sys.modules[modulename]
 
 def reload_plugin(modulename):
     print("reloading plugin", modulename)
@@ -431,10 +432,8 @@ class Command(object):
     def is_enabled_(self, args):
         ret = None
         try:
+            args = self.filter_args(args)
             if args:
-                if 'event' in args:
-                    del args['event']
-
                 ret = self.is_enabled(**args)
             else:
                 ret = self.is_enabled()
@@ -452,6 +451,7 @@ class Command(object):
     def is_visible_(self, args):
         ret = None
         try:
+            args = self.filter_args(args)
             if args:
                 ret = self.is_visible(**args)
             else:
@@ -470,6 +470,7 @@ class Command(object):
     def is_checked_(self, args):
         ret = None
         try:
+            args = self.filter_args(args)
             if args:
                 ret = self.is_checked(**args)
             else:
@@ -487,6 +488,7 @@ class Command(object):
 
     def description_(self, args):
         try:
+            args = self.filter_args(args)
             if args != None:
                 return self.description(**args)
             else:
@@ -497,13 +499,22 @@ class Command(object):
     def description(self):
         return ""
 
+    def filter_args(self, args):
+        if args:
+            if 'event' in args and not self.want_event():
+                args = args.copy()
+                del args['event']
+
+        return args
+
+    def want_event(self):
+        return False
+
 
 class ApplicationCommand(Command):
     def run_(self, edit_token, args):
+        args = self.filter_args(args)
         if args:
-            if 'event' in args:
-                del args['event']
-
             return self.run(**args)
         else:
             return self.run()
@@ -517,10 +528,8 @@ class WindowCommand(Command):
         self.window = window
 
     def run_(self, edit_token, args):
+        args = self.filter_args(args)
         if args:
-            if 'event' in args:
-                del args['event']
-
             return self.run(**args)
         else:
             return self.run()
@@ -534,10 +543,8 @@ class TextCommand(Command):
         self.view = view
 
     def run_(self, edit_token, args):
+        args = self.filter_args(args)
         if args:
-            if 'event' in args:
-                del args['event']
-
             edit = self.view.begin_edit(edit_token, self.name(), args)
             try:
                 return self.run(edit, **args)
@@ -677,7 +684,12 @@ multi_importer = MultizipImporter()
 sys.meta_path.insert(0, multi_importer)
 
 def update_compressed_packages(pkgs):
-    multi_importer.loaders = [ZipLoader(p) for p in pkgs]
+    multi_importer.loaders = []
+    for p in pkgs:
+        try:
+            multi_importer.loaders.append(ZipLoader(p))
+        except (FileNotFoundError, zipfile.BadZipFile) as e:
+            print("error loading " + p + ": " + str(e))
 
 def set_override_path(path):
     global override_path
