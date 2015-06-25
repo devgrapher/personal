@@ -11,11 +11,14 @@ const String kCmdLightOn = "light on";
 const String kCmdLightOff = "light off";
 const String kCmdSetPrefix = "set:";
 
+// Status string
+const String kStatusActionDetected = "action detected";
+
 const char kPacketDelimiter = '#';
 
 // The base brightness to decide day.
-int min_brightness_of_day = 120;
-int max_brightness_of_night = 30;
+int min_brightness_of_day = 10;
+int max_brightness_of_night = 5;
 
 void setup() {
   pinMode(kDPinLight, OUTPUT);
@@ -88,8 +91,9 @@ String pushCommandFragment(String fragment) {
   }
   
   String complete_cmd = buffer.substring(0, idx);
+  // check it there's more commands.
   if (buffer.length() > idx + 1) { 
-    buffer = buffer.substring(idx);
+    buffer = buffer.substring(idx + 1);
   } else {
     buffer = "";
   }
@@ -97,9 +101,31 @@ String pushCommandFragment(String fragment) {
   return complete_cmd;
 }
 
+// check activity is detected 
+// and create a response packet if response is needed.
+String checkActicityAndCreatePacket(int activity) {
+  static int last_status = 0;
+  // prevent creating duplicated packets.
+  if (last_status == activity) {
+    return "";
+  }
+  last_status = activity;
+  
+  if (!activity) {
+    return "";
+  }
+  
+  String packet = kStatusActionDetected;
+  packet += kPacketDelimiter;
+  return packet;
+}
+
 // The loop function runs over and over again forever
 void loop() {
+  String send_packet = "";
+  
   int activity = digitalRead(kDPinActivity);
+  send_packet += checkActicityAndCreatePacket(activity);
   //Serial.print("activity: ");
   //Serial.println(activity);
   
@@ -107,6 +133,7 @@ void loop() {
   //Serial.print("bright: ");
   //Serial.println(brightness);
   
+  /* do not use this code block
   if (needLightOn(activity, brightness)) {
     Serial.print("turn on the light: ");
     Serial.println(brightness);
@@ -115,7 +142,7 @@ void loop() {
     Serial.print("turn off the light: ");
     Serial.println(brightness);
     digitalWrite(kDPinLight, HIGH); // Turn off
-  }
+  }*/
   
   // Parse command from remote controller
   String cmd_fragment = "";
@@ -133,5 +160,11 @@ void loop() {
   
   if (Serial.available())
     mySerial.write(Serial.read());
+
+  // send packet if there's one to send.
+  if (send_packet.length() > 0) {
+    mySerial.write(send_packet.c_str());
+    Serial.println(send_packet);
+  }
 }
 
